@@ -1,0 +1,450 @@
+// Variabile SCSS
+$breakpoint-tablet: 768px;
+$breakpoint-desktop-small: 992px;
+$transition-standard: 0.5s ease;
+$border-radius-standard: 8px;
+
+// Mixin-uri
+@mixin transition($properties...) {
+  transition-property: $properties;
+  transition-duration: $transition-standard;
+  transition-timing-function: ease;
+}
+
+
+@mixin box-shadow {
+  box-shadow: 0 8px 15px var(--culoare-umbra);
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+// Stil pentru bara de navigatie principala
+nav {
+  background: linear-gradient(135deg, var(--culoare-primara), var(--culoare-secundara));
+  margin-top: 10px;
+  border-radius: $border-radius-standard;
+  position: relative;
+  z-index: 100;
+  @include box-shadow;
+
+  // Lista principala de navigare
+  > ul {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    position: relative;
+
+    // Elementele de nivel principal
+    > li {
+      position: relative;
+      flex: 1;
+      text-align: center;
+
+      // Link-uri de nivel principal
+      > a {
+        display: block;
+        padding: 15px 20px;
+        color: white;
+        text-decoration: none;
+        font-family: "Anton", sans-serif;
+        font-size: 1.2rem;
+        text-transform: uppercase;
+        position: relative;
+       transition: color 0.5s ease; /* Corectat: singura tranziție de care avem nevoie pentru culoare */
+
+        &:visited {
+          color: white;
+        }
+
+        &:hover {
+          background-color: transparent;
+          color: var(--culoare-deschis2); /* Adăugat: Schimbă culoarea textului la verde deschis la hover */
+        }
+      }
+
+      // Efect de hover pentru elemente fara submeniuri
+      &:not(:has(ul)) {
+        > a::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 0;
+          background: linear-gradient(
+            to right,
+            var(--culoare-secundara),
+            var(--culoare-deschis2),
+            var(--culoare-secundara)
+          );
+          transition: height $transition-standard, top $transition-standard;
+          z-index: -1;
+        }
+
+        &:hover > a::after {
+          height: 4px;
+          top: calc(100% - 4px);
+        }
+      }
+
+      // Submeniuri (nivel 2)
+      > ul {
+        position: absolute;
+        left: 50%;
+        background-color: var(--culoare-primara);
+        width: 220px;
+        display: flex;
+        flex-direction: column;
+        transform: translateX(-50%) scale(0);
+        transform-origin: top center;
+        opacity: 0;
+        visibility: hidden;
+        transition: transform $transition-standard, opacity $transition-standard, visibility 0s linear 0.6s;
+        border-radius: 0 0 $border-radius-standard $border-radius-standard;
+        box-shadow: 0 8px 16px var(--culoare-umbra);
+        z-index: 200;
+        list-style-type: none;
+        padding: 0;
+
+        // Elementele din submeniu
+        > li {
+          width: 100%;
+
+          // Link-uri din submeniu
+          > a {
+            display: block;
+            padding: 12px 20px;
+            color: white;
+            text-decoration: none;
+            font-family: "Anton", sans-serif;
+            font-size: 1rem;
+            text-align: left;
+            @include transition(background-color, color);
+
+            &:visited {
+              color: white;
+            }
+
+            &:hover {
+              background-color: var(--culoare-secundara);
+              color: var(--culoare-deschis);
+            }
+          }
+
+          // Ultima optiune din submeniu (colt rotunjit)
+          &:last-child > a {
+            border-radius: 0 0 $border-radius-standard $border-radius-standard;
+          }
+        }
+      }
+
+      // Afisare submeniu la hover
+      &:hover > ul {
+        transform: translateX(-50%) scale(1);
+        opacity: 1;
+        visibility: visible;
+        transition: transform $transition-standard, opacity $transition-standard, visibility 0s linear 0s;
+      }
+    }
+  }
+}
+
+// Stiluri pentru dispozitive mobile
+@media screen and (max-width: $breakpoint-tablet) {
+  nav {
+    > ul {
+      display: none;
+    }
+  }
+
+  // Butonul de hamburger
+  .hamburger-menu {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 30px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    z-index: 200;
+
+    span {
+      display: block;
+      position: absolute;
+      height: 4px;
+      width: 100%;
+      background: white;
+      border-radius: 2px;
+      opacity: 1;
+      left: 0;
+
+      &:nth-child(1) {
+        top: 0px;
+      }
+
+      &:nth-child(2) {
+        top: 10px;
+      }
+
+      &:nth-child(3) {
+        top: 20px;
+      }
+    }
+    // Animatii pentru butoanele hamburger
+    &.animated {
+      // Generăm delayuri diferite pentru fiecare bară folosind @for
+      @for $i from 1 through 3 {
+          span:nth-child(#{$i}) {
+              // Selectăm animația corespunzătoare fiecărei bare
+              @if $i == 1 {
+                  animation: hamburgerBar1Animation 0.8s ease-in-out forwards;
+              } @else if $i == 2 {
+                  animation: hamburgerBar2Animation 0.8s ease-in-out forwards;
+              } @else {
+                  animation: hamburgerBar3Animation 0.8s ease-in-out forwards;
+              }
+              animation-delay: #{$i * 300}ms;
+          }
+      }
+    }
+  }
+
+  // Meniul mobil
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60vh;
+    background-color: var(--culoare-inchis);
+    z-index: 100;
+    transform-origin: 0 0;
+    transform: scale(0);
+    transition: transform 0.5s ease;
+    overflow-y: auto;
+    border-bottom-right-radius: 100%;
+
+    &.active {
+      transform: scale(1);
+      border-bottom-right-radius: 0;
+      transition: transform 0.5s ease, border-bottom-right-radius 0.5s ease 0.25s;
+    }
+
+    // Icnoita Home din meniul mobil
+    .home-icon {
+      @include flex-center;
+      padding: 15px;
+      margin-top: 10px;
+
+      a {
+        color: white;
+        font-size: 24px;
+      }
+    }
+
+    // Lista principala din meniul mobil
+    ul.mobile-menu-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        width: 100%;
+        position: relative;
+
+        a {
+          display: block;
+          padding: 15px;
+          color: white;
+          text-decoration: none;
+          font-family: "Anton", sans-serif;
+          text-align: center;
+
+          &:hover {
+            background-color: var(--culoare-secundara);
+          }
+        }
+
+        // Submeniuri in versiunea mobila
+        ul.submenu {
+          list-style: none;
+          padding: 0;
+          background-color: rgba(30, 30, 30, 0.95);
+          max-height: 0;
+          opacity: 0;
+          visibility: hidden;
+          overflow: hidden;
+          transition: max-height 0.5s ease, opacity 0.5s ease, visibility 0s linear 0.5s;
+          width: 100%;
+
+          li {
+            width: 100%;
+
+            a {
+              padding: 12px 15px;
+              font-size: 0.9em;
+              text-align: center;
+            }
+          }
+        }
+
+        // Afisare submeniu la hover pe mobil
+        &:hover > ul.submenu {
+          max-height: 500px;
+          opacity: 1;
+          visibility: visible;
+          transition: max-height 0.5s ease, opacity 0.5s ease, visibility 0s linear 0s;
+        }
+      }
+    }
+  }
+
+  // Overlay pentru meniul mobil
+  .mobile-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 90;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+
+    &.active {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  // Stare inactiva a meniului mobil
+  .mobile-menu:not(.active) {
+    display: block !important;
+    transform: scale(0) !important;
+    border-bottom-right-radius: 100% !important;
+    visibility: hidden;
+  }
+}
+
+// Stiluri pentru tablete si dispozitive intermediare
+@media screen and (max-width: $breakpoint-desktop-small) and (min-width: ($breakpoint-tablet + 1)) {
+  nav {
+    > ul {
+      > li {
+        > a {
+          font-size: 0.9rem;
+          padding: 12px 15px;
+        }
+
+        > ul {
+          width: 180px;
+
+          > li > a {
+            font-size: 0.8rem;
+            padding: 10px 15px;
+          }
+        }
+
+        // Stilizare speciala pentru primul element (Home)
+        &:first-child > a {
+          font-size: 0;
+          padding: 12px;
+          @include flex-center;
+
+          &::before {
+            content: "\f015";
+            font-family: "Font Awesome 6 Free";
+            font-weight: 900;
+            font-size: 1rem;
+            color: white;
+          }
+        }
+      }
+    }
+  }
+}
+
+// Reguli pentru ascunderea meniului mobil inactiv
+.mobile-menu:not(.active) {
+  display: none !important;
+  visibility: hidden;
+}
+
+@media screen and (max-width: $breakpoint-tablet) {
+  .mobile-menu:not(.active) {
+    display: block !important;
+    transform: scale(0) !important;
+    border-bottom-right-radius: 100% !important;
+    visibility: hidden;
+  }
+  .mobile-menu.active {
+    display: block !important;
+    transform: scale(1) !important;
+    border-bottom-right-radius: 0 !important;
+    visibility: visible !important;
+  }
+}
+
+// Animatii pentru bara de hamburger
+@keyframes hamburgerBar1Animation {
+  0% {
+    background-color: var(--culoare-accent);
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    background-color: var(--culoare-accent);
+    transform: translateX(-10px) rotate(-15deg);
+    opacity: 0.6;
+  }
+  100% {
+    background-color: white;
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes hamburgerBar2Animation {
+  0% {
+    background-color: var(--culoare-secundara);
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    background-color: var(--culoare-secundara);
+    transform: scale(0.5);
+    opacity: 0.5;
+  }
+  100% {
+    background-color: white;
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes hamburgerBar3Animation {
+  0% {
+    background-color: var(--culoare-deschis);
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+  50% {
+    background-color: var(--culoare-deschis);
+    transform: translateX(10px) rotate(15deg);
+    opacity: 0.7;
+  }
+  100% {
+    background-color: white;
+    transform: translateX(0) rotate(0deg);
+    opacity: 1;
+  }
+}

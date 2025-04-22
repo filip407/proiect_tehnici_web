@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="ro">
+    <head>
+        <%- include("../fragmente/head.ejs") %>
+    </head>
+    <body>
+    <%- include("../fragmente/header.ejs") %> 
+    <main>
+        <div id="layout-responsive">
+            <section class="zona1">
+                <div class="z-pattern">
+                    <div class="z-top-left">
+                        <h2>Bine ați venit la Elite Kits!</h2>
+                        <p>Magazinul <strong>numărul 1</strong> de tricouri de fotbal din România.</p>
+                        <p>Oferim o gamă largă de <b>tricouri originale</b> de la cele mai populare echipe de club și naționale din lume.</p>
+                    </div>
+                    <div class="z-top-right">
+                        <figure>
+                    <picture>
+                        <source media="(max-width: 900px)" srcset="/resurse/imagini/imagine_mica.jpg">
+                        <source media="(max-width: 1400px)" srcset="/resurse/imagini/imagine_medie.jpg">
+                        <img src="/resurse/imagini/imagine_mare2.jpg" alt="Tricou de fotbal valabil pe Elite Kits">
+                    </picture>
+                    <figcaption>Tricou valabil pe Elite Kits</figcaption>
+                </figure>
+                    </div>
+                </div> 
+            </section>
+            <section class="zona2">
+                <h3>Ghid de mărimi</h3>
+                <div class="tabel-marimi">
+                    <table id="stilizare-tabel">
+                        <thead>
+                            <tr>
+                                <th rowspan="2">Mărime</th>
+                                <th colspan="2">Dimensiuni adulți</th>
+                                <th colspan="2">Dimensiuni copii</th>
+                            </tr>
+                            <tr>
+                                <th>Înălțime (cm)</th>
+                                <th>Lățime piept (cm)</th>
+                                <th>Vârstă (ani)</th>
+                                <th>Lățime piept (cm)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>S</td>
+                                <td>160-170</td>
+                                <td>88-94</td>
+                                <td>8-10</td>
+                                <td>70-76</td>
+                            </tr>
+                            <tr>
+                                <td>M</td>
+                                <td>170-175</td>
+                                <td>94-100</td>
+                                <td>10-12</td>
+                                <td>76-82</td>
+                            </tr>
+                            <tr>
+                                <td>L</td>
+                                <td>175-180</td>
+                                <td>100-106</td>
+                                <td>12-14</td>
+                                <td>82-88</td>
+                            </tr>
+                            <tr>
+                                <td>XL</td>
+                                <td>180-185</td>
+                                <td>106-112</td>
+                                <td>14-16</td>
+                                <td>88-94</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td colspan="5">Notă: Aceste mărimi sunt orientative și pot varia în funcție de producător</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </section>
+            <section class="zona3">
+                <h3>Calendar evenimente</h3>
+                <p>Urmărește cele mai importante evenimente din lumea fotbalului și nu rata lansările de noi tricouri!</p>
+            </section>
+            <section class="zona4">
+                <h3>Anunțuri</h3>
+                <p>Reduceri de 30% la toate tricourile de la Euro 2024! Promoția este valabilă până la sfârșitul lunii.</p>
+                <p>Tricourile pentru sezonul 2025-2026 sunt acum disponibile pentru precomandă.</p>
+            </section>
+            <section class="zona5">
+                <h3>Utilizatori online</h3>
+                <p>În acest moment sunt 43 utilizatori activi pe site.</p>
+                <p>Cele mai populare produse căutate astăzi:</p>
+                <ul>
+                    <li>Tricou FC Barcelona 2025/2026</li>
+                    <li>Tricou România Euro 2024</li>
+                    <li>Tricou Manchester United 2025/2026</li>
+                </ul>
+            </section>
+            <section class="zona6">
+                <h3>Statistici utilizator</h3>
+                <p>Bine ai revenit! Ultima ta vizită a fost acum 3 zile.</p>
+                <p>Ai 2 produse în lista de dorințe și 1 produs în coșul de cumpărături.</p>
+                <p>Voucherul tău de 10% reducere expiră în 5 zile.</p>
+            </section>
+            <section class="zona7">
+                <h3>Informații server</h3>
+                <p>Versiune site: 2.0.0</p>
+                <p>Ultima actualizare: 21 aprilie 2025</p>
+                <p>Stare server: Online</p>
+                <p>Timp de răspuns: 0.42s</p>
+                <p class="ip-utilizator">IP-ul tău: <%= locals.ip %></p>
+            </section>
+            <section class="zona8">
+                <h3>Noutăți și recomandări</h3>
+                <p>Descoperă cele mai recente tricouri pentru sezonul 2025-2026!</p>
+                <div class="noutati-container">
+                    <div class="noutate-item">
+                        <p>Tricou FC Barcelona 2025/2026</p>
+                        <p>Noul design revoluționar cu inserții de carbon pentru o ventilație optimă.</p>
+                        <div class="rating">
+                            <span>★★★★★</span>
+                            <small>(43 recenzii)</small>
+                        </div>
+                    </div>
+                    <hr class="sageata-hr" id="efect-css-stilizare-hr">
+                    <div class="noutate-item">
+                        <p>Tricou Real Madrid 2025/2026</p>
+                        <p>Inspirat de istoria glorioasă a clubului, cu accente aurii și tehnologie DryFit.</p>
+                        <div class="rating">
+                            <span>★★★★☆</span>
+                            <small>(28 recenzii)</small>
+                        </div>
+                    </div>
+                    <hr class="sageata-hr" id="efect-css-stilizare-hr">
+                    <div class="noutate-item">
+                        <p>Tricou România Euro 2024</p>
+                        <p>Ediție specială cu autograful căpitanului și detalii tricolore elegante.</p>
+                        <div class="rating">
+                            <span>★★★★★</span>
+                            <small>(56 recenzii)</small>
+                        </div>
+                    </div>
+                </div>
+                <hr class="sageata-hr" id="efect-css-stilizare-hr">
+                <div class="recomandari">
+                    <p>Recomandări personalizate</p>
+                    <p>Pe baza preferințelor tale, ți-ar putea plăcea:</p>
+                    <ul>
+                        <li>Tricou Manchester United 2025/2026</li>
+                        <li>Tricou Wolves 2023/2024</li>
+                        <li>Tricou Portugalia 2022/2023</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+        <section class="zona9">
+            <section id="catalog">
+            <h2><i class="fa-solid fa-soccer-ball fa-spin-custom"></i> Catalog de Tricouri</h2>
+            <div id="harta-imagini">
+                <img src="/resurse/imagini/tricouri-harta.jpg" usemap="#image-map">
+                <map name="image-map">
+                    <area target="_top" alt="Tricou Liverpool" title="Tricou Liverpool" href="" coords="133,112,320,352" shape="rect">
+                    <area target="_top" alt="Tricou Manchester City" title="Tricou Manchester City" href="" coords="356,113,428,343" shape="rect">
+                    <area target="_top" alt="Tricou Bayern" title="Tricou Bayern" href="" coords="461,120,540,347" shape="rect">
+                    <area target="_top" alt="Tricou Juventus" title="Tricou Juventus" href="" coords="554,118,620,348" shape="rect">
+                    <area target="_top" alt="Tricou Barcelona" title="Tricou Barcelona" href="" coords="642,110,721,349" shape="rect">
+                    <area target="_top" alt="Tricou PSG" title="Tricou PSG" href="" coords="736,113,792,347" shape="rect">
+                </map>
+            </div>
+            <p>Explorați colecția noastră completă de <b>tricouri de fotbal</b> pentru toate vârstele și preferințele. Oferim atât <b>tricouri pentru adulți</b>, cât și <b>tricouri pentru copii</b>, în toate mărimile disponibile.</p>
+            <ul>
+                <li><a href="#club">Echipe de Club</a></li>
+                <li><a href="#nationale">Echipe Naționale</a></li>
+                <li><a href="#fotbalisti">Tricouri cu Fotbaliști</a></li>
+                <li><a href="#retro">Tricouri Retro</a></li>
+            </ul>
+            </section>
+        <section id="promotii">
+            <h2>Promoții</h2>
+            <p>Profitați de <b>promoțiile noastre</b> curente pentru a achiziționa <b>tricouri de fotbal</b> la prețuri speciale.</p>
+            <ul>
+                <li><a href="#reduceri">Reduceri</a></li>
+                <li><a href="#oferte">Oferte speciale</a></li>
+            </ul>
+        </section>
+        <section id="resurse">
+            <h2>Resurse Utile</h2>
+            <ul>
+                <li><a href="#politica-confidentialitate">Politică de Confidențialitate</a></li>
+                <li><a href="#termeni-si-conditii">Termeni și condiții</a></li>
+                <li><a href="#livrare">Livrare și returnare</a></li>
+                <li><a href="#faq">Întrebări frecvente</a></li>
+            </ul>
+            <article id="ghid-marimi">
+                <h3>Ghid de mărimi</h3>
+                <p>Folosiți ghidul nostru de mărimi pentru a alege <b>tricoul potrivit</b> pentru dumneavoastră:</p>
+                <div id="ghid">
+                    <embed src="/resurse/ghid_marimi.pdf" type="application/pdf" width="500" height="400">
+                </div>
+                <p><a href="/resurse/ghid_marimi.pdf" download>Descarcă ghidul de mărimi (PDF)</a></p>
+                <div class="formula">
+                    <details>
+                    <summary>Calculează-ți singur ce mărime ți se potrivește</summary>
+                    <p>Formula pentru calcularea mărimii aproximative:</p>
+                    <!-- Asigurăm că folosim corect atributele pentru MathML -->
+                    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+                        <mrow>
+                          <mi>M</mi>
+                          <mo>=</mo>
+                          <mrow>
+                            <mfrac>
+                              <mrow>
+                                <mi>h</mi>
+                                <mo>×</mo>
+                                <mi>c</mi>
+                              </mrow>
+                              <mrow>
+                                <mn>1000</mn>
+                              </mrow>
+                            </mfrac>
+                            <mo>+</mo>
+                            <mn>50</mn>
+                          </mrow>
+                        </mrow>
+                      </math>
+                    <p>unde <i>h</i> este înălțimea în cm, iar <i>c</i> este circumferința pieptului în cm.</p>
+                        <p><strong>S</strong> : 63-66</p>
+                        <p><strong>M</strong> : 66-67.5</p>
+                        <p><strong>L</strong> : 67.5-69</p>
+                        <p><strong>XL</strong> : 70-73</p>
+                    </details>
+                </div>         
+            </article>
+            <article id="ingrijire">
+                <h3>Ghid de îngrijire</h3>
+                <div id="stilizare-taburi">
+                    <div class="taburi">
+                        <a href="https://www.youtube.com/embed/Uw2vFrT_1J0" target="ifr-video">Ghid îngrijire</a>
+                        <a href="https://www.youtube.com/embed/Jb1IZk0D_zU" target="ifr-video">Ghid îngrijire</a>
+                        <a href="https://www.youtube.com/embed/TzYkxmtb3nw" target="ifr-video">Curățare pete</a>
+                    </div>
+                    <iframe name="ifr-video"
+                            src="https://www.youtube.com/embed/Uw2vFrT_1J0"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                    </iframe>
+                </div>
+                <p>
+                    <a href="https://www.nike.com/a/how-to-wash-a-jersey" target="_blank">Pentru mai multe informații despre îngrijirea tricourilor, consultați acest ghid complet</a>
+                </p>
+            </article>
+        </section>
+    </section>
+    </main>
+    <%- include("../fragmente/footer.ejs") %>
+    </body>
+</html>

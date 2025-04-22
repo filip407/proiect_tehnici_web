@@ -1,0 +1,181 @@
+body, div, span, applet, object, iframe,
+h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, hgroup, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    vertical-align: baseline;
+}
+
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+    font-size: 16px;
+    margin: 0;
+    padding: 0;
+}
+
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+html, body {
+    font-size: 16px;
+    width: 100%;
+    height: 100%;
+}
+
+:root {
+    --culoare-primara: #076104;   
+    --culoare-secundara: #80C135;   
+    --culoare-accent: #F20505;    
+    --culoare-inchis: #0D0D0D;
+    --culoare-inchis2: #101010;     
+    --culoare-deschis: #F2F2F2;   
+    --culoare-deschis2: #E7FCE4;
+    --culoare-deschis3: #b3fea0;
+    --culoare-text-primar: var(--culoare-inchis);
+    --culoare-text-deschis: var(--culoare-deschis);
+    --culoare-fundal-primar: var(--culoare-deschis);
+    --culoare-fundal-secundar: var(--culoare-secundara);
+    --culoare-fundal-accent: var(--culoare-primara);
+    --culoare-margine: var(--culoare-primara);
+    --culoare-evidentiere: var(--culoare-accent);
+    --culoare-umbra: rgba(0, 0, 0, 0.2);
+    --culoare-hover: var(--culoare-primara);
+    --culoare-hover-text: var(--culoare-deschis);
+    --padare-pagina-mare: 3%;
+    --padare-pagina-medie: 2%;
+    --padare-pagina-mica: 1%;
+    --distanta-grid-mare: 20px;
+    --distanta-grid-medie: 15px;
+    --distanta-grid-mica: 10px;
+    --padare-continut: 20px;
+    --font-size-base: 1rem;
+    --font-size-h1: 4rem;
+    --font-size-h2: 2rem;
+    --font-size-h3: 1.5rem;
+    --font-size-h4: 1.25rem;
+    --line-height-normal: 1.5;
+    --font-weight-normal: 400;
+    --font-weight-bold: 700;
+    --spacing-xs: 0.25rem;
+    --spacing-s: 0.5rem;
+    --spacing-m: 1rem;
+    --spacing-l: 1.5rem;
+    --spacing-xl: 2rem;
+    --radius-small: 5px;
+    --radius-medium: 8px;
+    --radius-large: 12px;
+    --transition-quick: 0.3s;
+    --transition-medium: 0.5s;
+}
+
+strong, b {
+    font-weight: var(--font-weight-bold);
+}
+
+em, i {
+    font-style: italic;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: "Anton", sans-serif;
+    font-weight: var(--font-weight-normal);
+    line-height: 1.2;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+
+h1 {
+    font-size: var(--font-size-h1);
+    margin-top: 0em;
+    color: var(--culoare-deschis);
+}
+
+h2 {
+    font-size: var(--font-size-h2);
+    color: var(--culoare-text-primar);
+}
+
+h3 {
+    font-size: var(--font-size-h3);
+    color: var(--culoare-text-primar);
+}
+
+h4 {
+    font-size: var(--font-size-h4);
+    color: var(--culoare-text-primar);
+}
+
+p {
+    margin: 1em 0;
+    line-height: var(--line-height-normal);
+}
+
+table {
+    width: 100%;
+    margin: 1em 0;
+}
+
+th, td {
+    padding: 0.75em;
+    text-align: left;
+    border: 1px solid var(--culoare-deschis);
+}
+
+th {
+    background-color: var(--culoare-primara);
+    color: var(--culoare-deschis);
+    font-weight: var(--font-weight-bold);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: inline-block;
+}
+
+section, article, aside, footer, main {
+    margin-bottom: var(--spacing-l);
+}
+
+header {
+    margin-top: 0em;
+    margin-bottom: var(--spacing-l);
+}
+
+@media screen and (max-width: 768px) {
+    html, body {
+        font-size: 14px;
+    }
+}
+
+@media screen and (min-width: 1200px) {
+    html, body {
+        font-size: 18px;
+    }
+}
