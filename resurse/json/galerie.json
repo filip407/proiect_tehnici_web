@@ -1,0 +1,94 @@
+{
+    "cale_galerie": "/resurse/imagini/galerie",
+    "imagini": [
+      {
+        "cale_imagine": "tricou1.jpg",
+        "titlu": "Tricou Real Madrid",
+        "descriere": "Tricou oficial de joc, sezonul 2024-2025",
+        "timp": "08:00-14:00",
+        "alt": "Tricou alb Real Madrid"
+      },
+      {
+        "cale_imagine": "tricou2.jpg",
+        "titlu": "Tricou Barcelona",
+        "descriere": "Tricou oficial de joc, sezonul 2024-2025",
+        "timp": "10:00-16:00",
+        "alt": "Tricou negru Barcelona"
+      },
+      {
+        "cale_imagine": "tricou3.jpg",
+        "titlu": "Tricou Arsenal",
+        "descriere": "Tricou oficial de joc, sezonul 2024-2025",
+        "timp": "12:00-18:00",
+        "alt": "Tricou negru Arsenal",
+        "atribuire": {
+          "autor": "Arsenal",
+          "link": "https://www.arsenal.com/",
+          "licenta": "CC-BY"
+        }
+      },
+      {
+        "cale_imagine": "tricou4.jpg",
+        "titlu": "Tricou Juventus",
+        "descriere": "Tricou oficial de joc, sezonul 2024-2025",
+        "timp": "14:00-20:00",
+        "alt": "Tricou in dungi alb-negru Juventus"
+      },
+      {
+        "cale_imagine": "tricou5.jpg",
+        "titlu": "Tricou PSG",
+        "descriere": "Tricou oficial de joc, sezonul 2024-2025",
+        "timp": "06:00-12:00",
+        "alt": "Tricou albastru PSG"
+      },
+      {
+        "cale_imagine": "tricou6.jpg",
+        "titlu": "Tricou Bayern Munchen",
+        "descriere": "Tricou editie speciala, sezonul 2024-2025",
+        "timp": "16:00-22:00",
+        "alt": "Tricou rosu Bayern Munchen"
+      },
+      {
+        "cale_imagine": "tricou7.jpg",
+        "titlu": "Tricou Real Madrid",
+        "descriere": "Tricou oficial de joc, sezonul 2024-2025",
+        "timp": "09:00-15:00",
+        "alt": "Tricou portocaliu Real Madrid"
+      },
+      {
+        "cale_imagine": "tricou8.jpg",
+        "titlu": "Tricou Tottenham Hotspurs",
+        "descriere": "Tricou oficial de joc, sezonul 2024-2025",
+        "timp": "11:00-17:00",
+        "alt": "Tricou alb Tottenham Hotspurs"
+      },
+      {
+        "cale_imagine": "tricou9.jpg",
+        "titlu": "Tricou AC Milan",
+        "descriere": "Tricou oficial de joc, sezonul 2024-2025",
+        "timp": "13:00-19:00",
+        "alt": "Tricou in dungi rosu-negru AC Milan"
+      },
+      {
+        "cale_imagine": "tricou10.jpg",
+        "titlu": "Tricou Bayern Leverkusen",
+        "descriere": "Tricou oficial de joc, sezonul 2024-2025",
+        "timp": "13:00-19:00",
+        "alt": "Tricou rosu Bayern Leverkusen"
+      },
+      {
+        "cale_imagine": "tricou11.jpg",
+        "titlu": "Tricou Lyon",
+        "descriere": "Tricou oficial de joc, sezonul 2024-2025",
+        "timp": "15:00-21:00",
+        "alt": "Tricou negru Lyon"
+      },
+      {
+        "cale_imagine": "tricou12.jpg",
+        "titlu": "Tricou Marseille",
+        "descriere": "Tricou oficial de joc, sezonul 2024-2025",
+        "timp": "17:00-23:00",
+        "alt": "Tricou albastru Marseille"
+      }
+    ]
+  }

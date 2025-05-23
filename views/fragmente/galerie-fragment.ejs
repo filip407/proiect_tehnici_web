@@ -1,0 +1,32 @@
+<section id="galerie-statica">
+    <h3>Galerie Tricouri Disponibile</h3>
+    <div class="container-galerie">
+        <% if (locals.imagini && locals.imagini.length > 0) { %>
+            <% let count = 0; %>
+            <% for(let imagine of locals.imagini) { 
+                count++;
+                if(count > 10) break;
+            %>
+                <figure class="figura-galerie">
+                    <picture>
+                        <source media="(max-width: 500px)" srcset="<%- locals.cale_galerie %>/mic/<%= imagine.cale_imagine %>">
+                        <source media="(max-width: 900px)" srcset="<%- locals.cale_galerie %>/mediu/<%= imagine.cale_imagine %>">
+                        <img src="<%- locals.cale_galerie %>/<%= imagine.cale_imagine %>" 
+                             alt="<%= imagine.alt || imagine.cale_imagine %>" 
+                             title="<%= imagine.descriere %>"
+                             loading="lazy">
+                    </picture>
+                    <figcaption>
+                        <p><%= imagine.titlu %></p>
+                        <p><%= imagine.descriere %></p>
+                        <% if (imagine.atribuire) { %>
+                            <p class="atribuire">Imagine realizata de <a href="<%= imagine.atribuire.link %>" target="_blank"><%= imagine.atribuire.autor %></a> (<%= imagine.atribuire.licenta %>)</p>
+                        <% } %>
+                    </figcaption>
+                </figure>
+            <% } %>
+        <% } else { %>
+            <p class="mesaj-gol">Nicio imagine disponibilă în acest interval orar.</p>
+        <% } %>
+    </div>
+</section>

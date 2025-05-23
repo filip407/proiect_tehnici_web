@@ -1,0 +1,388 @@
+// 1. Importăm modulele Sass necesare folosind noua sintaxă @use
+@use "sass:color";
+@use "sass:math";
+
+// 2. Definim variabilele de bază
+$culoare-primara: #076104;   
+$culoare-secundara: #80C135;   
+$culoare-accent: #F20505;    
+$culoare-inchis: #0D0D0D;
+$culoare-deschis: #F2F2F2;   
+$culoare-deschis2: #E7FCE4;
+$culoare-deschis3: #b3fea0;
+
+// 3. Definim variabilele derivate folosind modulul color
+$culoare-primara-dark: color.adjust($culoare-primara, $lightness: -10%);
+$culoare-primara-light: color.adjust($culoare-primara, $lightness: 40%);
+$culoare-secundara-dark: color.adjust($culoare-secundara, $lightness: -10%);
+$culoare-secundara-light: color.adjust($culoare-secundara, $lightness: 20%);
+$culoare-accent-light: color.adjust($culoare-accent, $lightness: 30%);
+
+// 4. Restul variabilelor de customizare
+$font-family-sans-serif: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-family-base: $font-family-sans-serif;
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px, 
+  lg: 992px,  
+  xl: 1200px,
+  xxl: 1400px
+);
+
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1140px,
+  xxl: 1320px
+);
+
+$border-radius: 0.5rem;
+$border-radius-sm: 0.3rem;
+$border-radius-lg: 0.8rem;
+$border-radius-xl: 1.25rem;
+
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+  6: $spacer * 5,
+);
+
+$h1-font-size: 4rem;
+$h2-font-size: 2.5rem;
+$h3-font-size: 2rem;
+$h4-font-size: 1.6rem;
+$h5-font-size: 1.3rem;
+$h6-font-size: 1.1rem;
+
+@forward "../../node_modules/bootstrap/scss/bootstrap.scss" with (
+  $primary: $culoare-primara,
+  $secondary: $culoare-secundara,
+  $success: $culoare-secundara,
+  $info: $culoare-deschis3,
+  $danger: $culoare-accent,
+  $light: $culoare-deschis,
+  $dark: $culoare-inchis,
+  $grid-breakpoints: $grid-breakpoints,
+  $container-max-widths: $container-max-widths,
+  $border-radius: $border-radius,
+  $font-family-base: $font-family-base,
+  $h1-font-size: $h1-font-size,
+  $h2-font-size: $h2-font-size,
+  $h3-font-size: $h3-font-size,
+  $h4-font-size: $h4-font-size,
+  $h5-font-size: $h5-font-size,
+  $h6-font-size: $h6-font-size
+);
+
+// 5. Configurare pentru a evita warnings - setăm variabilele root înainte de importuri
+:root {
+  --bs-primary: #{$culoare-primara};
+  --bs-primary-rgb: 7, 97, 4;
+  --bs-secondary: #{$culoare-secundara};
+  --bs-secondary-rgb: 128, 193, 53;
+  --bs-success: #{$culoare-secundara};
+  --bs-success-rgb: 128, 193, 53;
+  --bs-info: #{$culoare-deschis3};
+  --bs-info-rgb: 179, 254, 160;
+  --bs-danger: #{$culoare-accent};
+  --bs-danger-rgb: 242, 5, 5;
+  --bs-light: #{$culoare-deschis};
+  --bs-light-rgb: 242, 242, 242;
+  --bs-dark: #{$culoare-inchis};
+  --bs-dark-rgb: 13, 13, 13;
+  --culoare-accent-light: #{$culoare-accent-light};
+  --culoare-primara-light: #{$culoare-primara-light};
+}
+
+
+// 7. Stilurile personalizate
+body {
+  font-family: $font-family-base;
+  background-color: $culoare-deschis2;
+  color: $culoare-inchis;
+}
+
+.btn-primary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #{$culoare-primara};
+  --bs-btn-border-color: #{$culoare-primara};
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #{$culoare-primara-dark};
+  --bs-btn-hover-border-color: #{$culoare-primara-dark};
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #{$culoare-primara-dark};
+  --bs-btn-active-border-color: #{$culoare-primara-dark};
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #{color.adjust($culoare-primara, $alpha: -0.3)};
+  --bs-btn-disabled-border-color: #{color.adjust($culoare-primara, $alpha: -0.3)};
+}
+
+.btn-secondary {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: #{$culoare-secundara};
+  --bs-btn-border-color: #{$culoare-secundara};
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: #{$culoare-secundara-dark};
+  --bs-btn-hover-border-color: #{$culoare-secundara-dark};
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: #{$culoare-secundara-dark};
+  --bs-btn-active-border-color: #{$culoare-secundara-dark};
+  --bs-btn-disabled-color: #fff;
+  --bs-btn-disabled-bg: #{color.adjust($culoare-secundara, $alpha: -0.3)};
+  --bs-btn-disabled-border-color: #{color.adjust($culoare-secundara, $alpha: -0.3)};
+}
+
+.bg-primary {
+  background-color: $culoare-primara !important;
+}
+
+.bg-secondary {
+  background-color: $culoare-secundara !important;
+}
+
+.bg-success {
+  background-color: $culoare-secundara !important;
+}
+
+.bg-info {
+  background-color: $culoare-deschis3 !important;
+}
+
+.bg-danger {
+  background-color: $culoare-accent !important;
+}
+
+.bg-accent-light {
+  background-color: $culoare-accent-light !important;
+}
+
+.bg-primary-light {
+  background-color: $culoare-primara-light !important;
+}
+
+.text-primary {
+  color: $culoare-primara !important;
+}
+
+.text-secondary {
+  color: $culoare-secundara !important;
+}
+
+.border-primary {
+  border-color: $culoare-primara !important;
+}
+
+.border-secondary {
+  border-color: $culoare-secundara !important;
+}
+
+h2, .h2 { 
+  color: $culoare-deschis;
+  font-size: $h2-font-size !important; 
+  font-weight: 300;
+  letter-spacing: -0.02em;
+}
+
+h3, .h3 {
+  color: $culoare-deschis;
+  font-size: $h3-font-size !important; 
+  font-weight: 600;
+}
+
+h4, .h4 { 
+  font-size: $h4-font-size !important; 
+  font-weight: 600;
+}
+
+h5, .h5 { 
+  font-size: $h5-font-size !important; 
+  font-weight: 500;
+}
+
+h6, .h6 { 
+  font-size: $h6-font-size !important; 
+  font-weight: 500;
+}
+
+.card {
+  border-radius: $border-radius !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+  
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+  }
+  
+  .card-header {
+    border-top-left-radius: $border-radius !important;
+    border-top-right-radius: $border-radius !important;
+    border-bottom: none;
+  }
+  
+  .card-body {
+    padding: 1.5rem;
+  }
+  
+  .card-footer {
+    border-bottom-left-radius: $border-radius !important;
+    border-bottom-right-radius: $border-radius !important;
+    border-top: none;
+    background-color: transparent;
+  }
+}
+
+.btn {
+  border-radius: $border-radius !important;
+  padding: 0.6rem 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.accordion {
+  --bs-accordion-border-radius: #{$border-radius};
+  --bs-accordion-inner-border-radius: #{$border-radius};
+  
+  .accordion-item {
+    border-radius: $border-radius;
+    margin-bottom: 0.5rem;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    
+    &:first-of-type {
+      border-top-left-radius: $border-radius;
+      border-top-right-radius: $border-radius;
+    }
+    
+    &:last-of-type {
+      border-bottom-left-radius: $border-radius;
+      border-bottom-right-radius: $border-radius;
+    }
+  }
+  
+  .accordion-header {
+    margin: 0;
+  }
+  
+  .accordion-button {
+    font-weight: 500;
+    padding: 1.25rem;
+    background-color: $culoare-deschis;
+    
+    &:not(.collapsed) {
+      background-color: $culoare-deschis3;
+      color: $culoare-primara;
+      box-shadow: none;
+    }
+    
+    &:focus {
+      box-shadow: none;
+      border-color: $culoare-secundara;
+    }
+    
+    &::after {
+      background-size: 1.2rem;
+    }
+  }
+  
+  .accordion-body {
+    padding: 1.5rem;
+    background-color: $culoare-deschis;
+  }
+}
+
+.alert {
+  border-radius: $border-radius;
+  border: none;
+  
+  &.alert-info {
+    background-color: $culoare-deschis3;
+    color: color.adjust($culoare-primara, $lightness: -5%);
+  }
+  
+  .alert-heading {
+    color: inherit;
+    letter-spacing: 0.02em;
+    margin-bottom: 0.75rem;
+  }
+}
+
+[data-bs-theme="dark"] {
+  --bs-body-bg: #{$culoare-inchis};
+  --bs-body-color: #{$culoare-deschis};
+  
+  .bg-primary {
+    background-color: $culoare-secundara !important;
+  }
+  
+  .bg-secondary {
+    background-color: $culoare-secundara-dark !important;
+  }
+  
+  .card {
+    background-color: color.adjust($culoare-inchis, $lightness: 10%);
+    
+    .card-header {
+      background-color: $culoare-secundara;
+      color: $culoare-deschis;
+    }
+  }
+  
+  .btn-primary {
+    --bs-btn-bg: #{$culoare-secundara};
+    --bs-btn-border-color: #{$culoare-secundara};
+    --bs-btn-hover-bg: #{$culoare-secundara-dark};
+    --bs-btn-hover-border-color: #{$culoare-secundara-dark};
+  }
+  
+  .alert-info {
+    background-color: color.adjust($culoare-deschis3, $alpha: -0.85);
+    color: $culoare-deschis;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  .card {
+    .card-body {
+      padding: 2rem;
+    }
+  }
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-bottom: 1rem;
+  }
+  
+  .container {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+  
+  h1, .h1 { font-size: 4.5rem !important; }
+  h2, .h2 { font-size: 3rem !important; }
+}

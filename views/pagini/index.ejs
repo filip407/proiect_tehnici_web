@@ -10,21 +10,52 @@
             <section class="zona1">
                 <div class="z-pattern">
                     <div class="z-top-left">
-                        <h2>Bine ați venit la Elite Kits!</h2>
+                        <div class="container-reflexie">
+                            <h2 class="titlu-cu-reflexie">Bine ați venit la Elite Kits!</h2>
+                            <h2 class="reflexie">Bine ați venit la Elite Kits!</h2>
+                        </div>
                         <p>Magazinul <strong>numărul 1</strong> de tricouri de fotbal din România.</p>
                         <p>Oferim o gamă largă de <b>tricouri originale</b> de la cele mai populare echipe de club și naționale din lume.</p>
                     </div>
                     <div class="z-top-right">
-                        <figure>
+                        <section id="video-instructional">
+                            <div class="video-container">
+                                <video 
+                                    id="video-tricou" 
+                                    controls
+                                    poster="/resurse/imagini/poster-tricou.jpg"
+                                    preload="metadata"
+                                    width="100%">
+                                    <source src="/resurse/video/video-tricou.mp4" type="video/mp4">
+                                    <source src="/resurse/video/video-tricou.webm" type="video/webm">
+                                    <track 
+                                        label="Română" 
+                                        kind="subtitles" 
+                                        srclang="ro" 
+                                        src="/resurse/video/subtitles-ro.vtt" 
+                                        default>
+                                    <track 
+                                        label="English" 
+                                        kind="subtitles" 
+                                        srclang="en" 
+                                        src="/resurse/video/subtitles-en.vtt">
+                                    Browserul dumneavoastră nu suportă elementul video.
+                                </video>
+                            </div>
+                            <p class="video-description">
+                                Video promoțional pentru unul din tricourile de pe site-ul nostru.
+                            </p>
+                        </section>
+                    </div>
+                        <!-- <figure>
                     <picture>
                         <source media="(max-width: 900px)" srcset="/resurse/imagini/imagine_mica.jpg">
                         <source media="(max-width: 1400px)" srcset="/resurse/imagini/imagine_medie.jpg">
                         <img src="/resurse/imagini/imagine_mare2.jpg" alt="Tricou de fotbal valabil pe Elite Kits">
                     </picture>
                     <figcaption>Tricou valabil pe Elite Kits</figcaption>
-                </figure>
-                    </div>
-                </div> 
+                </figure> -->
+                </div>
             </section>
             <section class="zona2">
                 <h3>Ghid de mărimi</h3>
@@ -171,6 +202,7 @@
                     <area target="_top" alt="Tricou PSG" title="Tricou PSG" href="" coords="736,113,792,347" shape="rect">
                 </map>
             </div>
+            <%- include("../fragmente/galerie-fragment.ejs") %>
             <p>Explorați colecția noastră completă de <b>tricouri de fotbal</b> pentru toate vârstele și preferințele. Oferim atât <b>tricouri pentru adulți</b>, cât și <b>tricouri pentru copii</b>, în toate mărimile disponibile.</p>
             <ul>
                 <li><a href="#club">Echipe de Club</a></li>
@@ -206,7 +238,6 @@
                     <details>
                     <summary>Calculează-ți singur ce mărime ți se potrivește</summary>
                     <p>Formula pentru calcularea mărimii aproximative:</p>
-                    <!-- Asigurăm că folosim corect atributele pentru MathML -->
                     <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
                         <mrow>
                           <mi>M</mi>
