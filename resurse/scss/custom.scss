@@ -1,8 +1,6 @@
-// 1. Importăm modulele Sass necesare folosind noua sintaxă @use
 @use "sass:color";
 @use "sass:math";
 
-// 2. Definim variabilele de bază
 $culoare-primara: #076104;   
 $culoare-secundara: #80C135;   
 $culoare-accent: #F20505;    
@@ -11,14 +9,12 @@ $culoare-deschis: #F2F2F2;
 $culoare-deschis2: #E7FCE4;
 $culoare-deschis3: #b3fea0;
 
-// 3. Definim variabilele derivate folosind modulul color
 $culoare-primara-dark: color.adjust($culoare-primara, $lightness: -10%);
 $culoare-primara-light: color.adjust($culoare-primara, $lightness: 40%);
 $culoare-secundara-dark: color.adjust($culoare-secundara, $lightness: -10%);
 $culoare-secundara-light: color.adjust($culoare-secundara, $lightness: 20%);
 $culoare-accent-light: color.adjust($culoare-accent, $lightness: 30%);
 
-// 4. Restul variabilelor de customizare
 $font-family-sans-serif: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $font-family-base: $font-family-sans-serif;
 
@@ -82,7 +78,6 @@ $h6-font-size: 1.1rem;
   $h6-font-size: $h6-font-size
 );
 
-// 5. Configurare pentru a evita warnings - setăm variabilele root înainte de importuri
 :root {
   --bs-primary: #{$culoare-primara};
   --bs-primary-rgb: 7, 97, 4;
@@ -102,8 +97,6 @@ $h6-font-size: 1.1rem;
   --culoare-primara-light: #{$culoare-primara-light};
 }
 
-
-// 7. Stilurile personalizate
 body {
   font-family: $font-family-base;
   background-color: $culoare-deschis2;
@@ -182,6 +175,13 @@ body {
 
 .border-secondary {
   border-color: $culoare-secundara !important;
+}
+
+h1, .h1 { 
+  color: $culoare-deschis !important;
+  font-size: $h1-font-size !important; 
+  font-weight: 300;
+  letter-spacing: -0.02em;
 }
 
 h2, .h2 { 

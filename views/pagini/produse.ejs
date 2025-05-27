@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <link rel="stylesheet" href="/resurse/css/produse.css" type="text/css" />
+    <link rel="stylesheet" href="/resurse/css/modal.css" type="text/css" />
+     <link rel="stylesheet" href="/resurse/css/comparator.css" type="text/css" />
+    <%- include("../fragmente/head") %>     
+    <script type="text/javascript" src="/resurse/js/produse.js"></script>
+    <script type="text/javascript" src="/resurse/js/comparator.js"></script>
+    <script type="text/javascript" src="/resurse/js/modal.js"></script>
+</head>
+<body>
+    <%- include("../fragmente/header") %>
+    <main>
+        <% if (locals.tipEchipaFiltru && locals.tipEchipaFiltru !== 'toate') { %>
+        <div class="filtru-activ-banner">
+            <div class="filtru-activ-content">
+                <i class="fas fa-filter"></i>
+                <span>
+                    Afișez produse pentru: 
+                    <strong>
+                        <% if (locals.tipEchipaFiltru === 'club') { %>
+                            Echipe de Club
+                        <% } else if (locals.tipEchipaFiltru === 'nationala') { %>
+                            Echipe Naționale
+                        <% } else if (locals.tipEchipaFiltru === 'fotbalist') { %>
+                            Fotbaliști
+                        <% } else { %>
+                            <%= locals.tipEchipaFiltru.charAt(0).toUpperCase() + locals.tipEchipaFiltru.slice(1) %>
+                        <% } %>
+                    </strong>
+                </span>
+                <a href="/produse" class="btn-clear-filter">
+                    <i class="fas fa-times"></i> Afișează toate
+                </a>
+            </div>
+        </div>
+        <% } %>
+        <div class="filters-container">
+            <h2><i class="fas fa-filter"></i> Filtrează produsele</h2>
+            
+            <div class="filters-grid">
+                <div class="filter-group">
+                    <h3><i class="fas fa-search"></i> Căutare</h3>
+                    <label for="inp-nume">Nume tricou, echipă sau jucător:</label>
+                    <input type="text" id="inp-nume" list="echipe-populare" placeholder="Ex: Barcelona, Messi, Real Madrid...">
+                    <datalist id="echipe-populare">
+                        <option value="FC Barcelona">
+                        <option value="Real Madrid">
+                        <option value="Manchester United">
+                        <option value="Liverpool">
+                        <option value="Bayern München">
+                        <option value="Juventus">
+                        <option value="PSG">
+                        <option value="Arsenal">
+                        <option value="Manchester City">
+                        <option value="AC Milan">
+                        <option value="România">
+                        <option value="Portugalia">
+                        <option value="Brazilia">
+                        <option value="Messi">
+                        <option value="Ronaldo">
+                        <option value="Haaland">
+                    </datalist>
+                </div>
+                <div class="filter-group">
+                    <h3><i class="fas fa-users"></i> Tip echipă</h3>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input id="tip-toate" name="gr_tip" value="toate" type="radio" 
+                                   <%= (locals.tipEchipaFiltru === 'toate' || !locals.tipEchipaFiltru) ? 'checked' : '' %>>
+                            <label for="tip-toate">Toate tipurile</label>
+                        </div>
+                        <div class="radio-item">
+                            <input id="tip-club" name="gr_tip" value="club" type="radio"
+                                   <%= locals.tipEchipaFiltru === 'club' ? 'checked' : '' %>>
+                            <label for="tip-club">Echipe de club</label>
+                        </div>
+                        <div class="radio-item">
+                            <input id="tip-nationala" name="gr_tip" value="nationala" type="radio"
+                                   <%= locals.tipEchipaFiltru === 'nationala' ? 'checked' : '' %>>
+                            <label for="tip-nationala">Echipe naționale</label>
+                        </div>
+                        <div class="radio-item">
+                            <input id="tip-fotbalist" name="gr_tip" value="fotbalist" type="radio"
+                                   <%= locals.tipEchipaFiltru === 'fotbalist' ? 'checked' : '' %>>
+                            <label for="tip-fotbalist">Tricouri cu fotbaliști</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <h3><i class="fas fa-tag"></i> Categorie</h3>
+                    <label for="inp-categorie">Selectează categoria:</label>
+                    <select id="inp-categorie">
+                        <option id="sel-toate" selected value="toate">Toate categoriile</option>
+                        <% if (locals.optiuni && locals.optiuni.length > 0) { %>
+                            <% for (let opt of locals.optiuni) { %>
+                                <option value="<%- opt.unnest %>"><%- opt.unnest %></option>
+                            <% } %>
+                        <% } else { %>
+                            <option value="acasa">Acasă</option>
+                            <option value="deplasare">Deplasare</option>
+                            <option value="editie speciala">Ediție specială</option>
+                            <option value="antrenament">Antrenament</option>
+                            <option value="retro">Retro</option>
+                            <option value="comemorativ">Comemorativ</option>
+                        <% } %>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <h3><i class="fas fa-list"></i> Caracteristici speciale</h3>
+                    <label for="inp-caracteristici">Selectează caracteristicile dorite:</label>
+                    <select id="inp-caracteristici" multiple size="4">
+                        <option value="DryFit">DryFit Technology</option>
+                        <option value="premium">Premium Quality</option>
+                        <option value="classic">Classic Design</option>
+                        <option value="retro">Retro Style</option>
+                        <option value="special">Special Edition</option>
+                        <option value="breathable">Breathable Fabric</option>
+                        <option value="antimicrobial">Antimicrobial</option>
+                        <option value="moisture">Moisture Wicking</option>
+                    </select>
+                    <small>Țineți Ctrl pentru selecție multiplă</small>
+                </div>
+                <div class="filter-group">
+                    <h3><i class="fas fa-euro-sign"></i> Preț maxim</h3>
+                    <label for="inp-pret">Preț maxim (RON):</label>
+                    <div class="range-container">
+                        <input type="range" id="inp-pret" value="400" min="0" max="400" step="10">
+                        <div class="price-display" id="pret-display">400 RON</div>
+                    </div>
+                </div>
+
+                <div class="filter-group">
+                    <h3><i class="fas fa-child"></i> Vârstă</h3>
+                    <div class="radio-group">
+                        <div class="radio-item">
+                            <input id="varsta-toate" name="gr_varsta" value="toate" type="radio" checked>
+                            <label for="varsta-toate">Toate vârstele</label>
+                        </div>
+                        <div class="radio-item">
+                            <input id="varsta-adulti" name="gr_varsta" value="false" type="radio">
+                            <label for="varsta-adulti">Pentru adulți</label>
+                        </div>
+                        <div class="radio-item">
+                            <input id="varsta-copii" name="gr_varsta" value="true" type="radio">
+                            <label for="varsta-copii">Pentru copii</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="filter-group">
+                    <h3><i class="fas fa-calendar"></i> Sezon</h3>
+                    <label for="inp-sezon">Selectează sezonul:</label>
+                    <select id="inp-sezon">
+                        <option value="toate" selected>Toate sezoanele</option>
+                        <option value="2025/2026">2025/2026</option>
+                        <option value="2024/2025">2024/2025</option>
+                        <option value="2024">2024</option>
+                        <option value="2022/2023">2022/2023</option>
+                        <option value="2021/2022">2021/2022</option>
+                        <option value="2010/2011">2010/2011</option>
+                        <option value="1970">1970</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <h3><i class="fas fa-star"></i> Echipe populare</h3>
+                    <label for="inp-echipe">Selectați echipele care vă interesează:</label>
+                    <textarea id="inp-echipe" rows="4" 
+                              placeholder="Introduceți numele echipelor separate prin virgulă&#10;Ex: Barcelona, Real Madrid, Manchester United, Liverpool, PSG"></textarea>
+                    <small>Separați echipele prin virgulă. Filtrarea va afișa produsele care conțin oricare din echipele specificate.</small>
+                    <small id="echipe-error" class="error-message" style="display: none; color: red;">
+                        Vă rugăm să introduceți doar nume de echipe valide (litere, spații, puncte și cratime)
+                    </small>
+                </div>
+            </div>
+            <div class="buttons-container">
+                <button id="filtrare" class="btn btn-primary">
+                    <i class="fas fa-filter"></i> Filtrează
+                </button>
+                <button id="resetare" class="btn btn-secondary">
+                    <i class="fas fa-undo"></i> Resetează filtrele
+                </button>
+                <button id="sortCrescNume" class="btn btn-success">
+                    <i class="fas fa-sort-amount-up"></i> Sortare crescătoare
+                </button>
+                <button id="sortDescrescNume" class="btn btn-warning">
+                    <i class="fas fa-sort-amount-down"></i> Sortare descrescătoare
+                </button>
+            </div>
+        </div>
+        <div class="suma-info">
+            <p id="p-suma">
+                <% if (locals.produse && locals.produse.length > 0) { %>
+                    Se afișează <%= locals.produse.length %> produse
+                    <% if (locals.tipEchipaFiltru && locals.tipEchipaFiltru !== 'toate') { %>
+                        pentru categoria 
+                        <% if (locals.tipEchipaFiltru === 'club') { %>
+                            "Echipe de Club"
+                        <% } else if (locals.tipEchipaFiltru === 'nationala') { %>
+                            "Echipe Naționale"
+                        <% } else if (locals.tipEchipaFiltru === 'fotbalist') { %>
+                            "Fotbaliști"
+                        <% } else { %>
+                            "<%= locals.tipEchipaFiltru %>"
+                        <% } %>
+                    <% } %>
+                <% } else { %>
+                    Se încarcă produsele...
+                <% } %>
+                Apăsați <kbd>Alt</kbd>+<kbd>C</kbd> pentru suma prețurilor produselor selectate.
+            </p>
+        </div>
+        <section id="produse" class="products-section">
+            <div class="section-header">
+                <h2><i class="fa-solid fa-soccer-ball fa-spin-custom"></i> 
+                    <% if (locals.tipEchipaFiltru && locals.tipEchipaFiltru !== 'toate') { %>
+                        <% if (locals.tipEchipaFiltru === 'club') { %>
+                            Tricouri Echipe de Club
+                        <% } else if (locals.tipEchipaFiltru === 'nationala') { %>
+                            Tricouri Echipe Naționale
+                        <% } else if (locals.tipEchipaFiltru === 'fotbalist') { %>
+                            Tricouri cu Fotbaliști
+                        <% } else { %>
+                            Tricouri <%= locals.tipEchipaFiltru %>
+                        <% } %>
+                    <% } else { %>
+                        Colecția noastră de tricouri
+                    <% } %>
+                </h2>
+                <p>Descoperă cele mai populare tricouri de fotbal din lume</p>
+            </div>
+
+            <div class="grid-produse">
+                <% if (locals.produse && locals.produse.length > 0) { %>
+                    <% for (let prod of locals.produse) { %>
+                        <article class="produs" id="elem_<%= prod.id %>">
+                            <h3 class="nume">
+                                <a href="/produs/<%-prod.id %>">
+                                    <span class="val-nume"><%- prod.nume %></span>
+                                </a>
+                            </h3>
+                            <div class="info-prod">
+                                <table class="tabel-caracteristici">
+                                    <tr>
+                                        <td><strong>Preț:</strong></td>
+                                        <td class="val-pret"><%- prod.pret %> RON</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Echipa:</strong></td>
+                                        <td class="val-echipa"><%- prod.echipa %></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Liga:</strong></td>
+                                        <td class="val-liga"><%- prod.liga || 'N/A' %></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Sezon:</strong></td>
+                                        <td class="val-sezon"><%- prod.sezon %></td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Pentru copii:</strong></td>
+                                        <td class="val-copii"><%- prod.pentru_copii ? 'Da' : 'Nu' %></td>
+                                    </tr>
+                                </table>
+
+                                <p class="descriere"><%- prod.descriere || 'Tricou de fotbal de calitate premium.' %></p>
+                                
+                                <p class="categorie-prod">Categorie: <span class="val-categorie"><%- prod.categorie %></span></p>
+                                <% if (prod.pentru_copii) { %>
+                                <div class="product-badges">
+                                    <span class="badge badge-kids">
+                                        <i class="fas fa-child"></i> Copii
+                                    </span>
+                                </div>
+                                <% } %>
+                            </div>
+                            <figure>
+                                <a href="/produs/<%-prod.id %>">
+                                    <img src="/resurse/imagini/produse/<%- prod.imagine %>" 
+                                         style="width:100%;height:auto;" 
+                                         alt="[imagine <%- prod.nume %>]"
+                                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI0NSUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlRyaWNvdTwvdGV4dD4KICA8dGV4dCB4PSI1MCUiIHk9IjYwJSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+RWxpdGUgS2l0czwvdGV4dD4KICA8L3N2Zz4K'" />
+                                </a>
+                            </figure>
+                            <label class="selecteaza-cos">
+                                <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
+                                Selectează
+                            </label>
+                        </article>
+                    <% } %>
+                <% } else { %>
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                        <h3>
+                            <% if (locals.tipEchipaFiltru && locals.tipEchipaFiltru !== 'toate') { %>
+                                Nu s-au găsit produse pentru această categorie
+                            <% } else { %>
+                                Se încarcă produsele...
+                            <% } %>
+                        </h3>
+                        <p>
+                            <% if (locals.tipEchipaFiltru && locals.tipEchipaFiltru !== 'toate') { %>
+                                <a href="/produse" class="btn btn-primary">Vezi toate produsele</a>
+                            <% } else { %>
+                                Produsele vor fi afișate automat prin JavaScript dacă nu sunt disponibile din server.
+                            <% } %>
+                        </p>
+                    </div>
+                <% } %>
+            </div>
+        </section>
+    </main>
+    <%- include("../fragmente/footer") %>
+</body>
+</html>

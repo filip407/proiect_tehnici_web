@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparare: <%= produs1.nume %> vs <%= produs2.nume %> - Elite Kits</title>
+    
+    <%- include("../fragmente/head") %>
+    <link rel="stylesheet" href="/resurse/css/comparare.css" type="text/css" />
+</head>
+<body>
+    <button class="close-button" onclick="window.close()">
+        <i class="fas fa-times"></i> Închide
+    </button>
+    
+    <div class="comparare-header">
+        <h1><i class="fas fa-balance-scale"></i> Comparare Produse</h1>
+        <p>Analizează diferențele dintre produsele selectate</p>
+    </div>
+
+    <div class="comparare-container">
+        <table class="comparare-table">
+            <thead>
+                <tr>
+                    <th><i class="fas fa-list"></i> Caracteristică</th>
+                    <th><i class="fas fa-tshirt"></i> <%= produs1.nume %></th>
+                    <th><i class="fas fa-tshirt"></i> <%= produs2.nume %></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="caracteristica-label"><strong><i class="fas fa-tag"></i> Nume</strong></td>
+                    <td class="produs-value nume"><%= produs1.nume %></td>
+                    <td class="produs-value nume"><%= produs2.nume %></td>
+                </tr>
+                <tr>
+                    <td class="caracteristica-label"><strong><i class="fas fa-euro-sign"></i> Preț</strong></td>
+                    <td class="produs-value pret"><%= parseFloat(produs1.pret).toFixed(2) %> RON</td>
+                    <td class="produs-value pret"><%= parseFloat(produs2.pret).toFixed(2) %> RON</td>
+                </tr>
+                <tr>
+                    <td class="caracteristica-label"><strong><i class="fas fa-users"></i> Echipa</strong></td>
+                    <td class="produs-value"><%= produs1.echipa || 'N/A' %></td>
+                    <td class="produs-value"><%= produs2.echipa || 'N/A' %></td>
+                </tr>
+                <tr>
+                    <td class="caracteristica-label"><strong><i class="fas fa-trophy"></i> Liga</strong></td>
+                    <td class="produs-value"><%= produs1.liga || 'N/A' %></td>
+                    <td class="produs-value"><%= produs2.liga || 'N/A' %></td>
+                </tr>
+                <tr>
+                    <td class="caracteristica-label"><strong><i class="fas fa-layer-group"></i> Tip echipă</strong></td>
+                    <td class="produs-value">
+                        <%= produs1.tip_echipa ? produs1.tip_echipa.charAt(0).toUpperCase() + produs1.tip_echipa.slice(1) : 'N/A' %>
+                    </td>
+                    <td class="produs-value">
+                        <%= produs2.tip_echipa ? produs2.tip_echipa.charAt(0).toUpperCase() + produs2.tip_echipa.slice(1) : 'N/A' %>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="caracteristica-label"><strong><i class="fas fa-calendar"></i> Sezon</strong></td>
+                    <td class="produs-value"><%= produs1.sezon || 'N/A' %></td>
+                    <td class="produs-value"><%= produs2.sezon || 'N/A' %></td>
+                </tr>
+                <tr>
+                    <td class="caracteristica-label"><strong><i class="fas fa-bookmark"></i> Categorie</strong></td>
+                    <td class="produs-value"><%= produs1.categorie || 'N/A' %></td>
+                    <td class="produs-value"><%= produs2.categorie || 'N/A' %></td>
+                </tr>
+                <tr>
+                    <td class="caracteristica-label"><strong><i class="fas fa-child"></i> Pentru copii</strong></td>
+                    <td class="produs-value">
+                        <span class="badge-comparare <%= produs1.pentru_copii ? 'badge-da' : 'badge-nu' %>">
+                            <%= produs1.pentru_copii ? 'Da' : 'Nu' %>
+                        </span>
+                    </td>
+                    <td class="produs-value">
+                        <span class="badge-comparare <%= produs2.pentru_copii ? 'badge-da' : 'badge-nu' %>">
+                            <%= produs2.pentru_copii ? 'Da' : 'Nu' %>
+                        </span>
+                    </td>
+                </tr>
+                
+                <% if (produs1.tara || produs2.tara) { %>
+                <tr>
+                    <td class="caracteristica-label"><strong><i class="fas fa-flag"></i> Țara</strong></td>
+                    <td class="produs-value"><%= produs1.tara || 'N/A' %></td>
+                    <td class="produs-value"><%= produs2.tara || 'N/A' %></td>
+                </tr>
+                <% } %>
+                
+                <% if (produs1.jucator || produs2.jucator) { %>
+                <tr>
+                    <td class="caracteristica-label"><strong><i class="fas fa-user"></i> Jucător</strong></td>
+                    <td class="produs-value"><%= produs1.jucator || 'N/A' %></td>
+                    <td class="produs-value"><%= produs2.jucator || 'N/A' %></td>
+                </tr>
+                <% } %>
+                
+                <% if (produs1.numar_tricou || produs2.numar_tricou) { %>
+                <tr>
+                    <td class="caracteristica-label"><strong><i class="fas fa-hashtag"></i> Număr tricou</strong></td>
+                    <td class="produs-value"><%= produs1.numar_tricou || 'N/A' %></td>
+                    <td class="produs-value"><%= produs2.numar_tricou || 'N/A' %></td>
+                </tr>
+                <% } %>
+                
+                <tr>
+                    <td class="caracteristica-label"><strong><i class="fas fa-star"></i> Caracteristici</strong></td>
+                    <td class="produs-value">
+                        <% if (Array.isArray(produs1.caracteristici)) { %>
+                            <%= produs1.caracteristici.join(', ') %>
+                        <% } else { %>
+                            <%= produs1.caracteristici || 'N/A' %>
+                        <% } %>
+                    </td>
+                    <td class="produs-value">
+                        <% if (Array.isArray(produs2.caracteristici)) { %>
+                            <%= produs2.caracteristici.join(', ') %>
+                        <% } else { %>
+                            <%= produs2.caracteristici || 'N/A' %>
+                        <% } %>
+                    </td>
+                </tr>
+                
+                <% if (produs1.descriere || produs2.descriere) { %>
+                <tr>
+                    <td class="caracteristica-label"><strong><i class="fas fa-info-circle"></i> Descriere</strong></td>
+                    <td class="produs-value descriere-text">
+                        <%= produs1.descriere || 'Fără descriere' %>
+                    </td>
+                    <td class="produs-value descriere-text">
+                        <%= produs2.descriere || 'Fără descriere' %>
+                    </td>
+                </tr>
+                <% } %>
+
+                <tr class="row-highlight">
+                    <td class="caracteristica-label"><strong><i class="fas fa-calculator"></i> Diferența de preț</strong></td>
+                    <% 
+                    const diferenta = Math.abs(parseFloat(produs1.pret) - parseFloat(produs2.pret));
+                    const maiIeftin = parseFloat(produs1.pret) < parseFloat(produs2.pret) ? 1 : 2;
+                    %>
+                    <td class="produs-value <%= maiIeftin === 1 ? 'pret-avantaj' : '' %>">
+                        <% if (maiIeftin === 1) { %>
+                            <span class="avantaj"><i class="fas fa-arrow-down"></i> Mai ieftin cu <%= diferenta.toFixed(2) %> RON</span>
+                        <% } else if (diferenta > 0) { %>
+                            <span class="dezavantaj"><i class="fas fa-arrow-up"></i> Mai scump cu <%= diferenta.toFixed(2) %> RON</span>
+                        <% } else { %>
+                            <span class="egal"><i class="fas fa-equals"></i> Același preț</span>
+                        <% } %>
+                    </td>
+                    <td class="produs-value <%= maiIeftin === 2 ? 'pret-avantaj' : '' %>">
+                        <% if (maiIeftin === 2) { %>
+                            <span class="avantaj"><i class="fas fa-arrow-down"></i> Mai ieftin cu <%= diferenta.toFixed(2) %> RON</span>
+                        <% } else if (diferenta > 0) { %>
+                            <span class="dezavantaj"><i class="fas fa-arrow-up"></i> Mai scump cu <%= diferenta.toFixed(2) %> RON</span>
+                        <% } else { %>
+                            <span class="egal"><i class="fas fa-equals"></i> Același preț</span>
+                        <% } %>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="comparare-footer">
+        <p><i class="fas fa-info-circle"></i> Apăsați <kbd>Esc</kbd> pentru a închide fereastra</p>
+        <div class="footer-buttons">
+            <button class="btn-footer" onclick="window.print()">
+                <i class="fas fa-print"></i> Printează
+            </button>
+            <button class="btn-footer" onclick="window.close()">
+                <i class="fas fa-times"></i> Închide
+            </button>
+        </div>
+    </div>
+
+    <script>
+        localStorage.setItem('ultimaActivitateComparare', Date.now().toString());
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                window.close();
+            }
+        });
+        document.addEventListener('DOMContentLoaded', function() {
+            const pret1 = parseFloat('<%= produs1.pret %>');
+            const pret2 = parseFloat('<%= produs2.pret %>');
+            
+            if (pret1 !== pret2) {
+                const celule = document.querySelectorAll('.produs-value.pret');
+                const maiIeftin = pret1 < pret2 ? celule[0] : celule[1];
+                maiIeftin.classList.add('pret-cel-mai-ieftin');
+            }
+        });
+    </script>
+</body>
+</html>

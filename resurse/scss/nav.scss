@@ -1,10 +1,9 @@
-// Variabile SCSS
+
 $breakpoint-tablet: 768px;
 $breakpoint-desktop-small: 992px;
 $transition-standard: 0.5s ease;
 $border-radius-standard: 8px;
 
-// Mixin-uri
 @mixin transition($properties...) {
   transition-property: $properties;
   transition-duration: $transition-standard;
@@ -22,16 +21,15 @@ $border-radius-standard: 8px;
   align-items: center;
 }
 
-// Stil pentru bara de navigatie principala
 nav {
-  background: linear-gradient(135deg, var(--culoare-primara), var(--culoare-secundara));
-  margin-top: 10px;
+  background: var(--culoare-primara);
+  margin-top: 20px;
+  height: 3.5em;
   border-radius: $border-radius-standard;
   position: relative;
   z-index: 100;
   @include box-shadow;
 
-  // Lista principala de navigare
   > ul {
     list-style-type: none;
     display: flex;
@@ -42,13 +40,11 @@ nav {
     margin: 0;
     position: relative;
 
-    // Elementele de nivel principal
     > li {
       position: relative;
       flex: 1;
       text-align: center;
 
-      // Link-uri de nivel principal
       > a {
         display: block;
         padding: 15px 20px;
@@ -58,7 +54,7 @@ nav {
         font-size: 1.2rem;
         text-transform: uppercase;
         position: relative;
-       transition: color 0.5s ease; /* Corectat: singura tranziție de care avem nevoie pentru culoare */
+       transition: color 0.5s ease;
 
         &:visited {
           color: white;
@@ -66,11 +62,10 @@ nav {
 
         &:hover {
           background-color: transparent;
-          color: var(--culoare-deschis2); /* Adăugat: Schimbă culoarea textului la verde deschis la hover */
+          color: var(--culoare-deschis2);
         }
       }
 
-      // Efect de hover pentru elemente fara submeniuri
       &:not(:has(ul)) {
         > a::after {
           content: "";
@@ -79,12 +74,7 @@ nav {
           left: 0;
           width: 100%;
           height: 0;
-          background: linear-gradient(
-            to right,
-            var(--culoare-secundara),
-            var(--culoare-deschis2),
-            var(--culoare-secundara)
-          );
+          background: var(--culoare-primara);
           transition: height $transition-standard, top $transition-standard;
           z-index: -1;
         }
@@ -95,7 +85,6 @@ nav {
         }
       }
 
-      // Submeniuri (nivel 2)
       > ul {
         position: absolute;
         left: 50%;
@@ -114,11 +103,9 @@ nav {
         list-style-type: none;
         padding: 0;
 
-        // Elementele din submeniu
         > li {
           width: 100%;
 
-          // Link-uri din submeniu
           > a {
             display: block;
             padding: 12px 20px;
@@ -139,14 +126,12 @@ nav {
             }
           }
 
-          // Ultima optiune din submeniu (colt rotunjit)
           &:last-child > a {
             border-radius: 0 0 $border-radius-standard $border-radius-standard;
           }
         }
       }
 
-      // Afisare submeniu la hover
       &:hover > ul {
         transform: translateX(-50%) scale(1);
         opacity: 1;
@@ -157,7 +142,6 @@ nav {
   }
 }
 
-// Stiluri pentru dispozitive mobile
 @media screen and (max-width: $breakpoint-tablet) {
   nav {
     > ul {
@@ -165,7 +149,6 @@ nav {
     }
   }
 
-  // Butonul de hamburger
   .hamburger-menu {
     display: block;
     position: absolute;
@@ -198,12 +181,11 @@ nav {
         top: 20px;
       }
     }
-    // Animatii pentru butoanele hamburger
+
     &.animated {
-      // Generăm delayuri diferite pentru fiecare bară folosind @for
+
       @for $i from 1 through 3 {
           span:nth-child(#{$i}) {
-              // Selectăm animația corespunzătoare fiecărei bare
               @if $i == 1 {
                   animation: hamburgerBar1Animation 0.8s ease-in-out forwards;
               } @else if $i == 2 {
@@ -217,7 +199,6 @@ nav {
     }
   }
 
-  // Meniul mobil
   .mobile-menu {
     position: fixed;
     top: 0;
@@ -238,7 +219,6 @@ nav {
       transition: transform 0.5s ease, border-bottom-right-radius 0.5s ease 0.25s;
     }
 
-    // Icnoita Home din meniul mobil
     .home-icon {
       @include flex-center;
       padding: 15px;
@@ -250,7 +230,6 @@ nav {
       }
     }
 
-    // Lista principala din meniul mobil
     ul.mobile-menu-list {
       list-style: none;
       padding: 0;
@@ -273,7 +252,6 @@ nav {
           }
         }
 
-        // Submeniuri in versiunea mobila
         ul.submenu {
           list-style: none;
           padding: 0;
@@ -296,7 +274,6 @@ nav {
           }
         }
 
-        // Afisare submeniu la hover pe mobil
         &:hover > ul.submenu {
           max-height: 500px;
           opacity: 1;
@@ -307,7 +284,6 @@ nav {
     }
   }
 
-  // Overlay pentru meniul mobil
   .mobile-menu-overlay {
     position: fixed;
     top: 0;
@@ -326,7 +302,6 @@ nav {
     }
   }
 
-  // Stare inactiva a meniului mobil
   .mobile-menu:not(.active) {
     display: block !important;
     transform: scale(0) !important;
@@ -335,7 +310,6 @@ nav {
   }
 }
 
-// Stiluri pentru tablete si dispozitive intermediare
 @media screen and (max-width: $breakpoint-desktop-small) and (min-width: ($breakpoint-tablet + 1)) {
   nav {
     > ul {
@@ -354,7 +328,6 @@ nav {
           }
         }
 
-        // Stilizare speciala pentru primul element (Home)
         &:first-child > a {
           font-size: 0;
           padding: 12px;
@@ -373,7 +346,6 @@ nav {
   }
 }
 
-// Reguli pentru ascunderea meniului mobil inactiv
 .mobile-menu:not(.active) {
   display: none !important;
   visibility: hidden;
@@ -394,7 +366,6 @@ nav {
   }
 }
 
-// Animatii pentru bara de hamburger
 @keyframes hamburgerBar1Animation {
   0% {
     background-color: var(--culoare-accent);

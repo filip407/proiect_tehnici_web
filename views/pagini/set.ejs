@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title><%= locals.set.nume_set %> - Elite Kits</title>
+    <%- include("../fragmente/head") %>
+    <link href="/resurse/css/seturi.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <%- include("../fragmente/header") %>
+    
+    <main>
+        <section id="set-individual">
+            <div class="container-set">
+                <div class="breadcrumb">
+                    <a href="/seturi">
+                        <i class="fas fa-arrow-left"></i>
+                        Înapoi la seturi
+                    </a>
+                </div>
+
+                <header class="header-set">
+                    <h2>
+                        <i class="fas fa-star"></i>
+                        <%= locals.set.nume_set %>
+                    </h2>
+                    <p class="descriere-set-detaliata">
+                        <%= locals.set.descriere_set %>
+                    </p>
+                </header>
+
+                <div class="info-set-principal">
+                    <div class="statistici-set">
+                        <div class="statistica">
+                            <i class="fas fa-shirt"></i>
+                            <span class="numar"><%= locals.set.produse.length %></span>
+                            <span class="label">Tricouri incluse</span>
+                        </div>
+                        <div class="statistica">
+                            <i class="fas fa-percentage"></i>
+                            <span class="numar"><%= locals.set.reducere_procentaj %>%</span>
+                            <span class="label">Reducere aplicată</span>
+                        </div>
+                        <div class="statistica">
+                            <i class="fas fa-piggy-bank"></i>
+                            <span class="numar"><%= locals.set.economie.toFixed(2) %></span>
+                            <span class="label">RON economisiți</span>
+                        </div>
+                    </div>
+
+                    <div class="preturi-set-principal">
+                        <div class="pret-comparatie">
+                            <span class="pret-original-mare">
+                                <span class="label">Preț individual total:</span>
+                                <span class="valoare"><%= locals.set.pret_total.toFixed(2) %> RON</span>
+                            </span>
+                            <span class="pret-set-mare">
+                                <span class="label">Preț set cu reducere:</span>
+                                <span class="valoare"><%= locals.set.pret_final.toFixed(2) %> RON</span>
+                            </span>
+                        </div>
+                        
+                        <div class="actiuni-set-principal">
+                            <button class="btn-adauga-set-mare" onclick="adaugaSetInCos('<%= locals.set.set_id %>')">
+                                <i class="fas fa-shopping-cart"></i>
+                                Adaugă întregul set în coș
+                                <span class="pret-btn"><%= locals.set.pret_final.toFixed(2) %> RON</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="produse-din-set">
+                    <h3>
+                        <i class="fas fa-list"></i>
+                        Produsele incluse în set
+                    </h3>
+                    
+                    <div class="grid-produse-set">
+                        <% for (let produs of locals.set.produse) { %>
+                            <article class="produs-set-card">
+                                <div class="imagine-produs-set">
+                                    <a href="/produs/<%= produs.id %>" title="Vezi detalii <%= produs.nume %>">
+                                        <img src="/resurse/imagini/produse/<%= produs.imagine %>" 
+                                             alt="<%= produs.nume %>"
+                                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI0NSUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNiIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlRyaWNvdTwvdGV4dD4KICA8dGV4dCB4PSI1MCUiIHk9IjYwJSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjEyIiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+RWxpdGUgS2l0czwvdGV4dD4KICA8L3N2Zz4K'" />
+                                    </a>
+                                </div>
+                                
+                                <div class="info-produs-set">
+                                    <h4 class="nume-produs-set">
+                                        <a href="/produs/<%= produs.id %>"><%= produs.nume %></a>
+                                    </h4>
+                                    
+                                    <div class="detalii-rapide-set">
+                                        <span class="echipa-set">
+                                            <i class="fas fa-shield-alt"></i>
+                                            <%= produs.echipa %>
+                                        </span>
+                                        
+                                        <span class="categorie-set">
+                                            <i class="fas fa-tag"></i>
+                                            <%= produs.categorie %>
+                                        </span>
+                                        
+                                        <% if (produs.tip_echipa) { %>
+                                        <span class="tip-echipa-set">
+                                            <i class="fas fa-users"></i>
+                                            <%= produs.tip_echipa %>
+                                        </span>
+                                        <% } %>
+                                        
+                                        <% if (produs.pentru_copii) { %>
+                                        <span class="copii-set">
+                                            <i class="fas fa-child"></i>
+                                            Pentru copii
+                                        </span>
+                                        <% } %>
+                                    </div>
+                                    
+                                    <% if (produs.descriere) { %>
+                                    <p class="descriere-produs-set">
+                                        <%= produs.descriere.length > 100 ? produs.descriere.substring(0, 100) + '...' : produs.descriere %>
+                                    </p>
+                                    <% } %>
+                                    
+                                    <div class="pret-si-actiuni-set">
+                                        <span class="pret-individual">
+                                            <%= parseFloat(produs.pret).toFixed(2) %> RON
+                                        </span>
+                                        
+                                        <div class="actiuni-produs-set">
+                                            <a href="/produs/<%= produs.id %>" class="btn-vezi-produs">
+                                                <i class="fas fa-eye"></i>
+                                                Vezi detalii
+                                            </a>
+                                            <button class="btn-cos-individual" onclick="adaugaProdusInCos('<%= produs.id %>')">
+                                                <i class="fas fa-shopping-cart"></i>
+                                                Doar acest produs
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </article>
+                        <% } %>
+                    </div>
+                </div>
+
+                <div class="beneficii-set">
+                    <h3>
+                        <i class="fas fa-star"></i>
+                        De ce să alegi acest set?
+                    </h3>
+                    <div class="grid-beneficii">
+                        <div class="beneficiu">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <h4>Economie garantată</h4>
+                            <p>Economisești <strong><%= locals.set.economie.toFixed(2) %> RON</strong> față de cumpărarea individuală</p>
+                        </div>
+                        <div class="beneficiu">
+                            <i class="fas fa-shipping-fast"></i>
+                            <h4>Livrare optimizată</h4>
+                            <p>Toate produsele din set se livrează împreună, rapid și sigur</p>
+                        </div>
+                        <div class="beneficiu">
+                            <i class="fas fa-gift"></i>
+                            <h4>Ambalaj premium</h4>
+                            <p>Setul vine într-un ambalaj special, perfect pentru cadouri</p>
+                        </div>
+                        <div class="beneficiu">
+                            <i class="fas fa-medal"></i>
+                            <h4>Calitate garantată</h4>
+                            <p>Fiecare produs din set este selectat pentru calitatea sa superioară</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <%- include("../fragmente/footer") %>
+    
+    <script>
+        function adaugaSetInCos(setId) {
+            alert('Întregul set a fost adăugat în coș!');
+            console.log('Set complet adăugat în coș:', setId);
+        }
+        
+        function adaugaProdusInCos(produsId) {
+            alert('Produsul a fost adăugat în coș!');
+            console.log('Produs individual adăugat în coș:', produsId);
+        }
+
+        document.querySelector('.breadcrumb a').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.history.back();
+        });
+    </script>
+</body>
+</html>

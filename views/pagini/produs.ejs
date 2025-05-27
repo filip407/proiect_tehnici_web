@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title><%- locals.prod.nume %> - Elite Kits</title>
+    <%- include("../fragmente/head") %>
+    <link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <%- include("../fragmente/header") %>
+    
+    <main>
+        <section>
+            <article id="art-produs">
+                <h3><span class="nume"><%- locals.prod.nume %></span></h3>
+                
+                <div class="produs-detalii">
+                    <div class="info-produs">
+                        <p><strong>Pret:</strong> <span class="pret"><%- locals.prod.pret %> RON</span></p>
+                        
+                        <% if (locals.prod.descriere) { %>
+                        <p><strong>Descriere:</strong> <span class="descriere"><%- locals.prod.descriere %></span></p>
+                        <% } %>
+                        
+                        <p><strong>Echipa:</strong> <span class="echipa"><%- locals.prod.echipa %></span></p>
+                        
+                        <% if (locals.prod.liga) { %>
+                        <p><strong>Liga:</strong> <span class="liga"><%- locals.prod.liga %></span></p>
+                        <% } %>
+                        
+                        <% if (locals.prod.tara) { %>
+                        <p><strong>Tara:</strong> <span class="tara"><%- locals.prod.tara %></span></p>
+                        <% } %>
+                        
+                        <p><strong>Sezon:</strong> <span class="sezon"><%- locals.prod.sezon %></span></p>
+                        
+                        <p><strong>Tip echipa:</strong> <span class="tip-echipa"><%- locals.prod.tip_echipa %></span></p>
+                        
+                        <p><strong>Categorie:</strong> <span class="categorie"><%- locals.prod.categorie %></span></p>
+                        
+                        <% if (locals.prod.jucator) { %>
+                        <p><strong>Jucator:</strong> <span class="jucator"><%- locals.prod.jucator %></span></p>
+                        <% } %>
+                        
+                        <% if (locals.prod.numar_tricou) { %>
+                        <p><strong>Numar tricou:</strong> <span class="numar-tricou"><%- locals.prod.numar_tricou %></span></p>
+                        <% } %>
+                        
+                        <p><strong>Pentru copii:</strong> 
+                            <span class="pentru-copii">
+                                <%- locals.prod.pentru_copii ? 'Da' : 'Nu' %>
+                            </span>
+                        </p>              
+                        <% if (locals.prod.caracteristici && locals.prod.caracteristici.length > 0) { %>
+                        <p><strong>Caracteristici:</strong></p>
+                        <ul class="caracteristici">
+                            <% for (let caracteristica of locals.prod.caracteristici) { %>
+                            <li><%- caracteristica %></li>
+                            <% } %>
+                        </ul>
+                        <% } %>
+                    </div>
+                    <figure class="imag-produs">
+                        <img src="/resurse/imagini/produse/<%- locals.prod.imagine %>" 
+                             alt="[imagine <%- locals.prod.nume %>]"
+                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI0NSUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlRyaWNvdTwvdGV4dD4KICA8dGV4dCB4PSI1MCUiIHk9IjYwJSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+RWxpdGUgS2l0czwvdGV4dD4KICA8L3N2Zz4K'" />
+                        <figcaption><%- locals.prod.nume %></figcaption>
+                    </figure>
+                </div>
+                <div class="actiuni-produs">
+                    <button class="btn-cos" onclick="adaugaInCos('<%= locals.prod.id %>')">
+                        Adauga in cos
+                    </button>
+                    <a href="/produse" class="btn-inapoi">
+                        Inapoi la produse
+                    </a>
+                </div>
+            </article>
+        </section>
+        <% if (locals.seturiProdus && locals.seturiProdus.length > 0) { %>
+        <section class="seturi-produs-section">
+            <div class="container-seturi-produs">
+                <h2 class="titlu-seturi-produs">
+                    <i class="fas fa-box-open"></i>
+                    Acest produs face parte din seturile:
+                </h2>
+                
+                <div class="grid-seturi-produs">
+                    <% for (let set of locals.seturiProdus) { %>
+                    <article class="set-produs-card" data-set-id="<%= set.set_id %>">
+                        <div class="set-produs-header">
+                            <h3 class="nume-set-produs">
+                                <a href="/set/<%= set.set_id %>">
+                                    <i class="fas fa-star"></i>
+                                    <%= set.nume_set %>
+                                </a>
+                            </h3>
+                            
+                            <div class="info-set-quick">
+                                <span class="badge-reducere-set">
+                                    <i class="fas fa-percentage"></i>
+                                    -<%= set.reducere_procentaj %>%
+                                </span>
+                                <span class="numar-produse-set">
+                                    <i class="fas fa-shirt"></i>
+                                    <%= set.numar_produse_in_set %> produse
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="descriere-set-produs">
+                            <p><%= set.descriere_set %></p>
+                        </div>
+
+                        <% if (set.alte_produse_din_set && set.alte_produse_din_set.length > 0) { %>
+                        <div class="alte-produse-set">
+                            <h4>
+                                <i class="fas fa-plus"></i>
+                                Plus alte <%= set.alte_produse_din_set.length %> produse în set:
+                            </h4>
+                            
+                            <div class="preview-alte-produse">
+                                <% for (let altProdus of set.alte_produse_din_set.slice(0, 3)) { %>
+                                <div class="alt-produs-preview" title="<%= altProdus.nume %>">
+                                    <a href="/produs/<%= altProdus.id %>">
+                                        <img src="/resurse/imagini/produse/<%= altProdus.imagine %>" 
+                                             alt="<%= altProdus.nume %>"
+                                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CiAgPHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0iI2RkZCIvPgogIDx0ZXh0IHg9IjUwJSIgeT0iNTAlIiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iOCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkVsaXRlIEtpdHM8L3RleHQ+CiAgPC9zdmc+'" />
+                                    </a>
+                                    <span class="nume-alt-produs"><%= altProdus.nume.substring(0, 15) %>...</span>
+                                </div>
+                                <% } %>
+                                
+                                <% if (set.alte_produse_din_set.length > 3) { %>
+                                <div class="alt-produs-preview more-products-set">
+                                    <div class="more-indicator-set">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                        <span>+<%= set.alte_produse_din_set.length - 3 %></span>
+                                    </div>
+                                </div>
+                                <% } %>
+                            </div>
+                        </div>
+                        <% } %>
+
+                        <div class="preturi-set-produs">
+                            <div class="comparatie-preturi">
+                                <div class="pret-individual-total">
+                                    <span class="label">Preț individual total:</span>
+                                    <span class="valoare original-price"><%= set.pret_total.toFixed(2) %> RON</span>
+                                </div>
+                                <div class="economie-set">
+                                    <span class="label">Economie:</span>
+                                    <span class="valoare economie-suma">
+                                        <i class="fas fa-piggy-bank"></i>
+                                        <%= set.economie.toFixed(2) %> RON
+                                    </span>
+                                </div>
+                                <div class="pret-set-final">
+                                    <span class="label">Preț set:</span>
+                                    <span class="valoare set-price"><%= set.pret_final.toFixed(2) %> RON</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="actiuni-set-produs">
+                            <a href="/set/<%= set.set_id %>" class="btn-vezi-set-complet">
+                                <i class="fas fa-eye"></i>
+                                Vezi setul complet
+                            </a>
+                            <button class="btn-adauga-set-produs" onclick="adaugaSetInCos('<%= set.set_id %>')">
+                                <i class="fas fa-shopping-cart"></i>
+                                Cumpără setul
+                                <span class="pret-btn-set"><%= set.pret_final.toFixed(2) %> RON</span>
+                            </button>
+                        </div>
+                    </article>
+                    <% } %>
+                </div>
+                
+                <div class="info-avantaje-seturi">
+                    <div class="avantaj-seturi">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <span>Economisești cumpărând setul complet</span>
+                    </div>
+                    <div class="avantaj-seturi">
+                        <i class="fas fa-shipping-fast"></i>
+                        <span>Livrare gratuită pentru seturi</span>
+                    </div>
+                    <div class="avantaj-seturi">
+                        <i class="fas fa-gift"></i>
+                        <span>Ambalaj premium inclus</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <% } %>
+        <% if (locals.produseSimilare && locals.produseSimilare.length > 0) { %>
+        <section class="produse-similare-section">
+            <div class="container-produse-similare">
+                <h2 class="titlu-produse-similare">
+                    <i class="fas fa-lightbulb"></i>
+                    Produse similare care te-ar putea interesa
+                </h2>
+                
+                <div class="grid-produse-similare">
+                    <% for (let prodSimilar of locals.produseSimilare) { %>
+                    <article class="produs-similar" data-id="<%= prodSimilar.id %>">
+                        <div class="produs-similar-content">
+                            <figure class="imagine-produs-similar">
+                                <a href="/produs/<%= prodSimilar.id %>" title="Vezi detalii <%= prodSimilar.nume %>">
+                                    <img src="/resurse/imagini/produse/<%= prodSimilar.imagine %>" 
+                                         alt="<%= prodSimilar.nume %>"
+                                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI0NSUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlRyaWNvdTwvdGV4dD4KICA8dGV4dCB4PSI1MCUiIHk9IjYwJSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+RWxpdGUgS2l0czwvdGV4dD4KICA8L3N2Zz4K'" />
+                                </a>
+
+                                <% if (prodSimilar.echipa === locals.prod.echipa) { %>
+                                <span class="badge-similar-echipa">
+                                    <i class="fas fa-users"></i>
+                                    Aceeași echipă
+                                </span>
+                                <% } %>
+                            
+                                <% 
+                                const pretOriginal = parseFloat(locals.prod.pret);
+                                const pretSimilar = parseFloat(prodSimilar.pret);
+                                const diferentaProcentuala = Math.abs((pretSimilar - pretOriginal) / pretOriginal * 100);
+                                %>
+                                <% if (diferentaProcentuala <= 15) { %>
+                                <span class="badge-pret-similar">
+                                    <i class="fas fa-tag"></i>
+                                    Preț similar
+                                </span>
+                                <% } %>
+                            </figure>
+                            
+                            <div class="info-produs-similar">
+                                <h3 class="nume-produs-similar">
+                                    <a href="/produs/<%= prodSimilar.id %>" title="Vezi detalii <%= prodSimilar.nume %>">
+                                        <%= prodSimilar.nume %>
+                                    </a>
+                                </h3>
+                                
+                                <div class="caracteristici-rapide">
+                                    <span class="echipa-similar">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <%= prodSimilar.echipa %>
+                                    </span>
+                                    
+                                    <span class="categorie-similar">
+                                        <i class="fas fa-tag"></i>
+                                        <%= prodSimilar.categorie %>
+                                    </span>
+                                    
+                                    <% if (prodSimilar.liga) { %>
+                                    <span class="liga-similar">
+                                        <i class="fas fa-trophy"></i>
+                                        <%= prodSimilar.liga %>
+                                    </span>
+                                    <% } %>
+                                    
+                                    <% if (prodSimilar.pentru_copii) { %>
+                                    <span class="copii-similar">
+                                        <i class="fas fa-child"></i>
+                                        Pentru copii
+                                    </span>
+                                    <% } %>
+                                </div>
+                                
+                                <div class="pret-si-actiuni">
+                                    <span class="pret-produs-similar">
+                                        <%= parseFloat(prodSimilar.pret).toFixed(2) %> RON
+                                    </span>
+                                    
+                                    <div class="actiuni-quick">
+                                        <a href="/produs/<%= prodSimilar.id %>" class="btn-vezi-detalii">
+                                            <i class="fas fa-eye"></i>
+                                            Vezi detalii
+                                        </a>
+                                        <button class="btn-cos-quick" onclick="adaugaInCos('<%= prodSimilar.id %>')">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <% if (prodSimilar.caracteristici && locals.prod.caracteristici) { %>
+                                    <%
+                                    const caracteristiciComune = prodSimilar.caracteristici.filter(caract => 
+                                        locals.prod.caracteristici.includes(caract)
+                                    );
+                                    %>
+                                    <% if (caracteristiciComune.length > 0) { %>
+                                    <div class="caracteristici-comune">
+                                        <small class="text-muted">
+                                            <i class="fas fa-check-circle"></i>
+                                            Caracteristici comune: <%= caracteristiciComune.join(', ') %>
+                                        </small>
+                                    </div>
+                                    <% } %>
+                                <% } %>
+                            </div>
+                        </div>
+                    </article>
+                    <% } %>
+                </div>
+            </div>
+        </section>
+        <% } %>
+    </main>
+
+    <%- include("../fragmente/footer") %>
+    
+    <script>
+        function adaugaInCos(id) {
+            alert('Produsul a fost adaugat in cos!');
+        }
+    </script>
+</body>
+</html>

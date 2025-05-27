@@ -1,0 +1,422 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+    min-height: 100vh;
+    padding: 20px;
+    color: #333;
+    line-height: 1.6;
+}
+
+.comparare-header {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #076104;
+}
+
+.comparare-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.1);
+    font-weight: 700;
+}
+
+.comparare-header p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    font-weight: 300;
+}
+
+.comparare-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid #e9ecef;
+}
+
+.comparare-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+}
+
+.comparare-table th {
+    background: linear-gradient(135deg, #076104, #228B22);
+    color: white;
+    padding: 20px 15px;
+    text-align: center;
+    font-weight: 600;
+    font-size: 1.2rem;
+    border-bottom: 3px solid #fff;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.comparare-table th:first-child {
+    width: 200px;
+    min-width: 180px;
+}
+
+.comparare-table td {
+    padding: 15px;
+    border-bottom: 1px solid #e9ecef;
+    vertical-align: middle;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+.comparare-table tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.comparare-table tr:hover {
+    background-color: rgba(7, 97, 4, 0.05);
+    transform: scale(1.01);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.comparare-table tr.row-highlight {
+    background: linear-gradient(135deg, rgba(7, 97, 4, 0.1), rgba(34, 139, 34, 0.1));
+    border-top: 2px solid #076104;
+    border-bottom: 2px solid #076104;
+}
+
+.comparare-table tr.row-highlight:hover {
+    background: linear-gradient(135deg, rgba(7, 97, 4, 0.15), rgba(34, 139, 34, 0.15));
+}
+
+.caracteristica-label {
+    font-weight: 700;
+    color: #076104;
+    background: rgba(7, 97, 4, 0.1);
+    text-align: left !important;
+    padding-left: 20px !important;
+    font-size: 1rem;
+    border-right: 2px solid #076104;
+}
+
+.caracteristica-label i {
+    margin-right: 8px;
+    width: 16px;
+    display: inline-block;
+}
+
+.produs-value {
+    font-size: 1rem;
+    color: #495057;
+    position: relative;
+}
+
+.produs-value.pret {
+    font-weight: 700;
+    color: #228B22;
+    font-size: 1.3rem;
+}
+
+.produs-value.nume {
+    font-weight: 600;
+    color: #076104;
+    font-size: 1.1rem;
+}
+
+.produs-value.pret-cel-mai-ieftin {
+    background: linear-gradient(135deg, rgba(34, 139, 34, 0.1), rgba(40, 167, 69, 0.1));
+    border: 2px solid #28a745;
+    border-radius: 8px;
+    animation: pulse-green 2s ease-in-out infinite;
+}
+
+@keyframes pulse-green {
+    0% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(40, 167, 69, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(40, 167, 69, 0); }
+}
+
+.descriere-text {
+    text-align: left !important;
+    max-width: 300px;
+    line-height: 1.5;
+    font-size: 0.95rem;
+    padding: 15px 20px !important;
+}
+
+.badge-comparare {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 15px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.badge-da {
+    background: linear-gradient(45deg, #28a745, #20c997);
+    color: white;
+}
+
+.badge-nu {
+    background: linear-gradient(45deg, #dc3545, #fd7e14);
+    color: white;
+}
+
+.pret-avantaj {
+    background: linear-gradient(135deg, rgba(40, 167, 69, 0.1), rgba(32, 201, 151, 0.1));
+    border-left: 4px solid #28a745;
+}
+
+.avantaj {
+    color: #28a745;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.dezavantaj {
+    color: #dc3545;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.egal {
+    color: #6c757d;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.close-button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #dc3545, #c82333);
+    color: white;
+    border: none;
+    padding: 12px 18px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 600;
+    z-index: 1000;
+    box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3);
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.close-button:hover {
+    background: linear-gradient(135deg, #c82333, #a71e2a);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4);
+}
+
+.comparare-footer {
+    max-width: 1200px;
+    margin: 30px auto 0;
+    text-align: center;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.comparare-footer p {
+    color: #6c757d;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+.comparare-footer kbd {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 3px;
+    padding: 2px 6px;
+    font-size: 0.8rem;
+    font-family: monospace;
+}
+
+.footer-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-footer {
+    background: linear-gradient(135deg, #076104, #228B22);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    box-shadow: 0 2px 8px rgba(7, 97, 4, 0.3);
+}
+
+.btn-footer:hover {
+    background: linear-gradient(135deg, #228B22, #32CD32);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(7, 97, 4, 0.4);
+}
+
+@media screen and (max-width: 1024px) {
+    body { 
+        padding: 15px; 
+    }
+    
+    .comparare-header h1 { 
+        font-size: 2rem; 
+    }
+    
+    .comparare-table th,
+    .comparare-table td { 
+        padding: 12px 10px; 
+        font-size: 0.95rem; 
+    }
+    
+    .caracteristica-label { 
+        font-size: 0.9rem;
+        padding-left: 15px !important;
+    }
+    
+    .close-button { 
+        top: 15px; 
+        right: 15px; 
+        padding: 10px 15px; 
+    }
+}
+
+@media screen and (max-width: 768px) {
+    body { 
+        padding: 10px; 
+    }
+    
+    .comparare-header h1 { 
+        font-size: 1.8rem; 
+    }
+    
+    .comparare-header p { 
+        font-size: 1rem; 
+    }
+    
+    .caracteristica-label { 
+        font-size: 0.85rem;
+        padding-left: 12px !important;
+    }
+    
+    .comparare-table th { 
+        padding: 15px 8px; 
+        font-size: 1rem; 
+    }
+    
+    .comparare-table td { 
+        padding: 10px 8px; 
+        font-size: 0.9rem; 
+    }
+    
+    .comparare-table th:first-child {
+        width: 140px;
+        min-width: 120px;
+    }
+    
+    .close-button { 
+        top: 10px; 
+        right: 10px; 
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .comparare-footer {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .footer-buttons {
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .comparare-table {
+        font-size: 0.8rem;
+    }
+    
+    .caracteristica-label {
+        font-size: 0.8rem;
+        padding-left: 10px !important;
+    }
+    
+    .comparare-table th,
+    .comparare-table td {
+        padding: 8px 6px;
+    }
+    
+    .comparare-table th:first-child {
+        width: 120px;
+        min-width: 100px;
+    }
+    
+    .produs-value.pret {
+        font-size: 1.1rem;
+    }
+    
+    .descriere-text {
+        font-size: 0.85rem;
+        padding: 10px 8px !important;
+    }
+    
+    .btn-footer {
+        padding: 8px 15px;
+        font-size: 0.8rem;
+    }
+}
+
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+    
+    .close-button,
+    .comparare-footer {
+        display: none !important;
+    }
+    
+    .comparare-container {
+        box-shadow: none;
+        border: 1px solid #ddd;
+    }
+    
+    .comparare-table tr:hover {
+        transform: none;
+        box-shadow: none;
+    }
+    
+    .comparare-header h1 {
+        color: #000;
+        text-shadow: none;
+    }
+}

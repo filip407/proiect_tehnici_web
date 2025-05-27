@@ -1,5 +1,4 @@
 @media print {
-  /* Banner in coltul din dreapta sus */
   #banner {
     position: fixed;
     top: 0;
@@ -12,15 +11,13 @@
     box-sizing: border-box;
   }
 
-  /* Elimina toate elementele media si containerele lor */
   img, video, iframe, embed,
   figure, figcaption, .taburi, a.taburi, .image-description, .media-caption, .fa-shirt, .fa-soccer-ball,
   a[href="#top"], #stilizare-tabel, a.sageata, #link-top, .link-top, .top, #sageata, 
   .tabel-marimi, .formula, #harta-imagini, map, embed, #stilizare-taburi, #ghid-marimi, #ingrijire, footer iframe, footer embed{
     display: none !important;
   }
-  
-  /* Elimina spatiile intre sectiuni */
+
   body, html {
     margin: 0 !important;
     padding: 0 !important;
@@ -30,8 +27,7 @@
     margin-top: 0 !important;
     margin-bottom: 0 !important;
   }
-  
-  /* Elimina spatiile de la sectiunile si divurile goale */
+
   section, div, p, article, aside, header, footer, main, .zona1, .zona2, .zona3, .zona4, .zona5, .zona6, .zona7, .zona8, .zona9 {
     margin-top: 2px !important;
     margin-bottom: 2px !important;
@@ -40,8 +36,7 @@
     min-height: 0 !important;
     height: auto !important;
   }
-  
-  /* Fix specific pentru navigație */
+ 
   nav {
     display: block !important;
     position: static !important;
@@ -52,8 +47,7 @@
     margin-bottom: 10px !important;
     border: none !important;
   }
-  
-  /* Eliminare background pentru toate elementele navului (excepție pentru #banner) */
+
   nav *, header *, footer *:not(#banner) {
     background: transparent !important;
     background-color: transparent !important;
@@ -62,46 +56,39 @@
     border: none !important;
   }
 
-  /* Eliminare orice fel de background sau efect de umbră - exceptând bannerul */
   *:not(#banner) {
     background-color: transparent !important;
     background-image: none !important;
     box-shadow: none !important;
   }
-  
-  /* Fix pentru section goale */
+
   section:empty, div:empty, p:empty, *:empty {
     display: none !important;
     height: 0 !important;
     margin: 0 !important;
     padding: 0 !important;
   }
-  
-  /* Asigura ca continutul nu e impartit intre pagini */
+
   h1, h2, h3, h4, h5, h6, p, ul, ol, li, table, tr, section {
     page-break-inside: avoid !important;
     break-inside: avoid !important;
   }
-  
-  /* Opreste break-uri de pagina nedorite */
+
   * {
     page-break-after: auto !important;
     page-break-before: auto !important;
   }
-  
-  /* Problemele cu întreruperi forțate de pagini sunt eliminate complet */
+
   nav::after, footer::before {
     content: none !important;
     display: none !important;
   }
-  
-  /* Elimina elemente non-esentiale si adauga padding specific pentru continut */
+
   main {
     padding: 0 !important;
     margin: 0 !important;
   }
-  
-  /* Forteaza tot continutul sa fie vizibil si compact */
+
   #layout-responsive,
   .layout-responsive,
   main > div,
@@ -121,21 +108,18 @@
     max-height: none !important;
     background: transparent !important;
   }
-  
-  /* Exceptii pentru text inline */
+
   span, strong, em, b, i, a, small {
     display: inline !important;
     background: transparent !important;
   }
-  
-  /* Stilizare link-uri */
+
   a {
     color: black !important;
     text-decoration: none !important;
     background: transparent !important;
   }
 
-  /* Centreaza titlul */
   h1 {
     text-align: center !important;
     page-break-before: auto;
@@ -150,7 +134,6 @@
     background: transparent !important;
   }
 
-  /* Font uniform pentru toate textele din navigație */
   nav, nav *, nav ul, nav ul li, nav ul li a, 
   nav ul li ul, nav ul li ul li, nav ul li ul li a {
     font-family: "Anton", sans-serif;
@@ -167,7 +150,6 @@
     box-shadow: none !important;
   }
 
-  /* Afisare meniu ca lista verticala compacta */
   nav > ul {
     display: block !important;
     list-style-type: disc !important;
@@ -222,14 +204,12 @@
     background: transparent !important;
   }
 
-  /* Elimină gradienții sau background-urile - cu excepția bannerului */
   [style*="background"]:not(#banner), [class*="bg-"]:not(#banner), .bg:not(#banner), .background:not(#banner) {
     background: transparent !important;
     background-image: none !important;
     background-color: transparent !important;
   }
 
-  /* Watermark */
   body::after {
     content: "Dumitriu\A Filip";
     white-space: pre;
@@ -247,7 +227,6 @@
     pointer-events: none;
   }
 
-  /* Margini diferite pentru pagini pare si impare */
   @page:left {
     margin-left: 2cm;
     margin-right: 1cm;

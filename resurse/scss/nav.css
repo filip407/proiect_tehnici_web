@@ -1,7 +1,7 @@
-@charset "UTF-8";
 nav {
-  background: linear-gradient(135deg, var(--culoare-primara), var(--culoare-secundara));
-  margin-top: 10px;
+  background: var(--culoare-primara);
+  margin-top: 20px;
+  height: 3.5em;
   border-radius: 8px;
   position: relative;
   z-index: 100;
@@ -31,14 +31,14 @@ nav > ul > li > a {
   font-size: 1.2rem;
   text-transform: uppercase;
   position: relative;
-  transition: color 0.5s ease; /* Corectat: singura tranziție de care avem nevoie pentru culoare */
+  transition: color 0.5s ease;
 }
 nav > ul > li > a:visited {
   color: white;
 }
 nav > ul > li > a:hover {
   background-color: transparent;
-  color: var(--culoare-deschis2); /* Adăugat: Schimbă culoarea textului la verde deschis la hover */
+  color: var(--culoare-deschis2);
 }
 nav > ul > li:not(:has(ul)) > a::after {
   content: "";
@@ -47,7 +47,7 @@ nav > ul > li:not(:has(ul)) > a::after {
   left: 0;
   width: 100%;
   height: 0;
-  background: linear-gradient(to right, var(--culoare-secundara), var(--culoare-deschis2), var(--culoare-secundara));
+  background: var(--culoare-primara);
   transition: height 0.5s ease, top 0.5s ease;
   z-index: -1;
 }

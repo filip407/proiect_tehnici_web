@@ -1,0 +1,199 @@
+
+:root {
+  --culoare-primara: #076104;   
+  --culoare-secundara: #80C135;   
+  --culoare-accent: #F20505;    
+  --culoare-inchis: #0D0D0D;
+  --culoare-inchis2: #101010;     
+  --culoare-deschis: #F2F2F2;   
+  --culoare-deschis2: #E7FCE4;
+  --culoare-deschis3: #b3fea0;
+  --culoare-accent2: #400080;
+  --culoare-text-primar: var(--culoare-inchis);
+  --culoare-text-deschis: var(--culoare-deschis);
+  --culoare-fundal-primar: var(--culoare-deschis);
+  --culoare-fundal-secundar: var(--culoare-secundara);
+  --culoare-fundal-accent: var(--culoare-primara);
+  --culoare-margine: var(--culoare-primara);
+  --culoare-evidentiere: var(--culoare-accent);
+  --culoare-umbra: rgba(0, 0, 0, 0.2);
+  --culoare-hover: var(--culoare-primara);
+  --culoare-hover-text: var(--culoare-deschis);
+
+  --bg-body: #ffffff;
+  --text-body: #0D0D0D;
+  --bg-header: var(--culoare-primara);
+  --bg-footer: var(--culoare-secundara);
+  --bg-zone: var(--culoare-deschis);
+  --bg-zone-special: var(--culoare-deschis2);
+  --shadow-color: rgba(0, 0, 0, 0.2);
+  --border-color: var(--culoare-primara);
+  --title-color: var(--culoare-deschis);
+}
+
+[data-theme="dark"] {
+  --culoare-primara: #4CAF50;   
+  --culoare-secundara: #2E7D32;   
+  --culoare-accent: #FF5722;    
+  --culoare-inchis: #FFFFFF;
+  --culoare-inchis2: #F0F0F0;     
+  --culoare-deschis: #121212;   
+  --culoare-deschis2: #1E1E1E;
+  --culoare-deschis3: #2C2C2C;
+  --culoare-accent2: #BB86FC;
+  --culoare-text-primar: var(--culoare-inchis);
+  --culoare-text-deschis: var(--culoare-deschis);
+  --culoare-fundal-primar: var(--culoare-deschis);
+  --culoare-fundal-secundar: var(--culoare-secundara);
+  --culoare-fundal-accent: var(--culoare-primara);
+  --culoare-margine: var(--culoare-secundara);
+  --culoare-evidentiere: var(--culoare-accent);
+  --culoare-umbra: rgba(255, 255, 255, 0.1);
+  --culoare-hover: var(--culoare-secundara);
+  --culoare-hover-text: var(--culoare-inchis);
+  
+  --bg-body: #121212;
+  --text-body: #FFFFFF;
+  --bg-header: #1E1E1E;
+  --bg-footer: #2E7D32;
+  --bg-zone: #1E1E1E;
+  --bg-zone-special: #2C2C2C;
+  --shadow-color: rgba(255, 255, 255, 0.1);
+  --border-color: var(--culoare-secundara);
+  --title-color: #FFFFFF;
+}
+
+h1 {
+  color: var(--title-color);
+  transition: color 0.3s ease;
+}
+
+body {
+  background-color: var(--bg-body);
+  color: var(--text-body);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+  background: var(--bg-header);
+  transition: background-color 0.3s ease;
+}
+
+footer {
+  background: var(--bg-footer);
+  transition: background-color 0.3s ease;
+}
+
+.zona1, .zona2, .zona3, .zona4, .zona5, .zona6, .zona7, .zona9 {
+  background-color: var(--bg-zone);
+  transition: background-color 0.3s ease;
+}
+
+.zona8 {
+  background-color: var(--bg-zone-special);
+  transition: background-color 0.3s ease;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 50px;
+  height: 50px;
+  border: none;
+  border-radius: 50%;
+  background: var(--culoare-fundal-secundar);
+  color: var(--culoare-text-primar);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  transition: all 0.3s ease;
+  z-index: 1001;
+  user-select: none;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+  box-shadow: 0 6px 16px var(--shadow-color);
+  background: var(--culoare-hover);
+  color: var(--culoare-hover-text);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-toggle .sun-icon {
+  display: block;
+}
+
+.theme-toggle .moon-icon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle .sun-icon {
+  display: none;
+}
+
+[data-theme="dark"] .theme-toggle .moon-icon {
+  display: block;
+}
+
+[data-theme="dark"] #stilizare-tabel th,
+[data-theme="dark"] #stilizare-tabel td {
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] #stilizare-tabel tr td:nth-child(odd) {
+  background-color: var(--bg-zone);
+}
+
+[data-theme="dark"] #stilizare-tabel tr td:nth-child(even) {
+  background-color: var(--bg-zone-special);
+}
+
+[data-theme="dark"] a {
+  color: var(--culoare-text-primar);
+}
+
+[data-theme="dark"] a:visited {
+  color: var(--text-body);
+}
+
+[data-theme="dark"] math {
+  background-color: var(--bg-zone-special);
+  border-left-color: var(--border-color);
+}
+
+[data-theme="dark"] #stilizare-taburi {
+  background-color: var(--bg-zone);
+}
+
+[data-theme="dark"] .taburi a {
+  background-color: var(--bg-zone-special);
+  color: var(--culoare-text-primar);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] #stilizare-taburi iframe {
+  border-color: var(--border-color);
+}
+
+* {
+  transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+[data-theme="dark"] ::-webkit-scrollbar {
+  background-color: var(--bg-zone);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb {
+  background-color: var(--culoare-secundara);
+}
+
+[data-theme="dark"] ::-webkit-scrollbar-thumb:hover {
+  background-color: var(--culoare-hover);
+}

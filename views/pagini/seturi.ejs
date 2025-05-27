@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title>Seturi de Produse - Elite Kits</title>
+    <%- include("../fragmente/head") %>
+    <link href="/resurse/css/seturi.css" type="text/css" rel="stylesheet" />
+</head>
+<body>
+    <%- include("../fragmente/header") %>
+    
+    <main>
+        <section id="seturi-section">
+            <div class="container-seturi">
+                <header class="header-seturi">
+                    <h2>
+                        <i class="fas fa-box-open"></i>
+                        Seturi de Produse Elite Kits
+                    </h2>
+                    <p class="descriere-seturi">
+                        Descoperă colecțiile noastre speciale de tricouri, create cu grijă pentru pasionații de fotbal. 
+                        Seturile noastre oferă reduceri exclusive și combinații perfecte pentru orice fan.
+                    </p>
+                </header>
+
+                <% if (locals.seturi && locals.seturi.length > 0) { %>
+                    <div class="grid-seturi">
+                        <% for (let set of locals.seturi) { %>
+                            <article class="card-set" data-set-id="<%= set.set_id %>">
+                                <div class="card-set-header">
+                                    <h3 class="nume-set">
+                                        <i class="fas fa-star"></i>
+                                        <%= set.nume_set %>
+                                    </h3>
+                                    
+                                    <div class="info-reducere">
+                                        <span class="badge-reducere">
+                                            <i class="fas fa-percentage"></i>
+                                            -<%= set.reducere_procentaj %>%
+                                        </span>
+                                        <span class="numar-produse">
+                                            <i class="fas fa-shirt"></i>
+                                            <%= set.numar_produse %> tricouri
+                                        </span>
+                                    </div>
+                                </div>
+
+                                <div class="descriere-set">
+                                    <p><%= set.descriere_set %></p>
+                                </div>
+
+                                <div class="preview-produse">
+                                    <div class="produse-grid">
+                                        <% for (let produs of set.produse.slice(0, 4)) { %>
+                                            <div class="produs-preview" title="<%= produs.nume %>">
+                                                <a href="/produs/<%= produs.id %>">
+                                                    <img src="/resurse/imagini/produse/<%= produs.imagine %>" 
+                                                         alt="<%= produs.nume %>"
+                                                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwIiBoZWlnaHQ9IjEwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxMiIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkVsaXRlIEtpdHM8L3RleHQ+CiAgPC9zdmc+'" />
+                                                </a>
+                                                <div class="overlay-produs">
+                                                    <span class="nume-produs-scurt"><%= produs.nume.substring(0, 20) %>...</span>
+                                                    <span class="pret-produs"><%= parseFloat(produs.pret).toFixed(2) %> RON</span>
+                                                </div>
+                                            </div>
+                                        <% } %>
+                                        
+                                        <% if (set.numar_produse > 4) { %>
+                                            <div class="produs-preview more-products">
+                                                <div class="more-indicator">
+                                                    <i class="fas fa-plus"></i>
+                                                    <span>+<%= set.numar_produse - 4 %></span>
+                                                </div>
+                                            </div>
+                                        <% } %>
+                                    </div>
+                                </div>
+
+                                <div class="info-preturi">
+                                    <div class="preturi-container">
+                                        <div class="pret-original">
+                                            <span class="label">Preț individual:</span>
+                                            <span class="valoare"><%= set.pret_total.toFixed(2) %> RON</span>
+                                        </div>
+                                        <div class="economie">
+                                            <span class="label">Economisiți:</span>
+                                            <span class="valoare economie-suma">
+                                                <i class="fas fa-piggy-bank"></i>
+                                                <%= set.economie.toFixed(2) %> RON
+                                            </span>
+                                        </div>
+                                        <div class="pret-final">
+                                            <span class="label">Preț set:</span>
+                                            <span class="valoare pret-redus">
+                                                <%= set.pret_final.toFixed(2) %> RON
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="actiuni-set">
+                                    <a href="/set/<%= set.set_id %>" class="btn-vezi-set">
+                                        <i class="fas fa-eye"></i>
+                                        Vezi detalii complete
+                                    </a>
+                                    <button class="btn-adauga-set" onclick="adaugaSetInCos('<%= set.set_id %>')">
+                                        <i class="fas fa-shopping-cart"></i>
+                                        Adaugă setul în coș
+                                    </button>
+                                </div>
+                            </article>
+                        <% } %>
+                    </div>
+                    
+                    <div class="info-avantaje">
+                        <div class="avantaj-card">
+                            <i class="fas fa-money-bill-wave"></i>
+                            <h4>Economisești mai mult</h4>
+                            <p>Reduceri de până la 25% când cumperi seturi complete</p>
+                        </div>
+                        <div class="avantaj-card">
+                            <i class="fas fa-shipping-fast"></i>
+                            <h4>Livrare gratuită</h4>
+                            <p>Transport gratuit pentru toate seturile de produse</p>
+                        </div>
+                        <div class="avantaj-card">
+                            <i class="fas fa-gift"></i>
+                            <h4>Perfect pentru cadouri</h4>
+                            <p>Seturile vin ambalate elegant, gata de oferit</p>
+                        </div>
+                    </div>
+                    
+                <% } else { %>
+                    <div class="no-seturi">
+                        <i class="fas fa-box-open fa-3x"></i>
+                        <h3>Nu sunt seturi disponibile momentan</h3>
+                        <p>Vă rugăm să reveniți mai târziu pentru noi colecții.</p>
+                        </a>
+                    </div>
+                <% } %>
+            </div>
+        </section>
+    </main>
+
+    <%- include("../fragmente/footer") %>
+    
+    <script>
+        function adaugaSetInCos(setId) {
+            alert('Setul a fost adăugat în coș!');
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const carduri = document.querySelectorAll('.card-set');
+            
+            carduri.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

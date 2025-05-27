@@ -1,0 +1,1017 @@
+#seturi-section {
+    padding: 30px 0;
+    background: linear-gradient(135deg, var(--culoare-deschis) 0%, var(--culoare-deschis2) 100%);
+    min-height: 80vh;
+}
+
+.container-seturi {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.header-seturi {
+    text-align: center;
+    margin-bottom: 40px;
+    padding: 30px 0;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--culoare-umbra);
+}
+
+.header-seturi h2 {
+    color: var(--culoare-text-primar);
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    font-weight: 600;
+}
+
+.header-seturi h2 i {
+    color: var(--culoare-accent);
+    margin-right: 10px;
+}
+
+.descriere-seturi {
+    color: var(--culoare-text-primar);
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.grid-seturi {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 30px;
+    margin-bottom: 50px;
+}
+
+.card-set {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px var(--culoare-umbra);
+    overflow: hidden;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.card-set:hover {
+    border-color: var(--culoare-primara);
+    box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+}
+
+.card-set-header {
+    padding: 25px;
+    background: linear-gradient(135deg, var(--culoare-primara) 0%, var(--culoare-secundara) 100%);
+    color: white;
+}
+
+.nume-set {
+    margin: 0 0 15px 0;
+    font-size: 1.4rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.nume-set i {
+    color: var(--culoare-deschis);
+}
+
+.info-reducere {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.badge-reducere,
+.numar-produse {
+    background: rgba(255,255,255,0.2);
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.badge-reducere {
+    background: var(--culoare-accent);
+}
+
+.descriere-set {
+    padding: 20px 25px;
+    border-bottom: 1px solid var(--culoare-deschis);
+}
+
+.descriere-set p {
+    margin: 0;
+    color: var(--culoare-text-primar);
+    line-height: 1.5;
+}
+
+.preview-produse {
+    padding: 20px 25px;
+}
+
+.produse-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 10px;
+    max-width: 100%;
+}
+
+.produs-preview {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: 8px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+}
+
+.produs-preview:hover {
+    transform: scale(1.05);
+}
+
+.produs-preview img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.produs-preview.more-products {
+    background: var(--culoare-deschis);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--culoare-primara);
+}
+
+.more-indicator {
+    text-align: center;
+    color: var(--culoare-primara);
+    font-weight: bold;
+}
+
+.more-indicator i {
+    display: block;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+}
+
+.overlay-produs {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(transparent, rgba(0,0,0,0.8));
+    color: white;
+    padding: 10px 5px 5px;
+    font-size: 0.7rem;
+    text-align: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.produs-preview:hover .overlay-produs {
+    opacity: 1;
+}
+
+.nume-produs-scurt {
+    display: block;
+    font-weight: bold;
+}
+
+.pret-produs {
+    display: block;
+    color: var(--culoare-accent);
+    font-weight: bold;
+}
+
+.info-preturi {
+    padding: 20px 25px;
+    background: var(--culoare-deschis);
+}
+
+.preturi-container {
+    display: grid;
+    gap: 10px;
+}
+
+.pret-original,
+.economie,
+.pret-final {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+.pret-original {
+    color: var(--culoare-text-primar);
+    text-decoration: line-through;
+}
+
+.economie {
+    color: var(--culoare-accent);
+    font-weight: bold;
+}
+
+.economie-suma i {
+    margin-right: 5px;
+}
+
+.pret-final {
+    color: var(--culoare-primara);
+    font-weight: bold;
+    font-size: 1.1rem;
+    border-top: 2px solid var(--culoare-primara);
+    padding-top: 12px;
+}
+
+.pret-redus {
+    color: var(--culoare-primara);
+    font-size: 1.2rem;
+}
+
+.actiuni-set {
+    padding: 25px;
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.btn-vezi-set,
+.btn-adauga-set {
+    flex: 1;
+    min-width: 140px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-vezi-set {
+    background: var(--culoare-primara);
+    color: white;
+}
+
+.btn-vezi-set:hover {
+    background: var(--culoare-hover);
+    transform: translateY(-2px);
+    color: white;
+}
+
+.btn-adauga-set {
+    background: var(--culoare-accent2);
+    color: white;
+}
+
+.btn-adauga-set:hover {
+    background: var(--culoare-accent3);
+    transform: translateY(-2px);
+}
+
+.info-avantaje {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 40px;
+}
+
+.avantaj-card {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 15px var(--culoare-umbra);
+    transition: transform 0.3s ease;
+}
+
+.avantaj-card:hover {
+    transform: translateY(-5px);
+}
+
+.avantaj-card i {
+    font-size: 2.5rem;
+    color: var(--culoare-accent);
+    margin-bottom: 15px;
+}
+
+.avantaj-card h4 {
+    color: var(--culoare-text-primar);
+    margin-bottom: 10px;
+}
+
+.avantaj-card p {
+    color: var(--culoare-text-primar);
+    line-height: 1.5;
+}
+
+.no-seturi {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--culoare-umbra);
+}
+
+.no-seturi i {
+    color: var(--culoare-primara);
+    margin-bottom: 20px;
+}
+
+.no-seturi h3 {
+    color: var(--culoare-text-primar);
+    margin-bottom: 15px;
+}
+
+.no-seturi p {
+    color: var(--culoare-text-primar);
+    margin-bottom: 25px;
+}
+
+.btn-produse {
+    background: var(--culoare-primara);
+    color: white;
+    padding: 12px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.btn-produse:hover {
+    background: var(--culoare-hover);
+    transform: translateY(-2px);
+    color: white;
+}
+
+#set-individual {
+    padding: 30px 0;
+    background: var(--culoare-deschis);
+}
+
+.container-set {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.breadcrumb {
+    margin-bottom: 25px;
+}
+
+.breadcrumb a {
+    color: var(--culoare-primara);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: color 0.3s ease;
+}
+
+.breadcrumb a:hover {
+    color: var(--culoare-hover);
+}
+
+.header-set {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--culoare-umbra);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+.header-set h2 {
+    color: var(--culoare-text-primar);
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+}
+
+.header-set h2 i {
+    color: var(--culoare-accent);
+}
+
+.descriere-set-detaliata {
+    color: var(--culoare-text-primar);
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.info-set-principal {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    margin-bottom: 40px;
+}
+
+.statistici-set {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--culoare-umbra);
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 20px;
+}
+
+.statistica {
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    background: var(--culoare-deschis);
+}
+
+.statistica i {
+    font-size: 2rem;
+    color: var(--culoare-accent);
+    margin-bottom: 10px;
+}
+
+.statistica .numar {
+    display: block;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: var(--culoare-primara);
+    margin-bottom: 5px;
+}
+
+.statistica .label {
+    font-size: 0.9rem;
+    color: var(--culoare-text-primar);
+    font-weight: 600;
+}
+
+.preturi-set-principal {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--culoare-umbra);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.pret-comparatie {
+    margin-bottom: 25px;
+}
+
+.pret-original-mare,
+.pret-set-mare {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid var(--culoare-deschis);
+}
+
+.pret-original-mare:last-child,
+.pret-set-mare:last-child {
+    border-bottom: none;
+}
+
+.pret-original-mare .label,
+.pret-set-mare .label {
+    font-weight: 600;
+    color: var(--culoare-text-primar);
+}
+
+.pret-original-mare .valoare {
+    font-size: 1.2rem;
+    color: var(--culoare-text-primar);
+    text-decoration: line-through;
+}
+
+.pret-set-mare .valoare {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: var(--culoare-primara);
+}
+
+.btn-adauga-set-mare {
+    background: var(--culoare-accent2);
+    color: white;
+    border: none;
+    padding: 15px 25px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    text-align: center;
+}
+
+.btn-adauga-set-mare:hover {
+    background: var(--culoare-accent3);
+    transform: translateY(-2px);
+}
+
+.pret-btn {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.produse-din-set {
+    margin-bottom: 40px;
+}
+
+.produse-din-set h3 {
+    color: var(--culoare-text-primar);
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.produse-din-set h3 i {
+    color: var(--culoare-accent);
+}
+
+.grid-produse-set {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.produs-set-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--culoare-umbra);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.produs-set-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.imagine-produs-set {
+    height: 200px;
+    overflow: hidden;
+}
+
+.imagine-produs-set a {
+    display: block;
+    height: 100%;
+}
+
+.imagine-produs-set img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.produs-set-card:hover .imagine-produs-set img {
+    transform: scale(1.05);
+}
+
+.info-produs-set {
+    padding: 20px;
+}
+
+.nume-produs-set {
+    margin: 0 0 15px 0;
+    font-size: 1.1rem;
+}
+
+.nume-produs-set a {
+    color: var(--culoare-text-primar);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.nume-produs-set a:hover {
+    color: var(--culoare-primara);
+}
+
+.detalii-rapide-set {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 15px;
+}
+
+.echipa-set,
+.categorie-set,
+.tip-echipa-set,
+.copii-set {
+    background: var(--culoare-deschis);
+    color: var(--culoare-text-primar);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.echipa-set i { color: var(--culoare-primara); }
+.categorie-set i { color: var(--culoare-accent); }
+.tip-echipa-set i { color: var(--culoare-accent2); }
+.copii-set i { color: #ff6b6b; }
+
+.descriere-produs-set {
+    color: var(--culoare-text-primar);
+    font-size: 0.9rem;
+    line-height: 1.4;
+    margin-bottom: 15px;
+}
+
+.pret-si-actiuni-set {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.pret-individual {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: var(--culoare-accent);
+}
+
+.actiuni-produs-set {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-vezi-produs,
+.btn-cos-individual {
+    padding: 8px 12px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-vezi-produs {
+    background: var(--culoare-primara);
+    color: white;
+}
+
+.btn-vezi-produs:hover {
+    background: var(--culoare-hover);
+    transform: translateY(-1px);
+    color: white;
+}
+
+.btn-cos-individual {
+    background: var(--culoare-accent2);
+    color: white;
+}
+
+.btn-cos-individual:hover {
+    background: var(--culoare-accent3);
+    transform: translateY(-1px);
+}
+
+.beneficii-set {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px var(--culoare-umbra);
+}
+
+.beneficii-set h3 {
+    color: var(--culoare-text-primar);
+    font-size: 1.8rem;
+    margin-bottom: 25px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.beneficii-set h3 i {
+    color: var(--culoare-accent);
+}
+
+.grid-beneficii {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+.beneficiu {
+    text-align: center;
+    padding: 25px;
+    border-radius: 10px;
+    background: var(--culoare-deschis);
+    transition: transform 0.3s ease;
+}
+
+.beneficiu:hover {
+    transform: translateY(-3px);
+}
+
+.beneficiu i {
+    font-size: 2.5rem;
+    color: var(--culoare-accent);
+    margin-bottom: 15px;
+}
+
+.beneficiu h4 {
+    color: var(--culoare-text-primar);
+    margin-bottom: 10px;
+    font-size: 1.1rem;
+}
+
+.beneficiu p {
+    color: var(--culoare-text-primar);
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.beneficiu strong {
+    color: var(--culoare-primara);
+    font-weight: bold;
+}
+
+@media (max-width: 1024px) {
+    .grid-seturi {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 25px;
+    }
+    
+    .info-set-principal {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .statistici-set {
+        grid-template-columns: repeat(3, 1fr);
+    }
+    
+    .grid-produse-set {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-seturi,
+    .container-set {
+        padding: 0 15px;
+    }
+    
+    .header-seturi,
+    .header-set {
+        padding: 25px 20px;
+    }
+    
+    .header-seturi h2,
+    .header-set h2 {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .grid-seturi {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .card-set-header {
+        padding: 20px;
+    }
+    
+    .nume-set {
+        font-size: 1.2rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .info-reducere {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+    
+    
+    .actiuni-set {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .btn-vezi-set,
+    .btn-adauga-set {
+        min-width: auto;
+    }
+    
+    .info-avantaje {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .avantaj-card {
+        padding: 25px 20px;
+    }
+    
+    .statistici-set {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+    
+    .statistica {
+        padding: 15px;
+    }
+    
+    .statistica .numar {
+        font-size: 1.5rem;
+    }
+    
+    .preturi-set-principal {
+        padding: 25px 20px;
+    }
+    
+    .pret-original-mare,
+    .pret-set-mare {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .btn-adauga-set-mare {
+        padding: 12px 20px;
+        font-size: 1rem;
+    }
+    
+    .grid-produse-set {
+        grid-template-columns: 1fr;
+    }
+    
+    .pret-si-actiuni-set {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+    }
+    
+    .actiuni-produs-set {
+        justify-content: center;
+    }
+    
+    .grid-beneficii {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .beneficiu {
+        padding: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header-seturi h2,
+    .header-set h2 {
+        font-size: 1.8rem;
+    }
+    
+    .descriere-seturi,
+    .descriere-set-detaliata {
+        font-size: 1rem;
+    }
+    
+    .card-set-header {
+        padding: 15px;
+    }
+    
+    .descriere-set,
+    .preview-produse {
+        padding: 15px;
+    }
+    
+    .info-preturi {
+        padding: 15px;
+    }
+    
+    .actiuni-set {
+        padding: 20px 15px;
+    }
+    
+    .produse-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+    
+    .statistici-set {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        padding: 20px;
+    }
+    
+    .statistica {
+        padding: 12px;
+    }
+    
+    .statistica i {
+        font-size: 1.5rem;
+    }
+    
+    .statistica .numar {
+        font-size: 1.3rem;
+    }
+    
+    .preturi-set-principal {
+        padding: 20px 15px;
+    }
+    
+    .info-produs-set {
+        padding: 15px;
+    }
+    
+    .detalii-rapide-set {
+        justify-content: center;
+    }
+    
+    .beneficii-set {
+        padding: 25px 20px;
+    }
+    
+    .beneficiu {
+        padding: 15px;
+    }
+    
+    .beneficiu i {
+        font-size: 2rem;
+    }
+}
+
+.grid-seturi .btn-vezi-set:visited,
+.grid-seturi .btn-adauga-set:visited,
+.btn-vezi-produs:visited,
+.btn-cos-individual:visited,
+.btn-adauga-set-mare:visited,
+.btn-produse:visited {
+    color: white;
+}
+
+.nume-produs-set a:visited {
+    color: var(--culoare-text-primar);
+}
+
+.breadcrumb a:visited {
+    color: var(--culoare-primara);
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.card-set {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.card-set:nth-child(1) { animation-delay: 0.1s; }
+.card-set:nth-child(2) { animation-delay: 0.2s; }
+.card-set:nth-child(3) { animation-delay: 0.3s; }
+.card-set:nth-child(4) { animation-delay: 0.4s; }
+.card-set:nth-child(5) { animation-delay: 0.5s; }
+.card-set:nth-child(6) { animation-delay: 0.6s; }

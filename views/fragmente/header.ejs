@@ -1,20 +1,39 @@
 <header>
-    <h1><i class="fa-solid fa-shirt"></i> ELITE KITS</h1>
+    <h1>Elite Kits</h1>
     <nav>
         <ul>
             <li><a href="/#acasa">Acasă</a></li>
-            <li><a href="#catalog">Catalog</a>
+            <li><a href="/produse">Catalog</a>
                 <ul>
-                    <li><a href="#tricouri_club">Tricouri club</a></li>
-                    <li><a href="#tricouri_nationala">Tricouri națională</a></li>
-                    <li><a href="#tricouri_retro">Tricouri retro</a></li>
-                    <li><a href="#tricouri_fotbalisti">Fotbaliști</a></li>
+                    <li><a href="/produse">Toate tricourile</a></li>
+                    <% if (locals.categoriiMeniu && locals.categoriiMeniu.length > 0) { %>
+                        <% for (let categorie of locals.categoriiMeniu) { %>
+                            <li>
+                                <a href="/produse?tip_echipa=<%= categorie %>">
+                                    <% if (categorie === 'club') { %>
+                                        Tricouri club
+                                    <% } else if (categorie === 'nationala') { %>
+                                        Tricouri naționale
+                                    <% } else if (categorie === 'fotbalist') { %>
+                                        Tricouri fotbaliști
+                                    <% } else { %>
+                                        <%= categorie.charAt(0).toUpperCase() + categorie.slice(1) %>
+                                    <% } %>
+                                </a>
+                            </li>
+                        <% } %>
+                    <% } else { %>
+                        <li><a href="/produse?tip_echipa=club">Tricouri club</a></li>
+                        <li><a href="/produse?tip_echipa=nationala">Tricouri naționale</a></li>
+                        <li><a href="/produse?tip_echipa=fotbalist">Tricouri fotbaliști</a></li>
+                    <% } %>
+                    <li><a href="/seturi">Seturi de produse</a></li>
                 </ul>
             </li>
-            <li><a href="#promotii">Promoții</a>
+            <li><a href="/produse">Promoții</a>
                 <ul>
-                    <li><a href="#reduceri">Reduceri</a></li>
-                    <li><a href="#oferte">Oferte</a></li>
+                    <li><a href="/produse">Reduceri</a></li>
+                    <li><a href="/produse">Oferte</a></li>
                 </ul>
             </li>
             <li><a href="#contul-de-utilizator">Contul de utilizator</a>
@@ -23,9 +42,14 @@
                     <li><a href="#autentificare">Autentificare</a></li>
                 </ul>
             </li>
-            <li><a href="/despre">Resurse</a></li>
+            <li><a href="/despre">Resurse</a>
+            <ul>
+                    <li><a href="/despre">Despre Noi</a></li>
+                    <li><a href="/ghid_marimi">Ghid de Mărimi</a></li>
+                    <li><a href="/ghid_ingrijire">Ghid de Îngrijire</a></li>
+            </ul>
+            </li>
             <li><a href="#contact-footer">Contact</a></li>
-            <li><a href="#cos-de-cumparaturi">Coș de cumpărături</a></li>
         </ul>
     </nav>
 </header>

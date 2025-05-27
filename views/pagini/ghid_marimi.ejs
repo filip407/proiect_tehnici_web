@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ro">
+    <head>
+    <%- include("../fragmente/head.ejs") %>
+    </head>
+    <body>
+    <%- include("../fragmente/header.ejs") %> 
+    <main>         
+        <article id="ghid-marimi">
+                <h3>Ghid de mărimi</h3>
+                <p>Folosiți ghidul nostru de mărimi pentru a alege <b>tricoul potrivit</b> pentru dumneavoastră:</p>
+                <div id="ghid">
+                    <embed src="/resurse/ghid_marimi.pdf" type="application/pdf" width="500" height="400">
+                </div>
+                <p><a href="/resurse/ghid_marimi.pdf" download>Descarcă ghidul de mărimi (PDF)</a></p>
+                <div class="formula">
+                    <details>
+                    <summary>Calculează-ți singur ce mărime ți se potrivește</summary>
+                    <p>Formula pentru calcularea mărimii aproximative:</p>
+                    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+                        <mrow>
+                          <mi>M</mi>
+                          <mo>=</mo>
+                          <mrow>
+                            <mfrac>
+                              <mrow>
+                                <mi>h</mi>
+                                <mo>×</mo>
+                                <mi>c</mi>
+                              </mrow>
+                              <mrow>
+                                <mn>1000</mn>
+                              </mrow>
+                            </mfrac>
+                            <mo>+</mo>
+                            <mn>50</mn>
+                          </mrow>
+                        </mrow>
+                      </math>
+                    <p>unde <i>h</i> este înălțimea în cm, iar <i>c</i> este circumferința pieptului în cm.</p>
+                        <p><strong>S</strong> : 63-66</p>
+                        <p><strong>M</strong> : 66-67.5</p>
+                        <p><strong>L</strong> : 67.5-69</p>
+                        <p><strong>XL</strong> : 70-73</p>
+                    </details>
+                </div>         
+            </article>
+    </main>
+    <%- include("../fragmente/footer.ejs") %> 
+    </body>
+</html>
