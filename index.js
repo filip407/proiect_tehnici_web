@@ -480,9 +480,15 @@ app.get('/produse', async (req, res) => {
     
     try {
         let query = `
-            SELECT id, nume, descriere, pret, tip_echipa, sezon, categorie, 
-                   pentru_copii, imagine, echipa, liga, tara, jucator, 
-                   numar_tricou, caracteristici, data_adaugare
+            SELECT 
+                id, nume, descriere, pret, tip_echipa, sezon, categorie, 
+                pentru_copii, imagine, echipa, liga, tara, jucator, 
+                numar_tricou, caracteristici, data_adaugare,
+                CASE 
+                    WHEN data_adaugare >= CURRENT_DATE - INTERVAL '30 days' 
+                    THEN true 
+                    ELSE false 
+                END as este_nou
             FROM tricouri 
         `;
         
@@ -493,7 +499,7 @@ app.get('/produse', async (req, res) => {
             params.push(tipEchipaFiltru);
         }
         
-        query += ' ORDER BY nume ASC';
+        query += ' ORDER BY este_nou DESC, nume ASC';
         
         const rezultatProduse = await client.query(query, params);
         
@@ -549,9 +555,15 @@ app.get('/api/produse', async (req, res) => {
     
     try {
         let query = `
-            SELECT id, nume, descriere, pret, tip_echipa, sezon, categorie, 
-                   pentru_copii, imagine, echipa, liga, tara, jucator, 
-                   numar_tricou, caracteristici, data_adaugare
+            SELECT 
+                id, nume, descriere, pret, tip_echipa, sezon, categorie, 
+                pentru_copii, imagine, echipa, liga, tara, jucator, 
+                numar_tricou, caracteristici, data_adaugare,
+                CASE 
+                    WHEN data_adaugare >= CURRENT_DATE - INTERVAL '30 days' 
+                    THEN true 
+                    ELSE false 
+                END as este_nou
             FROM tricouri 
         `;
         
@@ -562,7 +574,7 @@ app.get('/api/produse', async (req, res) => {
             params.push(tipEchipaFiltru);
         }
         
-        query += ' ORDER BY nume ASC';
+        query += ' ORDER BY este_nou DESC, nume ASC';
         
         const result = await client.query(query, params);
         
@@ -602,9 +614,15 @@ app.get('/produs/:id', async (req, res) => {
     
     try {
         const rezultat = await client.query(`
-            SELECT id, nume, descriere, pret, tip_echipa, sezon, categorie, 
-                   caracteristici, pentru_copii, imagine, echipa, liga, tara, 
-                   jucator, numar_tricou, data_adaugare
+            SELECT 
+                id, nume, descriere, pret, tip_echipa, sezon, categorie, 
+                caracteristici, pentru_copii, imagine, echipa, liga, tara, 
+                jucator, numar_tricou, data_adaugare,
+                CASE 
+                    WHEN data_adaugare >= CURRENT_DATE - INTERVAL '30 days' 
+                    THEN true 
+                    ELSE false 
+                END as este_nou
             FROM tricouri 
             WHERE id = $1
         `, [produsId]);

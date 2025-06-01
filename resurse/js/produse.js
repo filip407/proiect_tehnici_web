@@ -50,10 +50,22 @@ function extrageProduseDeInPagina() {
             const valCopii = card.querySelector('.val-copii');
             const valDataAdaugare = card.querySelector('time');
             const img = card.querySelector('img');
+            const badgeNou = card.querySelector('.badge-nou');
             
             if (!selectCos || !valNume || !valPret) {
                 console.warn(`Produs ${index + 1}: date incomplete`);
                 return;
+            }
+            
+            // Verifică dacă produsul este nou (din badge sau din data adăugării)
+            let esteNou = false;
+            if (badgeNou) {
+                esteNou = true;
+            } else if (valDataAdaugare) {
+                const dataAdaugare = new Date(valDataAdaugare.getAttribute('datetime'));
+                const acum = new Date();
+                const diferentaZile = Math.floor((acum - dataAdaugare) / (1000 * 60 * 60 * 24));
+                esteNou = diferentaZile <= 30;
             }
             
             const produs = {
@@ -68,7 +80,8 @@ function extrageProduseDeInPagina() {
                 pentru_copii: valCopii ? valCopii.textContent.trim() === 'Da' : false,
                 caracteristici: ['DryFit', 'premium'],
                 data_adaugare: valDataAdaugare ? valDataAdaugare.getAttribute('datetime') : null,
-                esteCelMaiIeftin: card.classList.contains('cel-mai-ieftin')
+                esteCelMaiIeftin: card.classList.contains('cel-mai-ieftin'),
+                este_nou: esteNou
             };
             
             if (produs.nume.toLowerCase().includes('retro') || produs.categorie === 'retro') {
@@ -191,6 +204,19 @@ function afiseazaProduse(listaProduse) {
         }
         if (esteCelMaiIeftin) {
             badges += '<span class="badge badge-cheapest"><i class="fas fa-crown"></i> CEL MAI IEFTIN DIN CATEGORIE</span>';
+        }
+        if (produs.este_nou) {
+            // Verifică dacă produsul este foarte nou (adăugat astăzi)
+            let claseNou = 'badge badge-nou';
+            if (produs.data_adaugare) {
+                const dataAdaugare = new Date(produs.data_adaugare);
+                const acum = new Date();
+                const diferentaZile = Math.floor((acum - dataAdaugare) / (1000 * 60 * 60 * 24));
+                if (diferentaZile === 0) {
+                    claseNou += ' foarte-nou';
+                }
+            }
+            badges += `<span class="${claseNou}"><i class="fas fa-sparkles"></i> NOU</span>`;
         }
 
         let dataFormatata = '';
