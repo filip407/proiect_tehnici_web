@@ -499,7 +499,7 @@ app.get('/produse', async (req, res) => {
             params.push(tipEchipaFiltru);
         }
         
-        query += ' ORDER BY este_nou DESC, nume ASC';
+        query += ' ORDER BY nume ASC';
         
         const rezultatProduse = await client.query(query, params);
         
@@ -574,7 +574,7 @@ app.get('/api/produse', async (req, res) => {
             params.push(tipEchipaFiltru);
         }
         
-        query += ' ORDER BY este_nou DESC, nume ASC';
+        query += ' ORDER BY nume ASC';
         
         const result = await client.query(query, params);
         

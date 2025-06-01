@@ -266,11 +266,24 @@
                                 <p class="descriere"><%- prod.descriere || 'Tricou de fotbal de calitate premium.' %></p>
                                 
                                 <p class="categorie-prod">Categorie: <span class="val-categorie"><%- prod.categorie %></span></p>
-                                <% if (prod.pentru_copii) { %>
+                                <% if (prod.pentru_copii || prod.este_nou || prod.esteCelMaiIeftin ) { %>
                                 <div class="product-badges">
+                                    <% if (prod.pentru_copii) { %>
                                     <span class="badge badge-kids">
                                         <i class="fas fa-child"></i> Copii
                                     </span>
+                                    <% } %>
+                                    
+                                    <% if (prod.este_nou) { %>
+                                    <span class="badge badge-nou">
+                                        <i class="fas fa-sparkles"></i> NOU
+                                    </span>
+                                    <% } %>
+                                    <% if (prod.esteCelMaiIeftin) { %>
+                                    <span class="badge badge-cheapest">
+                                        <i class="fas fa-crown"></i> CEL MAI IEFTIN DIN CATEGORIE
+                                    </span>
+                                    <% } %>
                                 </div>
                                 <% } %>
                             </div>
