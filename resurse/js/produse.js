@@ -1,10 +1,12 @@
+// Etapa 6 - JavaScript pentru functionalitatile paginii de produse
 let produse = [];
 let produseAfisate = [];
 
+// Etapa 6 - Incarcarea produselor din server sau din pagina
 async function incarcaProduse() {
     const gridProduse = document.querySelector('.grid-produse');
     if (!gridProduse) {
-        console.error('Nu s-a găsit containerul .grid-produse');
+        console.error('Nu s-a gasit containerul .grid-produse');
         return;
     }
 
@@ -20,7 +22,7 @@ async function incarcaProduse() {
                 produse = data;
                 afiseazaProduse(produse);
             } else {
-                throw new Error(`Răspuns API invalid: ${response.status}`);
+                throw new Error(`Raspuns API invalid: ${response.status}`);
             }
         } catch (error) {
             console.warn('API indisponibil, folosesc produsele default:', error.message);
@@ -28,12 +30,11 @@ async function incarcaProduse() {
     }
     
     produseAfisate = [...produse];
-    
     window.produse = produse;
-    
     actualizeazaContorProduse();
 }
 
+// Bonus 18 - Extragerea datelor produselor din HTML cu identificarea produselor noi
 function extrageProduseDeInPagina() {
     const produseExtrase = [];
     const cardurileProduslor = document.querySelectorAll('.produs');
@@ -57,7 +58,6 @@ function extrageProduseDeInPagina() {
                 return;
             }
             
-            // Verifică dacă produsul este nou (din badge sau din data adăugării)
             let esteNou = false;
             if (badgeNou) {
                 esteNou = true;
@@ -86,7 +86,7 @@ function extrageProduseDeInPagina() {
             
             if (produs.nume.toLowerCase().includes('retro') || produs.categorie === 'retro') {
                 produs.tip_echipa = 'fotbalist';
-            } else if (['România', 'Brazilia', 'Portugalia'].includes(produs.echipa)) {
+            } else if (['Romania', 'Brazilia', 'Portugalia'].includes(produs.echipa)) {
                 produs.tip_echipa = 'nationala';
             } else {
                 produs.tip_echipa = 'club';
@@ -101,6 +101,7 @@ function extrageProduseDeInPagina() {
     return produseExtrase;
 }
 
+// Etapa 6 - Validarea inputurilor cu mesaje de eroare
 function valideazaInputuri() {
     let valid = true;
     let mesajEroare = '';
@@ -113,7 +114,7 @@ function valideazaInputuri() {
         if (!formatValid) {
             echipeError.style.display = 'block';
             valid = false;
-            mesajEroare += 'Lista de echipe conține caractere nepermise. ';
+            mesajEroare += 'Lista de echipe contine caractere nepermise. ';
         } else {
             echipeError.style.display = 'none';
         }
@@ -124,29 +125,30 @@ function valideazaInputuri() {
     const nume = document.getElementById('inp-nume').value.trim();
     if (nume.length > 0 && /^\d+$/.test(nume)) {
         valid = false;
-        mesajEroare += 'Căutarea nu poate conține doar cifre. ';
+        mesajEroare += 'Cautarea nu poate contine doar cifre. ';
     }
     
     const tipSelectat = document.querySelector('input[name="gr_tip"]:checked');
     if (!tipSelectat) {
         valid = false;
-        mesajEroare += 'Selectați un tip de echipă. ';
+        mesajEroare += 'Selectati un tip de echipa. ';
     }
     
     if (!valid) {
-        alert('Validare eșuată: ' + mesajEroare);
+        alert('Validare esuata: ' + mesajEroare);
     }
     
     return valid;
 }
 
+// Formatare data in romana pentru afisare
 function formatareDataRomana(data) {
     const luni = [
         'Ianuarie', 'Februarie', 'Martie', 'Aprilie', 'Mai', 'Iunie',
         'Iulie', 'August', 'Septembrie', 'Octombrie', 'Noiembrie', 'Decembrie'
     ];
     
-    const zile = ['Duminică', 'Luni', 'Marți', 'Miercuri', 'Joi', 'Vineri', 'Sâmbătă'];
+    const zile = ['Duminica', 'Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Sambata'];
     
     const zi = data.getDate();
     const luna = luni[data.getMonth()];
@@ -156,6 +158,7 @@ function formatareDataRomana(data) {
     return `${zi} ${luna} ${an} (${ziSaptamana})`;
 }
 
+// Bonus 14 - Determinarea celui mai ieftin produs pe categoria
 function determinaCelMaiIeftinPeCategorie(listaProduse) {
     const categorii = {};
     
@@ -169,6 +172,7 @@ function determinaCelMaiIeftinPeCategorie(listaProduse) {
     return Object.values(categorii).map(produs => produs.id);
 }
 
+// Etapa 6 - Afisarea produselor cu bonus-uri pentru noi si cei mai ieftini
 function afiseazaProduse(listaProduse) {
     const container = document.querySelector('.grid-produse');
     if (!container) return;
@@ -178,8 +182,8 @@ function afiseazaProduse(listaProduse) {
     if (!listaProduse || listaProduse.length === 0) {
         container.innerHTML = `
             <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
-                <h3>Nu s-au găsit produse</h3>
-                <p>Încercați să modificați filtrele sau să reîncărcați pagina.</p>
+                <h3>Nu s-au gasit produse</h3>
+                <p>Incercati sa modificati filtrele sau sa reincarcati pagina.</p>
             </div>
         `;
         return;
@@ -206,7 +210,6 @@ function afiseazaProduse(listaProduse) {
             badges += '<span class="badge badge-cheapest"><i class="fas fa-crown"></i> CEL MAI IEFTIN DIN CATEGORIE</span>';
         }
         if (produs.este_nou) {
-            // Verifică dacă produsul este foarte nou (adăugat astăzi)
             let claseNou = 'badge badge-nou';
             if (produs.data_adaugare) {
                 const dataAdaugare = new Date(produs.data_adaugare);
@@ -234,7 +237,7 @@ function afiseazaProduse(listaProduse) {
             <div class="info-prod">
                 <table class="tabel-caracteristici">
                     <tr>
-                        <td><strong>Preț:</strong></td>
+                        <td><strong>Pret:</strong></td>
                         <td class="val-pret">${produs.pret.toFixed(2)} RON</td>
                     </tr>
                     <tr>
@@ -269,7 +272,7 @@ function afiseazaProduse(listaProduse) {
             </figure>
             <label class="selecteaza-cos">
                 <input type="checkbox" class="select-cos" value="${produs.id}" autocomplete="off">
-                Selectează pentru coș
+                Selecteaza pentru cos
             </label>
         `;
         
@@ -277,6 +280,7 @@ function afiseazaProduse(listaProduse) {
     });
 }
 
+// Etapa 6 - Filtrarea produselor cu cautare multipla si caracteristici
 function filtreazaProduse() {
     if (!valideazaInputuri()) {
         return;
@@ -332,8 +336,9 @@ function filtreazaProduse() {
     actualizeazaContorProduse();
 }
 
+// Etapa 6 - Resetarea filtrelor cu confirmare
 function reseteazaFiltre() {
-    if (!confirm('Sunteți sigur că doriți să resetați toate filtrele? Această acțiune va afișa din nou toate produsele.')) {
+    if (!confirm('Sunteti sigur ca doriti sa resetati toate filtrele? Aceasta actiune va afisa din nou toate produsele.')) {
         return;
     }
     
@@ -366,77 +371,45 @@ function reseteazaFiltre() {
     actualizeazaContorProduse();
 }
 
+// Etapa 6 - Sortare crescatoare cu algoritm compus
 function sorteazaCrescator() {
-    // Verifică dacă există noua interfață de sortare
-    if (document.getElementById('cheie-sortare-1')) {
-        document.getElementById('cheie-sortare-1').value = 'pret';
-        document.getElementById('directie-sortare-1').value = 'crescator';
-        document.getElementById('cheie-sortare-2').value = 'nume';
-        document.getElementById('directie-sortare-2').value = 'crescator';
-        
-        if (typeof actualizarePrevizualizareSortare === 'function') {
-            actualizarePrevizualizareSortare();
-        }
-        
-        if (typeof sorteazaCuDouaChei === 'function') {
-            sorteazaCuDouaChei();
-        }
-    } else {
-        // Fallback la sortarea veche
-        if (!valideazaInputuri()) {
-            return;
-        }
-        
-        produseAfisate.sort((a, b) => {
-            const raportA = a.pret / (a.sezon.length || 1);
-            const raportB = b.pret / (b.sezon.length || 1);
-            
-            if (Math.abs(raportA - raportB) > 0.01) {
-                return raportA - raportB;
-            }
-            
-            return a.categorie.localeCompare(b.categorie, 'ro', { sensitivity: 'base' });
-        });
-        afiseazaProduse(produseAfisate);
+    if (!valideazaInputuri()) {
+        return;
     }
+    
+    produseAfisate.sort((a, b) => {
+        const raportA = a.pret / (a.sezon.length || 1);
+        const raportB = b.pret / (b.sezon.length || 1);
+        
+        if (Math.abs(raportA - raportB) > 0.01) {
+            return raportA - raportB;
+        }
+        
+        return a.categorie.localeCompare(b.categorie, 'ro', { sensitivity: 'base' });
+    });
+    afiseazaProduse(produseAfisate);
 }
 
-
+// Etapa 6 - Sortare descrescatoare cu algoritm compus
 function sorteazaDescrescator() {
-    // Verifică dacă există noua interfață de sortare
-    if (document.getElementById('cheie-sortare-1')) {
-        document.getElementById('cheie-sortare-1').value = 'pret';
-        document.getElementById('directie-sortare-1').value = 'descrescator';
-        document.getElementById('cheie-sortare-2').value = 'nume';
-        document.getElementById('directie-sortare-2').value = 'crescator';
-        
-        if (typeof actualizarePrevizualizareSortare === 'function') {
-            actualizarePrevizualizareSortare();
-        }
-        
-        if (typeof sorteazaCuDouaChei === 'function') {
-            sorteazaCuDouaChei();
-        }
-    } else {
-        // Fallback la sortarea veche
-        if (!valideazaInputuri()) {
-            return;
-        }
-        
-        produseAfisate.sort((a, b) => {
-            const raportA = a.pret / (a.sezon.length || 1);
-            const raportB = b.pret / (b.sezon.length || 1);
-            
-            if (Math.abs(raportA - raportB) > 0.01) {
-                return raportB - raportA;
-            }
-            
-            return b.categorie.localeCompare(a.categorie, 'ro', { sensitivity: 'base' });
-        });
-        afiseazaProduse(produseAfisate);
+    if (!valideazaInputuri()) {
+        return;
     }
+    
+    produseAfisate.sort((a, b) => {
+        const raportA = a.pret / (a.sezon.length || 1);
+        const raportB = b.pret / (b.sezon.length || 1);
+        
+        if (Math.abs(raportA - raportB) > 0.01) {
+            return raportB - raportA;
+        }
+        
+        return b.categorie.localeCompare(a.categorie, 'ro', { sensitivity: 'base' });
+    });
+    afiseazaProduse(produseAfisate);
 }
 
+// Etapa 6 - Calcularea sumei produselor selectate cu afisare popup
 function calculeazaSuma() {
     const checkboxuri = document.querySelectorAll('.select-cos:checked');
     let suma = 0;
@@ -458,15 +431,15 @@ function calculeazaSuma() {
         divSuma.innerHTML = `
             <i class="fas fa-shopping-cart"></i>
             <div class="popup-content">
-                Nu aveți produse selectate în coș!
+                Nu aveti produse selectate in cos!
             </div>
         `;
     } else {
         divSuma.innerHTML = `
             <i class="fas fa-calculator"></i>
             <div class="popup-content">
-                Aveți ${numarProduse} produs${numarProduse === 1 ? '' : 'e'} selectat${numarProduse === 1 ? '' : 'e'}
-                <strong>Suma totală: ${suma.toFixed(2)} RON</strong>
+                Aveti ${numarProduse} produs${numarProduse === 1 ? '' : 'e'} selectat${numarProduse === 1 ? '' : 'e'}
+                <strong>Suma totala: ${suma.toFixed(2)} RON</strong>
             </div>
         `;
     }
@@ -485,6 +458,7 @@ function calculeazaSuma() {
     }, 2500);
 }
 
+// Bonus 15 - Actualizarea contorului de produse afisate
 function actualizeazaContorProduse() {
     const sumaInfo = document.getElementById('p-suma');
     if (sumaInfo) {
@@ -496,12 +470,13 @@ function actualizeazaContorProduse() {
             textOriginal.substring(textOriginal.indexOf('pentru categoria')) : '';
         
         sumaInfo.innerHTML = `
-            Se afișează ${numarAfisate} din ${numarTotal} produse${parteaCategorie.includes('pentru categoria') ? ' ' + parteaCategorie.split('Apăsați')[0] : ''}. 
-            Apăsați <kbd>Alt</kbd>+<kbd>C</kbd> pentru suma prețurilor produselor selectate.
+            Se afiseaza ${numarAfisate} din ${numarTotal} produse${parteaCategorie.includes('pentru categoria') ? ' ' + parteaCategorie.split('Apasati')[0] : ''}. 
+            Apasati <kbd>Alt</kbd>+<kbd>C</kbd> pentru suma preturilor produselor selectate.
         `;
     }
 }
 
+// Functie utilitara pentru debounce la input-uri
 function debounce(func, wait) {
     let timeout;
     return function executedFunction(...args) {
@@ -514,6 +489,7 @@ function debounce(func, wait) {
     };
 }
 
+// Initializarea event listeners pentru toate controalele
 function initializeazaEventListeners() {
     const pretSlider = document.getElementById('inp-pret');
     const pretDisplay = document.getElementById('pret-display');
@@ -588,25 +564,16 @@ function initializeazaEventListeners() {
         textareaEchipe.addEventListener('input', debounce(filtreazaProduse, 500));
     }
 
+    // Shortcut pentru calcularea sumei
     document.addEventListener('keydown', function(event) {
         if (event.altKey && event.key.toLowerCase() === 'c') {
             event.preventDefault();
             calculeazaSuma();
         }
     });
-    setTimeout(() => {
-        if (document.getElementById('cheie-sortare-1')) {
-            initializeazaSortarePersonalizabila();
-            integreazaSortareaPersonalizabila();
-        }
-    }, 100);
-
-    // Event listener pentru exemplele de sortare - se va defini global
-    window.aplicaExempluSortare = function(cheie1, directie1, cheie2, directie2) {
-        aplicaExempluSortare(cheie1, directie1, cheie2, directie2);
-    };
 }
 
+// Functia principala de initializare
 async function initializeazaAplicatia() {
     try {
         await incarcaProduse();
@@ -616,27 +583,16 @@ async function initializeazaAplicatia() {
             initializeazaComparator();
         }
         
-        // Inițializează sortarea personalizabilă după o scurtă întârziere
-        setTimeout(() => {
-            if (document.getElementById('cheie-sortare-1')) {
-                if (typeof initializeazaSortarePersonalizabila === 'function') {
-                    initializeazaSortarePersonalizabila();
-                }
-                if (typeof integreazaSortareaPersonalizabila === 'function') {
-                    integreazaSortareaPersonalizabila();
-                }
-                console.log('Sortarea personalizabilă a fost inițializată cu succes');
-            }
-        }, 500);
-        
-        console.log('Aplicația a fost inițializată cu succes (cu modal, comparator și sortare personalizabilă)');
+        console.log('Aplicatia a fost initializata cu succes (cu modal si comparator)');
     } catch (error) {
-        console.error('Eroare la inițializarea aplicației:', error);
+        console.error('Eroare la initializarea aplicatiei:', error);
     }
 }
 
+// Pornirea aplicatiei la incarcarea paginii
 document.addEventListener('DOMContentLoaded', initializeazaAplicatia);
 
+// Export pentru testare
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         incarcaProduse,

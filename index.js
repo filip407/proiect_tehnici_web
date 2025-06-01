@@ -7,6 +7,7 @@ const sharp = require("sharp");
 const pg = require("pg");
 const Client = pg.Client;
 
+// Etapa 4 - Cerinta 1: Configurare conexiune baza de date PostgreSQL
 const client = new Client({
     database: "elitekits",
     user: "filip", 
@@ -19,12 +20,13 @@ async function connectDB() {
     try {
         await client.connect();
         const result = await client.query("SELECT NOW() as timp, COUNT(*) as total FROM tricouri");
-        console.log("Conexiune BD reușită:", result.rows[0]);
+        console.log("Conexiune BD reusita:", result.rows[0]);
     } catch (err) {
         console.error("Eroare conectare baza de date:", err.message);
     }
 }
 
+// Etapa 5 - Bonus 13: Configurare cleanup automat foldere backup
 global.obiectGlobal = {
     folderScss: path.join(__dirname, "resurse/scss"),
     folderCss: path.join(__dirname, "resurse/scss"),
@@ -32,6 +34,7 @@ global.obiectGlobal = {
     intervalBackupCleanup: 30
 };
 
+// Etapa 4 - Cerinta 20: Creare foldere necesare proiectului
 ["temp", "backup"].forEach(f => {
     const folder = path.join(__dirname, f);
     if (!fs.existsSync(folder)) {
@@ -39,6 +42,7 @@ global.obiectGlobal = {
     }
 });
 
+// Etapa 5 - Bonus 13: Functie pentru stergerea fisierelor vechi din backup
 async function stergeBackupVechi() {
     try {
         const folderBackup = obiectGlobal.folderBackup;
@@ -46,7 +50,7 @@ async function stergeBackupVechi() {
         const acum = new Date();
         const limitaTimp = new Date(acum.getTime() - intervalMinute * 60 * 1000);
         
-        console.log(`[BACKUP] Verificare fișiere mai vechi de ${intervalMinute} minute...`);
+        console.log(`[BACKUP] Verificare fisiere mai vechi de ${intervalMinute} minute...`);
         
         const stergeRecursiv = async (folderCurent) => {
             try {
@@ -62,19 +66,17 @@ async function stergeBackupVechi() {
                             const fisiereFolderCurent = await fsp.readdir(caleFisier);
                             if (fisiereFolderCurent.length === 0) {
                                 await fsp.rmdir(caleFisier);
-                                console.log(`[BACKUP] Folder gol șters: ${caleFisier}`);
+                                console.log(`[BACKUP] Folder gol sters: ${caleFisier}`);
                             }
-                        } catch (err) {
-                        }
+                        } catch (err) {}
                     } else {
                         try {
                             const statFisier = await fsp.stat(caleFisier);
                             if (statFisier.mtime < limitaTimp) {
                                 await fsp.unlink(caleFisier);
-                                console.log(`[BACKUP] Fișier vechi șters: ${caleFisier}`);
+                                console.log(`[BACKUP] Fisier vechi sters: ${caleFisier}`);
                             }
-                        } catch (err) {
-                        }
+                        } catch (err) {}
                     }
                 }
             } catch (err) {
@@ -95,6 +97,7 @@ const intervalCleanup = setInterval(() => {
     stergeBackupVechi();
 }, 15 * 60 * 1000);
 
+// Etapa 5 - Cerinta 25b,c: Functie pentru compilarea SCSS cu backup
 async function compileazaScss(caleScss, caleCss) {
     const scssAbs = path.isAbsolute(caleScss)
         ? caleScss
@@ -123,6 +126,7 @@ async function compileazaScss(caleScss, caleCss) {
             }
         }
         
+        // Suprima deprecation warnings pentru SCSS
         process.stderr.write = function(chunk, encoding, callback) {
             if (typeof chunk === 'string' && !chunk.includes('Deprecation Warning')) {
                 return originalStderr.call(process.stderr, chunk, encoding, callback);
@@ -131,20 +135,6 @@ async function compileazaScss(caleScss, caleCss) {
                 const str = chunk.toString();
                 if (!str.includes('Deprecation Warning')) {
                     return originalStderr.call(process.stderr, chunk, encoding, callback);
-                }
-            }
-            if (callback) callback();
-            return true;
-        };
-        
-        process.stdout.write = function(chunk, encoding, callback) {
-            if (typeof chunk === 'string' && !chunk.includes('Deprecation Warning')) {
-                return originalStdout.call(process.stdout, chunk, encoding, callback);
-            }
-            if (Buffer.isBuffer(chunk)) {
-                const str = chunk.toString();
-                if (!str.includes('Deprecation Warning')) {
-                    return originalStdout.call(process.stdout, chunk, encoding, callback);
                 }
             }
             if (callback) callback();
@@ -165,6 +155,7 @@ async function compileazaScss(caleScss, caleCss) {
     }
 }
 
+// Etapa 5 - Cerinta 25d: Compilare initiala SCSS
 function compileazaToateScss() {
     const fisiere = fs.readdirSync(obiectGlobal.folderScss).filter(f => f.endsWith(".scss"));
     for (let f of fisiere) {
@@ -176,6 +167,7 @@ function compileazaToateScss() {
     }
 }
 
+// Etapa 5 - Cerinta 25e: Compilare automata la modificarea fisierelor SCSS
 fs.watch(obiectGlobal.folderScss, (event, filename) => {
     if (filename && filename.endsWith(".scss")) {
         console.log(`[SCSS] Detectat eveniment: ${event} la ${filename}`);
@@ -194,12 +186,15 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Etapa 4 - Cerinta 3: Afisare cai si foldere importante
 console.log("Folderul proiectului:", __dirname);
 console.log("Calea fisierului index.js:", __filename);
 console.log("Folderul curent de lucru:", process.cwd());
 
+// Etapa 4 - Cerinta 4: Configurare view engine EJS
 app.set("view engine", "ejs");
 
+// Etapa 4 - Cerinta 10-14: Sistem de gestionare erori cu JSON
 const obGlobal = {
     obErori: null
 };
@@ -245,6 +240,7 @@ function afisareEroare(res, identificator, titlu, text, imagine) {
     });
 }
 
+// Etapa 5 - Cerinta pentru galerie statica: Filtrare imagini dupa ora curenta
 function filtreazaImaginiDupaTimp(imagini, ora) {
     return imagini.filter(imagine => {
         const interval = imagine.timp.split("-");
@@ -265,6 +261,7 @@ function filtreazaImaginiDupaTimp(imagini, ora) {
     });
 }
 
+// Etapa 5 - Cerinta pentru galerie statica: Redimensionare automata imagini
 async function creeazaImaginiRedimensionate(numeFisier, caleFisier, caleFolderDest) {
     if (!fs.existsSync(caleFolderDest)) {
         fs.mkdirSync(caleFolderDest, { recursive: true });
@@ -289,6 +286,7 @@ async function creeazaImaginiRedimensionate(numeFisier, caleFisier, caleFolderDe
     }
 }
 
+// Etapa 5 - Cerinta pentru galerie statica: Middleware pentru incarcarea imaginilor
 function incarcaImaginiGalerie(req, res, next) {
     try {
         const caleJson = path.join(__dirname, "resurse/json/galerie.json");
@@ -320,12 +318,13 @@ function incarcaImaginiGalerie(req, res, next) {
         res.locals.imagini = imaginiFiltered;
         res.locals.cale_galerie = galerie.cale_galerie;
     } catch (err) {
-        console.error("Eroare la încărcarea galeriei:", err);
+        console.error("Eroare la incarcarea galeriei:", err);
     }
     
     next();
 }
 
+// Bonus 16: Obtinere produse similare cu algoritm de similaritate
 async function obtineProduseSimilare(produsId, produs) {
     try {
         const query = `
@@ -378,7 +377,7 @@ async function obtineProduseSimilare(produsId, produs) {
         return rezultat.rows;
 
     } catch (err) {
-        console.error("Eroare la obținerea produselor similare:", err.message);
+        console.error("Eroare la obtinerea produselor similare:", err.message);
         
         try {
             const fallbackQuery = `
@@ -400,12 +399,13 @@ async function obtineProduseSimilare(produsId, produs) {
             
             return fallbackRezultat.rows;
         } catch (fallbackErr) {
-            console.error("Eroare și la fallback:", fallbackErr.message);
+            console.error("Eroare si la fallback:", fallbackErr.message);
             return [];
         }
     }
 }
 
+// Etapa 4 - Cerinta 20: Creare vectorul de foldere necesare
 const vect_foldere = ["temp", "resurse/imagini/galerie", "resurse/imagini/galerie/mic", "resurse/imagini/galerie/mediu", "resurse/json"];
 for (let folder of vect_foldere) {
     let caleFolder = path.join(__dirname, folder);
@@ -414,11 +414,13 @@ for (let folder of vect_foldere) {
     }
 }
 
+// Etapa 4 - Cerinta 16: Middleware pentru afisarea IP-ului utilizatorului
 app.use(function(req, res, next) {
     res.locals.ip = req.ip;
     next();
 });
 
+// Middleware pentru categoriile din meniu
 app.use(async function(req, res, next) {
     try {
         const rezultat = await client.query(`
@@ -433,6 +435,7 @@ app.use(async function(req, res, next) {
     next();
 });
 
+// Etapa 4 - Cerinta 17-18: Protectie acces la foldere si fisiere EJS
 app.use("/resurse", function(req, res, next) {
     const fullPath = path.join(__dirname, "resurse", req.url);
     if (fs.existsSync(fullPath) && fs.statSync(fullPath).isDirectory()) {
@@ -444,21 +447,24 @@ app.use("/resurse", function(req, res, next) {
     next();
 }, express.static(path.join(__dirname, "resurse")));
 
+// Ruta speciala pentru orar.json
 app.get('/resurse/json/orar.json', function(req, res) {
     try {
         const caleOrar = path.join(__dirname, "resurse/json/orar.json");
         res.setHeader('Content-Type', 'application/json');
         res.sendFile(caleOrar);
     } catch (err) {
-        console.error("Eroare la servirea fișierului orar.json:", err);
-        res.status(500).json({ error: "Nu s-a putut încărca orarul" });
+        console.error("Eroare la servirea fisierului orar.json:", err);
+        res.status(500).json({ error: "Nu s-a putut incarca orarul" });
     }
 });
 
+// Etapa 4 - Cerinta 19: Ruta pentru favicon
 app.get("/favicon.ico", function(req, res) {
     res.sendFile(path.join(__dirname, "resurse/imagini/favicon.ico"));
 });
 
+// Etapa 4 - Cerinta 8: Rute multiple pentru pagina principala
 app.get(["/", "/index", "/home"], incarcaImaginiGalerie, function(req, res) {
     res.render("pagini/index", {ip: req.ip});
 });
@@ -475,6 +481,7 @@ app.get("/fisier", function(req, res) {
     res.sendFile(path.join(__dirname, "package.json"));
 });
 
+// Etapa 6 - Ruta principala pentru produse cu filtrare si bonus 14 cel mai ieftin
 app.get('/produse', async (req, res) => {
     const tipEchipaFiltru = req.query.tip_echipa;
     
@@ -528,7 +535,7 @@ app.get('/produse', async (req, res) => {
                 ORDER BY unnest
             `);
         } catch (catErr) {
-            console.log("Nu s-au putut încărca categoriile din enum");
+            console.log("Nu s-au putut incarca categoriile din enum");
         }
         
         res.render('pagini/produse', { 
@@ -539,7 +546,7 @@ app.get('/produse', async (req, res) => {
         });
         
     } catch (err) {
-        console.error("Eroare la încărcarea produselor:", err.message);
+        console.error("Eroare la incarcarea produselor:", err.message);
         
         res.render('pagini/produse', { 
             produse: null,
@@ -550,6 +557,7 @@ app.get('/produse', async (req, res) => {
     }
 });
 
+// API pentru produse - folosit de JavaScript client-side
 app.get('/api/produse', async (req, res) => {
     const tipEchipaFiltru = req.query.tip_echipa;
     
@@ -604,11 +612,12 @@ app.get('/api/produse', async (req, res) => {
     }
 });
 
+// Ruta pentru pagina individuala a produsului cu bonus 16 produse similare
 app.get('/produs/:id', async (req, res) => {
     const produsId = parseInt(req.params.id);
     
     if (isNaN(produsId)) {
-        afisareEroare(res, 404, "Produs negăsit", "ID-ul produsului nu este valid");
+        afisareEroare(res, 404, "Produs negasit", "ID-ul produsului nu este valid");
         return;
     }
     
@@ -628,7 +637,7 @@ app.get('/produs/:id', async (req, res) => {
         `, [produsId]);
         
         if (rezultat.rows.length === 0) {
-            afisareEroare(res, 404, "Produs negăsit", "Nu există un produs cu acest ID");
+            afisareEroare(res, 404, "Produs negasit", "Nu exista un produs cu acest ID");
             return;
         }
         
@@ -644,11 +653,12 @@ app.get('/produs/:id', async (req, res) => {
         });
         
     } catch (err) {
-        console.error("Eroare la încărcarea produsului:", err.message);
-        afisareEroare(res, 500, "Eroare server", "Nu s-a putut încărca produsul");
+        console.error("Eroare la incarcarea produsului:", err.message);
+        afisareEroare(res, 500, "Eroare server", "Nu s-a putut incarca produsul");
     }
 });
 
+// Bonus 17: Ruta pentru listarea seturilor de produse
 app.get('/seturi', async (req, res) => {
     try {
         const query = `
@@ -699,16 +709,17 @@ app.get('/seturi', async (req, res) => {
         });
         
     } catch (err) {
-        console.error("Eroare la încărcarea seturilor:", err.message);
-        afisareEroare(res, 500, "Eroare server", "Nu s-au putut încărca seturile de produse");
+        console.error("Eroare la incarcarea seturilor:", err.message);
+        afisareEroare(res, 500, "Eroare server", "Nu s-au putut incarca seturile de produse");
     }
 });
 
+// Bonus 17: Ruta pentru pagina individuala a unui set
 app.get('/set/:id', async (req, res) => {
     const setId = parseInt(req.params.id);
     
     if (isNaN(setId)) {
-        afisareEroare(res, 404, "Set negăsit", "ID-ul setului nu este valid");
+        afisareEroare(res, 404, "Set negasit", "ID-ul setului nu este valid");
         return;
     }
     
@@ -745,7 +756,7 @@ app.get('/set/:id', async (req, res) => {
         const rezultat = await client.query(query, [setId]);
         
         if (rezultat.rows.length === 0) {
-            afisareEroare(res, 404, "Set negăsit", "Nu există un set cu acest ID");
+            afisareEroare(res, 404, "Set negasit", "Nu exista un set cu acest ID");
             return;
         }
         
@@ -769,11 +780,12 @@ app.get('/set/:id', async (req, res) => {
         });
         
     } catch (err) {
-        console.error("Eroare la încărcarea setului:", err.message);
-        afisareEroare(res, 500, "Eroare server", "Nu s-a putut încărca setul");
+        console.error("Eroare la incarcarea setului:", err.message);
+        afisareEroare(res, 500, "Eroare server", "Nu s-a putut incarca setul");
     }
 });
 
+// Bonus 17: Functie pentru obtinerea seturilor care contin un produs specific
 async function obtineSeturiPentruProdus(produsId) {
     try {
         const query = `
@@ -827,11 +839,12 @@ async function obtineSeturiPentruProdus(produsId) {
         return seturiCuPreturi;
         
     } catch (err) {
-        console.error("Eroare la obținerea seturilor pentru produs:", err.message);
+        console.error("Eroare la obtinerea seturilor pentru produs:", err.message);
         return [];
     }
 }
 
+// Bonus 20: Ruta pentru compararea produselor
 app.get('/comparare-produse', function(req, res) {
     const produs1Param = req.query.produs1;
     const produs2Param = req.query.produs2;
@@ -856,19 +869,22 @@ app.get('/comparare-produse', function(req, res) {
         });
         
     } catch (error) {
-        console.error('Eroare la procesarea comparării:', error);
+        console.error('Eroare la procesarea compararii:', error);
         afisareEroare(res, 400, "Eroare de procesare", "S-a produs o eroare la procesarea datelor pentru comparare.");
     }
 });
 
+// Etapa 4 - Cerinta 18: Protectie fisiere EJS
 app.get("/*.ejs", function(req, res) {
     afisareEroare(res, 400);
 });
 
+// Ruta pentru galerie
 app.get("/galerie", incarcaImaginiGalerie, function(req, res) {
     res.render("pagini/galerie", {ip: req.ip});
 });
 
+// Etapa 4 - Cerinta 9: Ruta generala pentru toate paginile cu middleware galerie
 app.get("/*", function(req, res) {
     try {
         const middlewares = [];
@@ -913,18 +929,20 @@ app.get("/*", function(req, res) {
     }
 });
 
+// Functie pentru pornirea serverului
 async function startServer() {
     await connectDB();
     compileazaToateScss();
     
     app.listen(8080, () => {
-        console.log("Serverul Elite Kits rulează pe http://localhost:8080");
-        console.log(`[BACKUP] Cleanup automat activat - fișiere mai vechi de ${obiectGlobal.intervalBackupCleanup} minute vor fi șterse`);
+        console.log("Serverul Elite Kits ruleaza pe http://localhost:8080");
+        console.log(`[BACKUP] Cleanup automat activat - fisiere mai vechi de ${obiectGlobal.intervalBackupCleanup} minute vor fi sterse`);
     });
 }
 
+// Gestionarea inchiderii serverului
 process.on('SIGINT', async () => {
-    console.log('\nÎnchidere server...');
+    console.log('\nInchidere server...');
     
     if (intervalCleanup) {
         clearInterval(intervalCleanup);
@@ -933,17 +951,18 @@ process.on('SIGINT', async () => {
     
     try {
         await client.end();
-        console.log('Conexiune baza de date închisă');
+        console.log('Conexiune baza de date inchisa');
     } catch (err) {
-        console.log('Eroare la închiderea conexiunii DB');
+        console.log('Eroare la inchiderea conexiunii DB');
     }
     process.exit(0);
 });
 
+// Pornirea serverului cu fallback
 startServer().catch(err => {
     console.error('Eroare la pornirea serverului:', err);
     app.listen(8080, () => {
-        console.log("Server pornit fără conexiune DB pe http://localhost:8080");
-        console.log(`[BACKUP] Cleanup automat activat - fișiere mai vechi de ${obiectGlobal.intervalBackupCleanup} minute vor fi șterse`);
+        console.log("Server pornit fara conexiune DB pe http://localhost:8080");
+        console.log(`[BACKUP] Cleanup automat activat - fisiere mai vechi de ${obiectGlobal.intervalBackupCleanup} minute vor fi sterse`);
     });
 });
