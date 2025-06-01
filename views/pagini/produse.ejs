@@ -173,21 +173,91 @@
                     </small>
                 </div>
             </div>
-            <div class="buttons-container">
-                <button id="filtrare" class="btn btn-primary">
-                    <i class="fas fa-filter"></i> Filtrează
-                </button>
-                <button id="resetare" class="btn btn-secondary">
-                    <i class="fas fa-undo"></i> Resetează filtrele
-                </button>
-                <button id="sortCrescNume" class="btn btn-success">
-                    <i class="fas fa-sort-amount-up"></i> Sortare crescătoare
-                </button>
-                <button id="sortDescrescNume" class="btn btn-warning">
-                    <i class="fas fa-sort-amount-down"></i> Sortare descrescătoare
-                </button>
-            </div>
+           <!-- Înlocuiește secțiunea buttons-container din pagina produse.ejs -->
+<div class="buttons-container">
+    <button id="filtrare" class="btn btn-primary">
+        <i class="fas fa-filter"></i> Filtrează
+    </button>
+    <button id="resetare" class="btn btn-secondary">
+        <i class="fas fa-undo"></i> Resetează filtrele
+    </button>
+</div>
+
+<!-- Adaugă această secțiune pentru sortarea personalizabilă DUPĂ buttons-container -->
+<div class="sortare-personalizabila">
+    <h3><i class="fas fa-sort"></i> Sortare avansată</h3>
+    
+    <div class="sortare-grid">
+        <div class="sortare-cheie">
+            <label for="cheie-sortare-1">
+                <i class="fas fa-sort-amount-up"></i> 
+                Prima cheie de sortare:
+            </label>
+            <select id="cheie-sortare-1">
+                <option value="nume">Nume produs</option>
+                <option value="pret" selected>Preț</option>
+                <option value="echipa">Echipa</option>
+                <option value="categorie">Categorie</option>
+                <option value="sezon">Sezon</option>
+                <option value="liga">Liga</option>
+                <option value="data_adaugare">Data adăugării</option>
+            </select>
         </div>
+        
+        <div class="sortare-directie">
+            <label for="directie-sortare-1">Direcția primei sortări:</label>
+            <select id="directie-sortare-1">
+                <option value="crescator" selected>Crescător</option>
+                <option value="descrescator">Descrescător</option>
+            </select>
+        </div>
+        
+        <div class="sortare-cheie">
+            <label for="cheie-sortare-2">
+                <i class="fas fa-sort-amount-down"></i> 
+                A doua cheie de sortare:
+            </label>
+            <select id="cheie-sortare-2">
+                <option value="nume" selected>Nume produs</option>
+                <option value="pret">Preț</option>
+                <option value="echipa">Echipa</option>
+                <option value="categorie">Categorie</option>
+                <option value="sezon">Sezon</option>
+                <option value="liga">Liga</option>
+                <option value="data_adaugare">Data adăugării</option>
+            </select>
+        </div>
+        
+        <div class="sortare-directie">
+            <label for="directie-sortare-2">Direcția celei de-a doua sortări:</label>
+            <select id="directie-sortare-2">
+                <option value="crescator" selected>Crescător</option>
+                <option value="descrescator">Descrescător</option>
+            </select>
+        </div>
+    </div>
+    
+    <div class="sortare-preview">
+        <div class="preview-content">
+            <i class="fas fa-info-circle"></i>
+            <span id="preview-sortare">Se va sorta după <strong>preț (crescător)</strong>, apoi după <strong>nume (crescător)</strong></span>
+        </div>
+    </div>
+</div>
+
+    <div class="sortare-rapida-btns">
+        <button id="resetSortare" class="btn btn-secondary">
+            <i class="fas fa-undo"></i> Resetează la implicit
+        </button>
+        <button id="sortCrescNume" class="btn btn-success">
+            <i class="fas fa-sort-amount-up"></i> Sortare crescătoare rapidă
+        </button>
+        <button id="sortDescrescNume" class="btn btn-warning">
+            <i class="fas fa-sort-amount-down"></i> Sortare descrescătoare rapidă
+        <button id="aplicaSortare" class="btn btn-primary">
+            <i class="fas fa-sort"></i> Aplică sortarea
+        </button>
+    </div>
         <div class="suma-info">
             <p id="p-suma">
                 <% if (locals.produse && locals.produse.length > 0) { %>

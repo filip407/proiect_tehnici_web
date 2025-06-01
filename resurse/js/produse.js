@@ -367,39 +367,74 @@ function reseteazaFiltre() {
 }
 
 function sorteazaCrescator() {
-    if (!valideazaInputuri()) {
-        return;
-    }
-    
-    produseAfisate.sort((a, b) => {
-        const raportA = a.pret / (a.sezon.length || 1);
-        const raportB = b.pret / (b.sezon.length || 1);
+    // Verifică dacă există noua interfață de sortare
+    if (document.getElementById('cheie-sortare-1')) {
+        document.getElementById('cheie-sortare-1').value = 'pret';
+        document.getElementById('directie-sortare-1').value = 'crescator';
+        document.getElementById('cheie-sortare-2').value = 'nume';
+        document.getElementById('directie-sortare-2').value = 'crescator';
         
-        if (Math.abs(raportA - raportB) > 0.01) {
-            return raportA - raportB;
+        if (typeof actualizarePrevizualizareSortare === 'function') {
+            actualizarePrevizualizareSortare();
         }
         
-        return a.categorie.localeCompare(b.categorie, 'ro', { sensitivity: 'base' });
-    });
-    afiseazaProduse(produseAfisate);
+        if (typeof sorteazaCuDouaChei === 'function') {
+            sorteazaCuDouaChei();
+        }
+    } else {
+        // Fallback la sortarea veche
+        if (!valideazaInputuri()) {
+            return;
+        }
+        
+        produseAfisate.sort((a, b) => {
+            const raportA = a.pret / (a.sezon.length || 1);
+            const raportB = b.pret / (b.sezon.length || 1);
+            
+            if (Math.abs(raportA - raportB) > 0.01) {
+                return raportA - raportB;
+            }
+            
+            return a.categorie.localeCompare(b.categorie, 'ro', { sensitivity: 'base' });
+        });
+        afiseazaProduse(produseAfisate);
+    }
 }
 
+
 function sorteazaDescrescator() {
-    if (!valideazaInputuri()) {
-        return;
-    }
-    
-    produseAfisate.sort((a, b) => {
-        const raportA = a.pret / (a.sezon.length || 1);
-        const raportB = b.pret / (b.sezon.length || 1);
+    // Verifică dacă există noua interfață de sortare
+    if (document.getElementById('cheie-sortare-1')) {
+        document.getElementById('cheie-sortare-1').value = 'pret';
+        document.getElementById('directie-sortare-1').value = 'descrescator';
+        document.getElementById('cheie-sortare-2').value = 'nume';
+        document.getElementById('directie-sortare-2').value = 'crescator';
         
-        if (Math.abs(raportA - raportB) > 0.01) {
-            return raportB - raportA;
+        if (typeof actualizarePrevizualizareSortare === 'function') {
+            actualizarePrevizualizareSortare();
         }
         
-        return b.categorie.localeCompare(a.categorie, 'ro', { sensitivity: 'base' });
-    });
-    afiseazaProduse(produseAfisate);
+        if (typeof sorteazaCuDouaChei === 'function') {
+            sorteazaCuDouaChei();
+        }
+    } else {
+        // Fallback la sortarea veche
+        if (!valideazaInputuri()) {
+            return;
+        }
+        
+        produseAfisate.sort((a, b) => {
+            const raportA = a.pret / (a.sezon.length || 1);
+            const raportB = b.pret / (b.sezon.length || 1);
+            
+            if (Math.abs(raportA - raportB) > 0.01) {
+                return raportB - raportA;
+            }
+            
+            return b.categorie.localeCompare(a.categorie, 'ro', { sensitivity: 'base' });
+        });
+        afiseazaProduse(produseAfisate);
+    }
 }
 
 function calculeazaSuma() {
@@ -559,6 +594,17 @@ function initializeazaEventListeners() {
             calculeazaSuma();
         }
     });
+    setTimeout(() => {
+        if (document.getElementById('cheie-sortare-1')) {
+            initializeazaSortarePersonalizabila();
+            integreazaSortareaPersonalizabila();
+        }
+    }, 100);
+
+    // Event listener pentru exemplele de sortare - se va defini global
+    window.aplicaExempluSortare = function(cheie1, directie1, cheie2, directie2) {
+        aplicaExempluSortare(cheie1, directie1, cheie2, directie2);
+    };
 }
 
 async function initializeazaAplicatia() {
@@ -570,7 +616,20 @@ async function initializeazaAplicatia() {
             initializeazaComparator();
         }
         
-        console.log('Aplicația a fost inițializată cu succes (cu modal și comparator)');
+        // Inițializează sortarea personalizabilă după o scurtă întârziere
+        setTimeout(() => {
+            if (document.getElementById('cheie-sortare-1')) {
+                if (typeof initializeazaSortarePersonalizabila === 'function') {
+                    initializeazaSortarePersonalizabila();
+                }
+                if (typeof integreazaSortareaPersonalizabila === 'function') {
+                    integreazaSortareaPersonalizabila();
+                }
+                console.log('Sortarea personalizabilă a fost inițializată cu succes');
+            }
+        }, 500);
+        
+        console.log('Aplicația a fost inițializată cu succes (cu modal, comparator și sortare personalizabilă)');
     } catch (error) {
         console.error('Eroare la inițializarea aplicației:', error);
     }

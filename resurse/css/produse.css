@@ -923,3 +923,434 @@ datalist {
         font-size: 0.8rem;
     }
 }
+
+/* Stilizare pentru sortarea personalizabilă */
+.sortare-personalizabila {
+    background: linear-gradient(135deg, var(--culoare-deschis), var(--culoare-deschis2));
+    padding: var(--padare-continut);
+    border-radius: 12px;
+    box-shadow: 0 4px 8px var(--culoare-umbra);
+    margin-top: 40px; /* Spațiu mare între butoane și sortare */
+    margin-bottom: var(--distanta-grid-mare);
+    border-left: 4px solid var(--culoare-primara);
+    transition: all 0.3s ease;
+}
+
+.sortare-personalizabila:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px var(--culoare-umbra);
+}
+
+.sortare-personalizabila h3 {
+    color: var(--culoare-primara);
+    margin-bottom: 20px;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 2px solid var(--culoare-deschis2);
+    padding-bottom: 10px;
+}
+
+.sortare-personalizabila h3 i {
+    color: var(--culoare-secundara);
+    font-size: 1.2rem;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-3px); }
+}
+
+.sortare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.sortare-cheie, .sortare-directie {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.sortare-cheie label, .sortare-directie label {
+    font-weight: 600;
+    color: var(--culoare-text-primar);
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sortare-cheie label i {
+    color: var(--culoare-primara);
+    font-size: 0.9rem;
+}
+
+.sortare-cheie select, .sortare-directie select {
+    padding: 12px 16px;
+    border: 2px solid var(--culoare-deschis);
+    border-radius: 8px;
+    background: var(--culoare-fundal-primar);
+    color: var(--culoare-text-primar);
+    font-family: inherit;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+    padding-right: 40px;
+    appearance: none;
+}
+
+.sortare-cheie select:focus, .sortare-directie select:focus {
+    outline: none;
+    border-color: var(--culoare-primara);
+    box-shadow: 0 0 0 3px rgba(7, 97, 4, 0.1);
+    background-color: rgba(7, 97, 4, 0.02);
+}
+
+.sortare-cheie select:hover, .sortare-directie select:hover {
+    border-color: var(--culoare-secundara);
+    background-color: rgba(128, 193, 53, 0.05);
+}
+
+.sortare-preview {
+    background: linear-gradient(135deg, var(--culoare-primara), var(--culoare-secundara));
+    color: var(--culoare-deschis);
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(7, 97, 4, 0.3);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.preview-content {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.preview-content i {
+    font-size: 1.2rem;
+    color: var(--culoare-deschis);
+    opacity: 0.9;
+}
+
+.preview-content strong {
+    font-weight: 700;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.sortare-actiuni {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.sortare-actiuni .btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    font-family: inherit;
+    text-decoration: none;
+    box-shadow: 0 3px 6px var(--culoare-umbra);
+    min-width: 160px;
+    justify-content: center;
+}
+
+.sortare-actiuni .btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 12px var(--culoare-umbra);
+}
+
+.sortare-actiuni .btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px var(--culoare-umbra);
+}
+
+.sortare-actiuni .btn-primary {
+    background: linear-gradient(135deg, var(--culoare-primara), var(--culoare-secundara));
+    color: var(--culoare-deschis);
+}
+
+.sortare-actiuni .btn-secondary {
+    background: linear-gradient(135deg, var(--culoare-accent2), var(--culoare-accent3));
+    color: var(--culoare-deschis);
+}
+
+/* Animații pentru feedback vizual */
+.sortare-aplicata {
+    animation: sortare-success 0.6s ease-out;
+}
+
+@keyframes sortare-success {
+    0% {
+        background: linear-gradient(135deg, var(--culoare-deschis), var(--culoare-deschis2));
+        transform: scale(1);
+    }
+    50% {
+        background: linear-gradient(135deg, rgba(7, 97, 4, 0.1), rgba(128, 193, 53, 0.1));
+        transform: scale(1.02);
+    }
+    100% {
+        background: linear-gradient(135deg, var(--culoare-deschis), var(--culoare-deschis2));
+        transform: scale(1);
+    }
+}
+
+/* Stiluri responsive */
+@media screen and (max-width: 768px) {
+    .sortare-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    .sortare-personalizabila {
+        padding: 15px;
+    }
+    
+    .sortare-personalizabila h3 {
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+    }
+    
+    .sortare-actiuni {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .sortare-actiuni .btn {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .preview-content {
+        font-size: 0.95rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sortare-cheie select, .sortare-directie select {
+        padding: 10px 12px;
+        padding-right: 35px;
+        font-size: 0.9rem;
+    }
+    
+    .sortare-cheie label, .sortare-directie label {
+        font-size: 0.9rem;
+    }
+    
+    .preview-content {
+        font-size: 0.9rem;
+    }
+    
+    .sortare-personalizabila h3 {
+        font-size: 1.1rem;
+    }
+}
+
+/* Efecte speciale pentru diferite combinații de sortare */
+.sortare-personalizabila.sortare-pret-nume {
+    border-left-color: #FFD700;
+}
+
+.sortare-personalizabila.sortare-echipa-categorie {
+    border-left-color: #FF6B6B;
+}
+
+.sortare-personalizabila.sortare-data-pret {
+    border-left-color: #4ECDC4;
+}
+
+/* Tooltip pentru explicații */
+.sortare-cheie label::after,
+.sortare-directie label::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    background: var(--culoare-inchis);
+    color: var(--culoare-deschis);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: normal;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    pointer-events: none;
+    margin-top: 5px;
+}
+
+/* Stilizare pentru exemplele de sortare */
+.sortare-exemple {
+    margin-top: 25px;
+    padding: 20px;
+    background: rgba(7, 97, 4, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(7, 97, 4, 0.1);
+}
+
+.sortare-exemple h4 {
+    color: var(--culoare-primara);
+    margin-bottom: 15px;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sortare-exemple h4 i {
+    color: var(--culoare-secundara);
+    font-size: 1rem;
+}
+
+.exemple-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 12px;
+}
+
+.btn-exemplu {
+    background: linear-gradient(135deg, rgba(7, 97, 4, 0.1), rgba(128, 193, 53, 0.1));
+    border: 2px solid var(--culoare-deschis);
+    color: var(--culoare-text-primar);
+    padding: 12px 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+    text-align: center;
+}
+
+.btn-exemplu:hover {
+    background: linear-gradient(135deg, var(--culoare-primara), var(--culoare-secundara));
+    color: var(--culoare-deschis);
+    border-color: var(--culoare-primara);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px var(--culoare-umbra);
+}
+
+.btn-exemplu i {
+    font-size: 0.9rem;
+    opacity: 0.8;
+}
+
+.btn-exemplu:hover i {
+    opacity: 1;
+}
+
+/* Stilizare pentru sortarea rapidă */
+.sortare-rapida {
+    margin-top: 30px; /* Spațiu între sortarea personalizabilă și cea rapidă */
+    padding: 15px;
+    background: rgba(128, 193, 53, 0.05);
+    border-radius: 8px;
+    border: 1px solid rgba(128, 193, 53, 0.2);
+}
+
+.sortare-rapida h4 {
+    color: var(--culoare-secundara);
+    margin-bottom: 15px;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sortare-rapida h4 i {
+    color: var(--culoare-accent);
+    font-size: 0.9rem;
+}
+
+.sortare-rapida-btns {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.sortare-rapida-btns .btn {
+    min-width: 180px;
+    font-size: 0.9rem;
+}
+
+/* Responsive pentru exemplele de sortare */
+@media screen and (max-width: 768px) {
+    .exemple-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+    
+    .btn-exemplu {
+        padding: 10px 12px;
+        font-size: 0.85rem;
+    }
+    
+    .sortare-rapida {
+        margin-top: 25px; /* Spațiu redus pe mobile pentru sortarea rapidă */
+    }
+    
+    .sortare-rapida-btns {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .sortare-rapida-btns .btn {
+        width: 100%;
+        min-width: auto;
+    }
+    
+    .sortare-exemple, .sortare-rapida {
+        padding: 15px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sortare-rapida {
+        margin-top: 20px; /* Spațiu foarte redus pe mobile mic pentru sortarea rapidă */
+    }
+    
+    .sortare-exemple h4, .sortare-rapida h4 {
+        font-size: 1rem;
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+    
+    .btn-exemplu {
+        padding: 8px 10px;
+        font-size: 0.8rem;
+        flex-direction: column;
+        gap: 4px;
+    }
+    
+    .exemple-grid {
+        gap: 8px;
+    }
+}
