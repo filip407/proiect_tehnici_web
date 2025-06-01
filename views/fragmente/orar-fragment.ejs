@@ -1,0 +1,43 @@
+<div id="orar-overlay" class="orar-overlay" style="display: none;">
+    <div class="orar-container">
+        <div class="orar-header">
+            <h3>
+                <i class="fas fa-clock"></i>
+                Program de funcționare Elite Kits
+            </h3>
+            <button class="orar-close" onclick="inchideOrar()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <div class="orar-content">
+            <table class="tabel-orar">
+                <thead>
+                    <tr>
+                        <th>Ziua</th>
+                        <th>Program</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody id="tabel-orar-corp">
+                    <!-- Orarul va fi generat dinamic prin JavaScript -->
+                </tbody>
+            </table>
+            
+            <div class="status-curent">
+                <div id="status-magazin" class="status-indicator">
+                    <i id="status-icon" class="fas fa-clock"></i>
+                    <span id="status-text">Se verifică statusul...</span>
+                </div>
+                <div class="ora-curenta">
+                    <i class="fas fa-calendar-day"></i>
+                    <span id="ora-curenta-text"></span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="orar-footer">
+            <p><i class="fas fa-info-circle"></i> Orarul se actualizează automat în funcție de ziua și ora curentă</p>
+        </div>
+    </div>
+</div>

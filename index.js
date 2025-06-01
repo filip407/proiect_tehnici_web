@@ -444,6 +444,17 @@ app.use("/resurse", function(req, res, next) {
     next();
 }, express.static(path.join(__dirname, "resurse")));
 
+app.get('/resurse/json/orar.json', function(req, res) {
+    try {
+        const caleOrar = path.join(__dirname, "resurse/json/orar.json");
+        res.setHeader('Content-Type', 'application/json');
+        res.sendFile(caleOrar);
+    } catch (err) {
+        console.error("Eroare la servirea fișierului orar.json:", err);
+        res.status(500).json({ error: "Nu s-a putut încărca orarul" });
+    }
+});
+
 app.get("/favicon.ico", function(req, res) {
     res.sendFile(path.join(__dirname, "resurse/imagini/favicon.ico"));
 });

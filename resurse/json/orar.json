@@ -1,0 +1,46 @@
+{
+  "orar": [
+    {
+      "zi": "Luni",
+      "ore_deschidere": "09:00",
+      "ore_inchidere": "18:00",
+      "deschis": true
+    },
+    {
+      "zi": "Marți",
+      "ore_deschidere": "09:00",
+      "ore_inchidere": "18:00",
+      "deschis": true
+    },
+    {
+      "zi": "Miercuri",
+      "ore_deschidere": "09:00",
+      "ore_inchidere": "18:00",
+      "deschis": true
+    },
+    {
+      "zi": "Joi",
+      "ore_deschidere": "09:00",
+      "ore_inchidere": "18:00",
+      "deschis": true
+    },
+    {
+      "zi": "Vineri",
+      "ore_deschidere": "09:00",
+      "ore_inchidere": "20:00",
+      "deschis": true
+    },
+    {
+      "zi": "Sâmbătă",
+      "ore_deschidere": "10:00",
+      "ore_inchidere": "16:00",
+      "deschis": true
+    },
+    {
+      "zi": "Duminică",
+      "ore_deschidere": "00:00",
+      "ore_inchidere": "00:00",
+      "deschis": false
+    }
+  ]
+}
