@@ -1,3 +1,5 @@
+/* ETAPA 3: Meniu responsive pentru ecrane mici */
+
 document.addEventListener('DOMContentLoaded', function() {
     const BREAKPOINT_MOBILE = 768;
     
@@ -5,15 +7,16 @@ document.addEventListener('DOMContentLoaded', function() {
     const desktopMenu = document.querySelector('nav > ul');
     
     const mainCategories = {
-        "Acasă": false,
+        "Acasa": false,
         "Catalog": true,
-        "Promoții": true, 
+        "Promotii": true, 
         "Contul de utilizator": true,
         "Resurse": true,
         "Contact": true,
-        "Coș de cumpărături": true
+        "Cos de cumparaturi": true
     };
     
+    // Creaza structura completa a meniului mobil
     function createMobileMenu() {
         createHamburgerButton();
         createMobileMenuContainer();
@@ -22,6 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
         hideSubcategoriesFromMainMenu();
     }
     
+    // ETAPA 3, Bonus: Icon-ul hamburger creat cu 3 divuri
     function createHamburgerButton() {
         const hamburgerButton = document.createElement('div');
         hamburgerButton.className = 'hamburger-menu';
@@ -29,6 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         header.insertBefore(hamburgerButton, header.firstChild);
     }
     
+    // Creaza containerul meniului mobil cu iconul home
     function createMobileMenuContainer() {
         const mobileMenu = document.createElement('div');
         mobileMenu.className = 'mobile-menu';
@@ -47,6 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         document.body.appendChild(mobileMenu);
     }
     
+    // Populeaza meniul mobil cu elemente din meniul desktop
     function populateMobileMenu(mobileMenuList) {
         if (!desktopMenu) return;
         
@@ -74,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Adauga submeniu daca exista
     function addSubmenuIfExists(originalItem, newItem) {
         const submenu = originalItem.querySelector('ul');
         if (!submenu) return;
@@ -98,12 +105,14 @@ document.addEventListener('DOMContentLoaded', function() {
         newItem.appendChild(newSubmenu);
     }
     
+    // Creaza overlay-ul pentru inchiderea meniului
     function createOverlay() {
         const overlay = document.createElement('div');
         overlay.className = 'mobile-menu-overlay';
         document.body.appendChild(overlay);
     }
     
+    // Configureaza event listeners pentru meniul mobil
     function setupEventListeners() {
         const hamburgerButton = document.querySelector('.hamburger-menu');
         const mobileMenu = document.querySelector('.mobile-menu');
@@ -132,6 +141,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // Ascunde subcategoriile din meniul principal
     function hideSubcategoriesFromMainMenu() {
         if (!desktopMenu) return;
         
@@ -154,6 +164,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // ETAPA 3, Bonus: Animatia hamburger cu schimbarea culorilor si transformari
     function addHamburgerAnimation() {
         if (window.innerWidth <= BREAKPOINT_MOBILE) {
             const hamburgerMenu = document.querySelector('.hamburger-menu');

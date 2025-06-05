@@ -1,6 +1,9 @@
+/* ETAPA 6, Bonus 20: Sistem de comparare produse cu container persistent */
+
 let produseComparare = [];
 let tooltipElement = null;
 
+// Verifica daca suntem pe o pagina cu produse
 function estePaginaProduse() {
     return window.location.pathname.includes('/produse') || 
            window.location.pathname.includes('/produs/') ||
@@ -8,10 +11,12 @@ function estePaginaProduse() {
            document.querySelector('.produs') !== null;
 }
 
+// Actualizeaza timestamp-ul ultimei activitati de comparare
 function actualizeazaUltimaActivitate() {
     localStorage.setItem('ultimaActivitateComparare', Date.now().toString());
 }
 
+// Verifica daca containerul de comparare a expirat (o zi)
 function verificaExpirareComparator() {
     const ultimaActivitate = localStorage.getItem('ultimaActivitateComparare');
     if (!ultimaActivitate) return true;
@@ -23,6 +28,7 @@ function verificaExpirareComparator() {
     return (acum - ultimaActivitateTime) > unaZi;
 }
 
+// Incarca lista de produse pentru comparare din localStorage
 function incarcaListaComparare() {
     if (verificaExpirareComparator()) {
         localStorage.removeItem('produseComparare');
@@ -34,11 +40,13 @@ function incarcaListaComparare() {
     return lista ? JSON.parse(lista) : [];
 }
 
+// Salveaza lista de produse pentru comparare
 function salveazaListaComparare() {
     localStorage.setItem('produseComparare', JSON.stringify(produseComparare));
     actualizeazaUltimaActivitate();
 }
 
+// Creaza containerul fix pentru compararea produselor
 function creeazaContainerComparare() {
     if (document.getElementById('container-comparare')) return;
     
@@ -55,6 +63,7 @@ function creeazaContainerComparare() {
     return container;
 }
 
+// Actualizeaza continutul containerului de comparare
 function actualizeazaContainerComparare() {
     const container = document.getElementById('container-comparare');
     const listaDiv = document.getElementById('lista-produse-comparare');
@@ -88,7 +97,7 @@ function actualizeazaContainerComparare() {
     if (produseComparare.length === 2) {
         html += `
             <button class="btn-afiseaza-comparare" onclick="afiseazaComparare()">
-                <i class="fas fa-eye"></i> Afișează compararea
+                <i class="fas fa-eye"></i> Afiseaza compararea
             </button>
         `;
     }
@@ -97,6 +106,7 @@ function actualizeazaContainerComparare() {
     actualizeazaStareButoane();
 }
 
+// Sterge un produs din lista de comparare
 function stergeProdusComparare(index) {
     produseComparare.splice(index, 1);
     salveazaListaComparare();
@@ -104,6 +114,7 @@ function stergeProdusComparare(index) {
     actualizeazaUltimaActivitate();
 }
 
+// Actualizeaza starea butoanelor de comparare (activeaza/dezactiveaza)
 function actualizeazaStareButoane() {
     const butoane = document.querySelectorAll('.btn-compara');
     
@@ -122,6 +133,7 @@ function actualizeazaStareButoane() {
     });
 }
 
+// Afiseaza tooltip pentru butoanele dezactivate
 function afiseazaTooltip(event) {
     if (!event.target.disabled) return;
     
@@ -129,7 +141,7 @@ function afiseazaTooltip(event) {
     
     tooltipElement = document.createElement('div');
     tooltipElement.className = 'tooltip show';
-    tooltipElement.textContent = 'Ștergeți un produs din lista de comparare';
+    tooltipElement.textContent = 'Stergeti un produs din lista de comparare';
     
     document.body.appendChild(tooltipElement);
     
@@ -146,6 +158,7 @@ function afiseazaTooltip(event) {
     }
 }
 
+// Ascunde tooltip-ul
 function ascundeTooltip() {
     if (tooltipElement) {
         tooltipElement.remove();
@@ -153,20 +166,21 @@ function ascundeTooltip() {
     }
 }
 
+// Adauga un produs in lista de comparare
 function adaugaProdusComparare(produsId) {
     const produs = window.produse ? window.produse.find(p => p.id === parseInt(produsId)) : null;
     if (!produs) {
-        console.error('Produsul nu a fost găsit:', produsId);
+        console.error('Produsul nu a fost gasit:', produsId);
         return;
     }
     
     if (produseComparare.some(p => p.id === produs.id)) {
-        alert('Acest produs este deja în lista de comparare!');
+        alert('Acest produs este deja in lista de comparare!');
         return;
     }
     
     if (produseComparare.length >= 2) {
-        alert('Puteți compara maximum 2 produse! Ștergeți un produs din listă pentru a adăuga altul.');
+        alert('Puteti compara maximum 2 produse! Stergeti un produs din lista pentru a adauga altul.');
         return;
     }
     
@@ -178,7 +192,7 @@ function adaugaProdusComparare(produsId) {
     const butonCompara = document.querySelector(`[data-produs-id="${produsId}"]`);
     if (butonCompara) {
         const textOriginal = butonCompara.innerHTML;
-        butonCompara.innerHTML = '<i class="fas fa-check"></i> Adăugat!';
+        butonCompara.innerHTML = '<i class="fas fa-check"></i> Adaugat!';
         butonCompara.style.background = '#28a745';
         
         setTimeout(() => {
@@ -188,9 +202,10 @@ function adaugaProdusComparare(produsId) {
     }
 }
 
+// Afiseaza fereastra de comparare in popup nou
 function afiseazaComparare() {
     if (produseComparare.length !== 2) {
-        alert('Trebuie să selectați exact 2 produse pentru comparare!');
+        alert('Trebuie sa selectati exact 2 produse pentru comparare!');
         return;
     }
     
@@ -202,12 +217,13 @@ function afiseazaComparare() {
         'width=1200,height=800,scrollbars=yes,resizable=yes,status=yes,toolbar=no,menubar=no');
     
     if (!fereastraComparare) {
-        alert('Popup-ul a fost blocat! Vă rugăm să permiteți popup-urile pentru acest site.');
+        alert('Popup-ul a fost blocat! Va rugam sa permiteti popup-urile pentru acest site.');
     }
     
     actualizeazaUltimaActivitate();
 }
 
+// Adauga butoane de comparare pe toate produsele
 function adaugaButoaneDComparare() {
     const produseCards = document.querySelectorAll('.produs');
     produseCards.forEach(card => {
@@ -221,7 +237,7 @@ function adaugaButoaneDComparare() {
         const butonCompara = document.createElement('button');
         butonCompara.className = 'btn-compara';
         butonCompara.setAttribute('data-produs-id', produsId);
-        butonCompara.innerHTML = '<i class="fas fa-balance-scale"></i> Compară';
+        butonCompara.innerHTML = '<i class="fas fa-balance-scale"></i> Compara';
         
         butonCompara.addEventListener('click', function(e) {
             e.preventDefault();
@@ -235,6 +251,7 @@ function adaugaButoaneDComparare() {
         }
     });
     
+    // Adauga buton si pe pagina individuala a produsului
     const paginaProdusuluiContainer = document.querySelector('.produs-individual, .detalii-produs, .produs-container');
     if (paginaProdusuluiContainer && window.location.pathname.includes('/produs/')) {
         if (paginaProdusuluiContainer.querySelector('.btn-compara')) return;
@@ -246,7 +263,7 @@ function adaugaButoaneDComparare() {
             const butonCompara = document.createElement('button');
             butonCompara.className = 'btn-compara';
             butonCompara.setAttribute('data-produs-id', produsId);
-            butonCompara.innerHTML = '<i class="fas fa-balance-scale"></i> Compară acest produs';
+            butonCompara.innerHTML = '<i class="fas fa-balance-scale"></i> Compara acest produs';
             
             butonCompara.addEventListener('click', function(e) {
                 e.preventDefault();
@@ -263,6 +280,7 @@ function adaugaButoaneDComparare() {
     }
 }
 
+// Initializeaza sistemul de comparare produse
 function initializeazaComparator() {
     if (!estePaginaProduse()) {
         return;
@@ -279,6 +297,7 @@ function initializeazaComparator() {
         actualizeazaStareButoane();
     }, 100);
     
+    // Observer pentru produse adaugate dinamic
     const observer = new MutationObserver(function(mutations) {
         mutations.forEach(function(mutation) {
             if (mutation.type === 'childList') {

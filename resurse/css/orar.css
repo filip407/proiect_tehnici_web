@@ -1,4 +1,6 @@
-/* Overlay pentru orar */
+/* BONUS ETAPA 6 - Bonus 19: Orarul sa poata fi vizualizat pe orice pagina */
+
+/* Overlay principal pentru orar */
 .orar-overlay {
     position: fixed;
     top: 0;
@@ -15,7 +17,7 @@
 }
 
 .orar-container {
-    background: var(--bg-body, #ffffff);
+    background: var(--bg-body, var(--culoare-deschis));
     border-radius: 12px;
     max-width: 600px;
     width: 90%;
@@ -23,12 +25,12 @@
     overflow-y: auto;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
     animation: slideIn 0.3s ease-out;
-    border: 2px solid var(--culoare-primara, #076104);
+    border: 2px solid var(--culoare-primara);
 }
 
 .orar-header {
-    background: var(--culoare-primara, #076104);
-    color: white;
+    background: var(--culoare-primara);
+    color: var(--culoare-deschis);
     padding: 20px;
     border-radius: 10px 10px 0 0;
     display: flex;
@@ -38,14 +40,14 @@
 
 .orar-header h3 {
     margin: 0;
-    color: white;
+    color: var(--culoare-deschis);
     font-size: 1.4rem;
 }
 
 .orar-close {
     background: transparent;
     border: none;
-    color: white;
+    color: var(--culoare-deschis);
     font-size: 1.5rem;
     cursor: pointer;
     padding: 5px;
@@ -66,14 +68,14 @@
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 25px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 8px var(--culoare-umbra);
     border-radius: 8px;
     overflow: hidden;
 }
 
 .tabel-orar th {
-    background: var(--culoare-secundara, #80C135);
-    color: white;
+    background: var(--culoare-secundara);
+    color: var(--culoare-deschis);
     padding: 15px;
     text-align: center;
     font-weight: 600;
@@ -83,28 +85,28 @@
 .tabel-orar td {
     padding: 12px 15px;
     text-align: center;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--culoare-deschis);
     transition: background-color 0.3s ease;
 }
 
 .tabel-orar tr:hover td {
-    background-color: var(--culoare-deschis2, #E7FCE4);
+    background-color: var(--culoare-deschis2);
 }
 
-/* Ziua curentă */
+/* Ziua curenta */
 .tabel-orar tr.zi-curenta td {
-    background-color: var(--culoare-accent2, #400080);
-    color: white;
+    background-color: var(--culoare-accent2);
+    color: var(--culoare-deschis);
     font-weight: bold;
 }
 
 .tabel-orar tr.zi-curenta:hover td {
-    background-color: var(--culoare-accent3, #932ec9);
+    background-color: var(--culoare-accent3);
 }
 
-/* Status deschis/închis */
+/* Status deschis/inchis */
 .status-deschis {
-    color: var(--culoare-primara, #076104);
+    color: var(--culoare-primara);
     font-weight: bold;
 }
 
@@ -113,7 +115,7 @@
 }
 
 .status-inchis {
-    color: var(--culoare-accent, #F20505);
+    color: var(--culoare-accent);
     font-weight: bold;
 }
 
@@ -123,11 +125,11 @@
 
 /* Status curent al magazinului */
 .status-curent {
-    background: var(--culoare-deschis, #F2F2F2);
+    background: var(--culoare-deschis);
     border-radius: 8px;
     padding: 20px;
     text-align: center;
-    border-left: 4px solid var(--culoare-primara, #076104);
+    border-left: 4px solid var(--culoare-primara);
 }
 
 .status-indicator {
@@ -136,20 +138,20 @@
 }
 
 .status-indicator.deschis {
-    color: var(--culoare-primara, #076104);
+    color: var(--culoare-primara);
 }
 
 .status-indicator.inchis {
-    color: var(--culoare-accent, #F20505);
+    color: var(--culoare-accent);
 }
 
 .ora-curenta {
-    color: var(--culoare-text-primar, #0D0D0D);
+    color: var(--culoare-text-primar);
     font-weight: 500;
 }
 
 .orar-footer {
-    background: var(--culoare-deschis, #F2F2F2);
+    background: var(--culoare-deschis);
     padding: 15px 25px;
     border-radius: 0 0 10px 10px;
     text-align: center;
@@ -157,10 +159,10 @@
     font-size: 0.9rem;
 }
 
-/* Butonul pentru afișarea orarului */
+/* Butonul pentru afisarea orarului */
 .btn-orar {
-    background: var(--culoare-secundara, #80C135);
-    color: white;
+    background: var(--culoare-secundara);
+    color: var(--culoare-deschis);
     border: none;
     padding: 12px 20px;
     border-radius: 25px;
@@ -170,16 +172,16 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 2px 10px var(--culoare-umbra);
 }
 
 .btn-orar:hover {
-    background: var(--culoare-primara, #076104);
+    background: var(--culoare-primara);
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Animații */
+/* Animatii */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -211,7 +213,7 @@
     }
 }
 
-/* Responsive */
+/* Responsive design */
 @media screen and (max-width: 768px) {
     .orar-container {
         width: 95%;
@@ -262,4 +264,3 @@
         font-size: 1.1rem;
     }
 }
-

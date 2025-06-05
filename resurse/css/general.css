@@ -1,3 +1,4 @@
+/* ETAPA 2 - Task design rudimentar: Variabile CSS pentru schema cromatica si spatiere */
 :root {
   --culoare-primara: #076104;   
   --culoare-secundara: #80C135;   
@@ -28,14 +29,14 @@
   --padare-continut: 20px;
 }
 
-/* Dimensiuni text responsive cu tranzitie */
-
+/* ETAPA 2 - Task iconuri si font extern: Font extern Google API */
 html {
   font-size: 16px;
   transition: font-size 0.3s ease;
   scroll-behavior: smooth;
 }
 
+/* ETAPA 1 - Task 11: Taguri h pentru structura pagini */
 h1 {
   font-family: "Anton", sans-serif;
   font-weight: 400;
@@ -69,8 +70,7 @@ h4{
   font-size: 1.25rem;
 }
 
-/* Stilizare pentru toate linkurile din site */
-
+/* ETAPA 1 - Task 11: Stilizare linkuri speciale */
 a {
   color: var(--culoare-text-primar);
   text-decoration: none;
@@ -102,6 +102,7 @@ main a:not(nav a):not(.taburi a):active {
   padding: 0 2px;
 }
 
+/* ETAPA 1 - Task 11a: Link extern cu indicator vizual */
 main a[href^="http"]:not(nav a):not(.taburi a):not(header a):not(footer a):not(#mobile-menu a):not(.mobile-nav a)::before {
   content: "⮳";
   font-size: 1.5em;
@@ -115,6 +116,7 @@ main a[href^="http"]:not(nav a):not(.taburi a):not(header a):not(footer a):not(#
   color: var(--culoare-text-primar);
 }
 
+/* ETAPA 1 - Task 11d: Link de tip download */
 main a[download]:not(nav a):not(.taburi a):not(header a):not(footer a):not(#mobile-menu a):not(.mobile-nav a)::before {
   content: "⮳";
   font-size: 1.5em;
@@ -144,8 +146,7 @@ nav a, .taburi a, header a, footer a, #mobile-menu a, .mobile-nav a {
   user-select: none !important;
 }
 
-/*Stilizare harta imagini*/
-
+/* BONUS ETAPA 1 - Crearea unei harti de imagini */
 #harta-imagini {
   width: 100%;
   min-width: 200px;
@@ -157,8 +158,7 @@ nav a, .taburi a, header a, footer a, #mobile-menu a, .mobile-nav a {
   margin-right: auto;
 }
 
-/* Stilizare body */
-
+/* ETAPA 2 - Task design rudimentar: Stilizare body cu spatiere */
 body {
   font-family: "Oswald", sans-serif;
   font-optical-sizing: auto;
@@ -168,12 +168,11 @@ body {
   transition: font-size 0.3s ease, background-color 0.3s ease, color 0.3s ease;
   padding-left: var(--padare-pagina-mare);
   padding-right: var(--padare-pagina-mare);
-  background-color: var(--bg-body, #ffffff);
+  background-color: var(--bg-body, var(--culoare-deschis));
   color: var(--text-body, var(--culoare-text-primar));
 }
 
-/* Stilizare Header */
-
+/* ETAPA 1 - Task 4: Impartirea body-ului in header, main, footer */
 header {
   background: var(--bg-header, var(--culoare-primara));
   color: var(--culoare-primara);
@@ -187,8 +186,6 @@ header {
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Stilizare Footer */
-
 footer {
   background: var(--bg-footer, var(--culoare-secundara));
   color: var(--culoare-deschis);
@@ -199,7 +196,7 @@ footer {
   transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Stilizare link de navigare la inceput */
+/* ETAPA 2 - Task link top: Link de navigare la inceput */
 #link-top {
   position: fixed;
   bottom: 0.3em;
@@ -239,8 +236,7 @@ footer {
   transform: scale(1.2);
 }
 
-/* Stilizare tabel */
-
+/* ETAPA 2 - Task tabel: Stilizare tabel responsiv cu valori alternate */
 .tabel-marimi {
   max-width: 100%;
   overflow-x: auto;
@@ -279,7 +275,6 @@ footer {
   font-weight: bold;
 }
 
-/* Coloane cu background alternant */
 #stilizare-tabel tr td:nth-child(odd) {
   background-color: var(--bg-zone, var(--culoare-deschis));
 }
@@ -288,24 +283,20 @@ footer {
   background-color: var(--bg-zone-special, var(--culoare-deschis2));
 }
 
-/* Hover pe rand cu tranzitie */
 #stilizare-tabel tbody tr td {
   transition: background-color 0.3s ease;
 }
 
-/* Cand dam hover pe rand, toate celulele din rand isi schimba culoarea */
 #stilizare-tabel tbody tr:hover td {
   background-color: var(--culoare-secundara);
 }
 
-/* Celula specifica pe care este cursorul primeste o culoare diferita */
 #stilizare-tabel tbody tr:hover td:hover {
   background-color: var(--culoare-primara);
   color: var(--culoare-hover-text);
 }
 
-/* Stilizare taburi video */
-
+/* ETAPA 2 - Task stilizare-taburi: Stilizare taburi pentru iframe */
 #stilizare-taburi {
   position: relative;
   width: 100%;
@@ -382,8 +373,7 @@ footer {
   box-shadow: 5px 5px 15px var(--shadow-color, var(--culoare-umbra)) !important;
 }
 
-/* Stilizare grid */
-
+/* ETAPA 2 - Task layout: Grid responsive cu zone definite */
 #layout-responsive {
   display: grid;
   grid-template-areas:
@@ -427,7 +417,7 @@ footer {
   transition: background-color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Z-pattern pentru zona 1 */
+/* ETAPA 2 - Task design rudimentar: Z-pattern pentru zona 1 */
 .z-pattern {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -442,8 +432,7 @@ footer {
 .z-bottom-left { grid-area: z-bottom-left; }
 .z-bottom-right { grid-area: z-bottom-right; }
 
-/* Elemente media responsive */
-
+/* ETAPA 1 - Task 8: Elemente media responsive */
 video {
   width: 100%;
   min-width: 200px;
@@ -456,8 +445,7 @@ iframe {
   height: 400px;
 }
 
-/* Stilizare iconite */
-
+/* ETAPA 2 - Task iconuri si font extern: Iconuri Font Awesome */
 .fa-shirt{
   font-size: 70px;
   color: var(--culoare-deschis);
@@ -469,8 +457,6 @@ iframe {
   font-size: 40px;
   margin-right: 10px;
 }
-
-/* Animatie */
 
 .fa-spin-custom {
   animation: fa-spin 4s infinite linear;
@@ -485,8 +471,7 @@ iframe {
   }
 }
 
-/* Stilizare formula */
-
+/* BONUS ETAPA 1 - Folosirea unei formule scrise in MathML */
 math {
   background-color: var(--bg-zone-special, var(--culoare-deschis2));
   padding: var(--padare-continut);
@@ -536,7 +521,7 @@ math mfrac mn, math mn {
   color: var(--culoare-accent);
 }
 
-/* Stilizare videoclip */
+/* ETAPA 4 - Task video: Stilizare videoclip */
 .video-container {
   position: relative;
   margin: 20px 0;
@@ -560,10 +545,9 @@ math mfrac mn, math mn {
   font-style: italic;
 }
 
-/* Stilizarea subtitrarilor VTT */
 ::cue {
   background-color: var(--culoare-inchis2);
-  color: #5f02a8;
+  color: var(--culoare-accent2);
   font-family: Arial, sans-serif;
   font-size: 1em;
   padding: 4px 8px;
@@ -574,21 +558,20 @@ math mfrac mn, math mn {
   text-decoration: underline;
 }
 
-/* Stilizarea pentru subtitlul din coltul din dreapta sus */
 video::cue(.top-right) {
   position: absolute;
   top: 20px;
   right: 20px;
 }
 
-/* Responsive pentru ecran mare */
+/* Responsive design pentru ecrane mari */
 @media screen and (min-width: 1200px) {
   html {
       font-size: 18px;
   }
 }
 
-/* Responsive pentru ecran mediu */
+/* Responsive design pentru ecran mediu */
 @media screen and (max-width: 1024px) {
   #layout-responsive {
       grid-template-areas:
@@ -605,7 +588,7 @@ video::cue(.top-right) {
   }
 }
 
-/* Responsive pentru ecran mic */
+/* Responsive design pentru ecran mic */
 @media screen and (max-width: 768px) {
   #video-tricou {
     min-width: 250px;
@@ -665,7 +648,7 @@ video::cue(.top-right) {
   }
 }
 
-/* Ajustari pentru ecrane foarte mici */
+/* Responsive design pentru ecrane foarte mici */
 @media screen and (max-width: 480px) {
   body {
       padding-left: var(--padare-pagina-mica);

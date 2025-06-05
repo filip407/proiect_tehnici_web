@@ -1,4 +1,6 @@
+/* ETAPA 3: Stil printare - Configurare generala pentru print */
 @media print {
+  /* ETAPA 3: Banner proiect scolar pentru print */
   #banner {
     position: fixed;
     top: 0;
@@ -11,13 +13,17 @@
     box-sizing: border-box;
   }
 
+  /* ETAPA 3: Ascunderea elementelor multimedia si interactive */
   img, video, iframe, embed,
-  figure, figcaption, .taburi, a.taburi, .image-description, .media-caption, .fa-shirt, .fa-soccer-ball,
-  a[href="#top"], #stilizare-tabel, a.sageata, #link-top, .link-top, .top, #sageata, 
-  .tabel-marimi, .formula, #harta-imagini, map, embed, #stilizare-taburi, #ghid-marimi, #ingrijire, footer iframe, footer embed{
+  figure, figcaption, .taburi, a.taburi, .image-description, .media-caption, 
+  .fa-shirt, .fa-soccer-ball, a[href="#top"], #stilizare-tabel, a.sageata, 
+  #link-top, .link-top, .top, #sageata, .tabel-marimi, .formula, 
+  #harta-imagini, map, embed, #stilizare-taburi, #ghid-marimi, #ingrijire, 
+  footer iframe, footer embed {
     display: none !important;
   }
 
+  /* ETAPA 3: Resetarea marginilor si paddingurilor pentru print */
   body, html {
     margin: 0 !important;
     padding: 0 !important;
@@ -28,7 +34,9 @@
     margin-bottom: 0 !important;
   }
 
-  section, div, p, article, aside, header, footer, main, .zona1, .zona2, .zona3, .zona4, .zona5, .zona6, .zona7, .zona8, .zona9 {
+  /* ETAPA 3: Normalizarea spatierilor pentru toate elementele */
+  section, div, p, article, aside, header, footer, main, 
+  .zona1, .zona2, .zona3, .zona4, .zona5, .zona6, .zona7, .zona8, .zona9 {
     margin-top: 2px !important;
     margin-bottom: 2px !important;
     padding-top: 2px !important;
@@ -37,6 +45,7 @@
     height: auto !important;
   }
  
+  /* ETAPA 3: Stilizarea navigarii pentru print */
   nav {
     display: block !important;
     position: static !important;
@@ -48,6 +57,7 @@
     border: none !important;
   }
 
+  /* ETAPA 3: Eliminarea backgroundurilor pentru print */
   nav *, header *, footer *:not(#banner) {
     background: transparent !important;
     background-color: transparent !important;
@@ -62,6 +72,7 @@
     box-shadow: none !important;
   }
 
+  /* ETAPA 3: Ascunderea elementelor goale */
   section:empty, div:empty, p:empty, *:empty {
     display: none !important;
     height: 0 !important;
@@ -69,6 +80,7 @@
     padding: 0 !important;
   }
 
+  /* ETAPA 3: Prevenirea ruperii paginii in elemente */
   h1, h2, h3, h4, h5, h6, p, ul, ol, li, table, tr, section {
     page-break-inside: avoid !important;
     break-inside: avoid !important;
@@ -79,11 +91,13 @@
     page-break-before: auto !important;
   }
 
+  /* ETAPA 3: Eliminarea contentului generat */
   nav::after, footer::before {
     content: none !important;
     display: none !important;
   }
 
+  /* ETAPA 3: Layout pentru print */
   main {
     padding: 0 !important;
     margin: 0 !important;
@@ -93,7 +107,8 @@
   .layout-responsive,
   main > div,
   main > section,
-  .zona1, .zona2, .zona3, .zona4, .zona5, .zona6, .zona7, .zona8, .zona9, section, div, article {
+  .zona1, .zona2, .zona3, .zona4, .zona5, .zona6, .zona7, .zona8, .zona9, 
+  section, div, article {
     display: block !important;
     float: none !important;
     width: 100% !important;
@@ -109,6 +124,7 @@
     background: transparent !important;
   }
 
+  /* ETAPA 3: Stilizarea elementelor inline */
   span, strong, em, b, i, a, small {
     display: inline !important;
     background: transparent !important;
@@ -120,6 +136,7 @@
     background: transparent !important;
   }
 
+  /* ETAPA 3: Stilizarea headingurilor pentru print */
   h1 {
     text-align: center !important;
     page-break-before: auto;
@@ -134,6 +151,7 @@
     background: transparent !important;
   }
 
+  /* ETAPA 3: Stilizarea navigarii ca lista pentru print */
   nav, nav *, nav ul, nav ul li, nav ul li a, 
   nav ul li ul, nav ul li ul li, nav ul li ul li a {
     font-family: "Anton", sans-serif;
@@ -204,12 +222,17 @@
     background: transparent !important;
   }
 
-  [style*="background"]:not(#banner), [class*="bg-"]:not(#banner), .bg:not(#banner), .background:not(#banner) {
+  /* ETAPA 3: Eliminarea backgroundurilor cu clase specifice */
+  [style*="background"]:not(#banner), 
+  [class*="bg-"]:not(#banner), 
+  .bg:not(#banner), 
+  .background:not(#banner) {
     background: transparent !important;
     background-image: none !important;
     background-color: transparent !important;
   }
 
+  /* ETAPA 3: Watermark cu numele studentului */
   body::after {
     content: "Dumitriu\A Filip";
     white-space: pre;
@@ -227,6 +250,7 @@
     pointer-events: none;
   }
 
+  /* ETAPA 3: Configurarea paginii pentru print */
   @page:left {
     margin-left: 2cm;
     margin-right: 1cm;

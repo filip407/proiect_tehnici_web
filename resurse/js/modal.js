@@ -1,3 +1,6 @@
+/* ETAPA 6, Bonus 11: Modal box pentru afisarea detaliilor produsului */
+
+// Creaza structura modalului pentru afisarea detaliilor produsului
 function creeazaModal() {
     const modalOverlay = document.createElement('div');
     modalOverlay.className = 'modal-overlay';
@@ -27,7 +30,7 @@ function creeazaModal() {
                         </table>
                         <div class="modal-descriere">
                             <h4><i class="fas fa-info-circle"></i> Descriere</h4>
-                            <p id="modal-descriere-text">Descrierea produsului va fi afișată aici...</p>
+                            <p id="modal-descriere-text">Descrierea produsului va fi afisata aici...</p>
                         </div>
                         <div class="modal-caracteristici" id="modal-caracteristici-container">
                             <h4><i class="fas fa-star"></i> Caracteristici</h4>
@@ -43,11 +46,12 @@ function creeazaModal() {
     return modalOverlay;
 }
 
+// Populeaza modalul cu datele produsului selectat
 async function populeazaModal(produsId) {
     const produse = window.produse || [];
     const produs = produse.find(p => p.id === parseInt(produsId));
     if (!produs) {
-        console.error('Produsul nu a fost găsit:', produsId);
+        console.error('Produsul nu a fost gasit:', produsId);
         return;
     }
     
@@ -67,6 +71,7 @@ async function populeazaModal(produsId) {
         modalBadges.innerHTML += '<span class="badge badge-kids"><i class="fas fa-child"></i> Pentru Copii</span>';
     }
     
+    // ETAPA 6, Bonus 14: Marcarea celui mai ieftin produs din fiecare categorie
     if (typeof determinaCelMaiIeftinPeCategorie === 'function') {
         const celeMaiIeftineIds = determinaCelMaiIeftinPeCategorie(produse);
         if (produs.esteCelMaiIeftin || celeMaiIeftineIds.includes(produs.id)) {
@@ -77,7 +82,7 @@ async function populeazaModal(produsId) {
     const modalTabel = document.getElementById('modal-tabel');
     modalTabel.innerHTML = `
         <tr>
-            <td><strong><i class="fas fa-euro-sign"></i> Preț:</strong></td>
+            <td><strong><i class="fas fa-euro-sign"></i> Pret:</strong></td>
             <td class="val-pret">${produs.pret.toFixed(2)} RON</td>
         </tr>
         <tr>
@@ -97,7 +102,7 @@ async function populeazaModal(produsId) {
             <td>${produs.categorie}</td>
         </tr>
         <tr>
-            <td><strong><i class="fas fa-tshirt"></i> Tip echipă:</strong></td>
+            <td><strong><i class="fas fa-tshirt"></i> Tip echipa:</strong></td>
             <td>${produs.tip_echipa ? produs.tip_echipa.charAt(0).toUpperCase() + produs.tip_echipa.slice(1) : 'N/A'}</td>
         </tr>
         <tr>
@@ -106,26 +111,26 @@ async function populeazaModal(produsId) {
         </tr>
         ${produs.jucator ? `
         <tr>
-            <td><strong><i class="fas fa-user"></i> Jucător:</strong></td>
+            <td><strong><i class="fas fa-user"></i> Jucator:</strong></td>
             <td>${produs.jucator}</td>
         </tr>
         ` : ''}
         ${produs.numar_tricou ? `
         <tr>
-            <td><strong><i class="fas fa-hashtag"></i> Numărul tricou:</strong></td>
+            <td><strong><i class="fas fa-hashtag"></i> Numarul tricou:</strong></td>
             <td>${produs.numar_tricou}</td>
         </tr>
         ` : ''}
         ${produs.tara ? `
         <tr>
-            <td><strong><i class="fas fa-flag"></i> Țara:</strong></td>
+            <td><strong><i class="fas fa-flag"></i> Tara:</strong></td>
             <td>${produs.tara}</td>
         </tr>
         ` : ''}
     `;
     
     document.getElementById('modal-descriere-text').textContent = 
-        produs.descriere || 'Tricou de fotbal de calitate premium din colecția Elite Kits.';
+        produs.descriere || 'Tricou de fotbal de calitate premium din colectia Elite Kits.';
     
     const caracteristiciContainer = document.getElementById('modal-caracteristici-container');
     const caracteristiciLista = document.getElementById('modal-caracteristici-lista');
@@ -146,7 +151,7 @@ async function populeazaModal(produsId) {
         const dataFormatata = formatareDataRomana(dataAdaugare);
         modalTabel.innerHTML += `
             <tr>
-                <td><strong><i class="fas fa-plus-circle"></i> Data adăugare:</strong></td>
+                <td><strong><i class="fas fa-plus-circle"></i> Data adaugare:</strong></td>
                 <td>${dataFormatata}</td>
             </tr>
         `;
@@ -157,6 +162,7 @@ async function populeazaModal(produsId) {
     };
 }
 
+// Afiseaza modalul cu informatiile produsului
 function deschideModal(produsId) {
     let modal = document.getElementById('modal-produs');
     
@@ -198,6 +204,7 @@ function deschideModal(produsId) {
     document.body.style.overflow = 'hidden';
 }
 
+// Inchide modalul
 function inchideModal() {
     const modal = document.getElementById('modal-produs');
     if (modal) {
@@ -211,6 +218,7 @@ function inchideModal() {
     }
 }
 
+// Ataseaza event listeners pentru deschiderea modalului la click pe produs
 function atasaEventListenersModal() {
     document.addEventListener('click', function(e) {
         const produsContainer = e.target.closest('.produs');
@@ -237,6 +245,7 @@ function atasaEventListenersModal() {
     });
 }
 
+// Initializeaza modalul
 function initializeazaModal() {
     atasaEventListenersModal();
 }

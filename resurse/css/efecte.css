@@ -1,3 +1,4 @@
+/* ETAPA 5: Efecte CSS - Stilizare HR cu pattern sageata */
 hr.sageata-hr {
   height: 24px;
   border: none;
@@ -10,6 +11,7 @@ hr.sageata-hr {
   background-repeat: repeat-x;
 }
 
+/* ETAPA 5: Efecte CSS - Reflexie pentru titluri */
 .titlu-cu-reflexie {
     position: relative;
     font-size: 2.0em;
@@ -38,7 +40,8 @@ hr.sageata-hr {
     transform: scaleY(-0.7) skewX(-15deg);
     opacity: 0.3;
   }
-  
+
+/* ETAPA 5: Galeria statica - Layout si styling */
 #galerie-statica {
   width: 100%;
   padding: 20px 0;
@@ -52,40 +55,7 @@ hr.sageata-hr {
   color: var(--culoare-text);
 }
 
-.container-galerie {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(4, auto);
-  gap: 20px;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.container-galerie .figura-galerie:nth-child(1) { grid-area: 1 / 1 / 2 / 2; }
-.container-galerie .figura-galerie:nth-child(2) { grid-area: 1 / 2 / 2 / 3; }
-.container-galerie .figura-galerie:nth-child(3) { grid-area: 1 / 3 / 2 / 4; }
-.container-galerie .figura-galerie:nth-child(4) { grid-area: 2 / 1 / 3 / 2; }
-.container-galerie .figura-galerie:nth-child(5) { grid-area: 2 / 4 / 3 / 5; }
-.container-galerie .figura-galerie:nth-child(6) { grid-area: 3 / 1 / 4 / 2; }
-.container-galerie .figura-galerie:nth-child(7) { grid-area: 3 / 2 / 4 / 3; }
-.container-galerie .figura-galerie:nth-child(8) { grid-area: 3 / 3 / 4 / 4; }
-.container-galerie .figura-galerie:nth-child(9) { grid-area: 3 / 4 / 4 / 5; }
-.container-galerie .figura-galerie:nth-child(10) { grid-area: 4 / 1 / 5 / 2; }
-.container-galerie .figura-galerie:nth-child(11) { grid-area: 4 / 2 / 5 / 3; }
-.container-galerie .figura-galerie:nth-child(12) { grid-area: 4 / 3 / 5 / 4; }
-.container-galerie .figura-galerie:nth-child(13) { grid-area: 4 / 4 / 5 / 5; }
-
-.container-galerie {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: repeat(3, auto);
-  gap: 20px;
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
+/* ETAPA 5: Galeria statica - Grid layout cu pozitionare specifica */
 .container-galerie {
   display: grid;
   grid-template-areas:
@@ -95,6 +65,9 @@ hr.sageata-hr {
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(3, auto);
   gap: 20px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 .container-galerie .figura-galerie:nth-child(1) { grid-area: img1; }
@@ -108,6 +81,7 @@ hr.sageata-hr {
 .container-galerie .figura-galerie:nth-child(9) { grid-area: img9; }
 .container-galerie .figura-galerie:nth-child(10) { grid-area: img10; }
 
+/* ETAPA 5: Galeria statica - Stilizarea figurilor */
 .figura-galerie {
   position: relative;
   overflow: hidden;
@@ -143,6 +117,7 @@ hr.sageata-hr {
   font-weight: bold;
 }
 
+/* ETAPA 5: Galeria statica - Efecte hover */
 .figura-galerie:hover {
   transform: translateY(-30%) scale(1.3);
   z-index: 10;
@@ -154,6 +129,7 @@ hr.sageata-hr {
   color: white;
 }
 
+/* ETAPA 5: Galeria statica - Atribuiri si mesaje */
 .atribuire {
   font-size: 0.8em;
   font-style: italic;
@@ -174,6 +150,7 @@ hr.sageata-hr {
   border-radius: 5px;
 }
 
+/* ETAPA 5: Galeria statica - Responsive design */
 @media screen and (max-width: 900px) {
   .container-galerie {
     grid-template-areas: initial;

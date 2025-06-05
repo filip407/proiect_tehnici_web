@@ -1,3 +1,4 @@
+/* BONUS ETAPA 6.11: Modal box pentru afisarea detaliilor produsului */
 .modal-imagine-container {
     display: flex;
     flex-direction: column;

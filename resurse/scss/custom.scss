@@ -1,6 +1,8 @@
+/* ETAPA 5: Compilare automata SCSS - Schema cromatica personalizata */
 @use "sass:color";
 @use "sass:math";
 
+/* ETAPA 5: Customizare Bootstrap - Definirea culorilor principale */
 $culoare-primara: #076104;   
 $culoare-secundara: #80C135;   
 $culoare-accent: #F20505;    
@@ -9,15 +11,18 @@ $culoare-deschis: #F2F2F2;
 $culoare-deschis2: #E7FCE4;
 $culoare-deschis3: #b3fea0;
 
+/* ETAPA 5: Customizare Bootstrap - Generarea variantelor de culori */
 $culoare-primara-dark: color.adjust($culoare-primara, $lightness: -10%);
 $culoare-primara-light: color.adjust($culoare-primara, $lightness: 40%);
 $culoare-secundara-dark: color.adjust($culoare-secundara, $lightness: -10%);
 $culoare-secundara-light: color.adjust($culoare-secundara, $lightness: 20%);
 $culoare-accent-light: color.adjust($culoare-accent, $lightness: 30%);
 
+/* ETAPA 5: Customizare Bootstrap - Familia de font personalizata */
 $font-family-sans-serif: 'Montserrat', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $font-family-base: $font-family-sans-serif;
 
+/* ETAPA 5: Customizare Bootstrap - Dimensiuni de ecran personalizate */
 $grid-breakpoints: (
   xs: 0,
   sm: 576px,
@@ -35,11 +40,13 @@ $container-max-widths: (
   xxl: 1320px
 );
 
+/* ETAPA 5: Customizare Bootstrap - Raza borderului personalizata */
 $border-radius: 0.5rem;
 $border-radius-sm: 0.3rem;
 $border-radius-lg: 0.8rem;
 $border-radius-xl: 1.25rem;
 
+/* ETAPA 5: Customizare Bootstrap - Spatieri personalizate */
 $spacer: 1rem;
 $spacers: (
   0: 0,
@@ -51,6 +58,7 @@ $spacers: (
   6: $spacer * 5,
 );
 
+/* ETAPA 5: Customizare Bootstrap - Dimensiuni headinguri personalizate */
 $h1-font-size: 4rem;
 $h2-font-size: 2.5rem;
 $h3-font-size: 2rem;
@@ -58,6 +66,7 @@ $h4-font-size: 1.6rem;
 $h5-font-size: 1.3rem;
 $h6-font-size: 1.1rem;
 
+/* ETAPA 5: Importul Bootstrap cu variabilele personalizate */
 @forward "../../node_modules/bootstrap/scss/bootstrap.scss" with (
   $primary: $culoare-primara,
   $secondary: $culoare-secundara,
@@ -78,6 +87,7 @@ $h6-font-size: 1.1rem;
   $h6-font-size: $h6-font-size
 );
 
+/* ETAPA 5: CSS custom properties pentru compatibilitate */
 :root {
   --bs-primary: #{$culoare-primara};
   --bs-primary-rgb: 7, 97, 4;
@@ -97,12 +107,14 @@ $h6-font-size: 1.1rem;
   --culoare-primara-light: #{$culoare-primara-light};
 }
 
+/* ETAPA 5: Stilizare body cu schema cromatica */
 body {
   font-family: $font-family-base;
   background-color: $culoare-deschis2;
   color: $culoare-inchis;
 }
 
+/* ETAPA 5: Customizare butoane Bootstrap */
 .btn-primary {
   --bs-btn-color: #fff;
   --bs-btn-bg: #{$culoare-primara};
@@ -133,6 +145,7 @@ body {
   --bs-btn-disabled-border-color: #{color.adjust($culoare-secundara, $alpha: -0.3)};
 }
 
+/* ETAPA 5: Culori de background Bootstrap personalizate */
 .bg-primary {
   background-color: $culoare-primara !important;
 }
@@ -161,6 +174,7 @@ body {
   background-color: $culoare-primara-light !important;
 }
 
+/* ETAPA 5: Culori de text Bootstrap personalizate */
 .text-primary {
   color: $culoare-primara !important;
 }
@@ -169,6 +183,7 @@ body {
   color: $culoare-secundara !important;
 }
 
+/* ETAPA 5: Culori de border Bootstrap personalizate */
 .border-primary {
   border-color: $culoare-primara !important;
 }
@@ -177,6 +192,7 @@ body {
   border-color: $culoare-secundara !important;
 }
 
+/* ETAPA 5: Stilizarea headingurilor cu noile dimensiuni */
 h1, .h1 { 
   color: $culoare-deschis !important;
   font-size: $h1-font-size !important; 
@@ -212,6 +228,7 @@ h6, .h6 {
   font-weight: 500;
 }
 
+/* ETAPA 5: Stilizarea cardurilor Bootstrap */
 .card {
   border-radius: $border-radius !important;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -240,6 +257,7 @@ h6, .h6 {
   }
 }
 
+/* ETAPA 5: Stilizarea butoanelor generale */
 .btn {
   border-radius: $border-radius !important;
   padding: 0.6rem 1.2rem;
@@ -258,6 +276,7 @@ h6, .h6 {
   }
 }
 
+/* ETAPA 5: Stilizarea accordion Bootstrap */
 .accordion {
   --bs-accordion-border-radius: #{$border-radius};
   --bs-accordion-inner-border-radius: #{$border-radius};
@@ -310,6 +329,7 @@ h6, .h6 {
   }
 }
 
+/* ETAPA 5: Stilizarea alert Bootstrap */
 .alert {
   border-radius: $border-radius;
   border: none;
@@ -326,6 +346,7 @@ h6, .h6 {
   }
 }
 
+/* ETAPA 6: Light/dark theme - Dark theme pentru Bootstrap */
 [data-bs-theme="dark"] {
   --bs-body-bg: #{$culoare-inchis};
   --bs-body-color: #{$culoare-deschis};
@@ -360,6 +381,7 @@ h6, .h6 {
   }
 }
 
+/* ETAPA 5: Media queries responsive */
 @media (min-width: 768px) {
   .container {
     padding-left: 2rem;

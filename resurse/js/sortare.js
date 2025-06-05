@@ -1,8 +1,6 @@
-// Funcții pentru sortarea personalizabilă cu două chei
+/* BONUS ETAPA 6 - Bonus 8: Sortarea personalizabila cu doua chei */
 
-/**
- * Obține valoarea pentru sortare dintr-un produs pe baza cheii specificate
- */
+// Functie pentru obtinerea valorii de sortare pe baza cheii specificate
 function getValueForSort(produs, cheie) {
     switch (cheie) {
         case 'nume':
@@ -24,9 +22,7 @@ function getValueForSort(produs, cheie) {
     }
 }
 
-/**
- * Compară două valori pentru sortare
- */
+// Functie pentru compararea a doua valori pentru sortare
 function compareValues(val1, val2, crescator = true) {
     let comparison = 0;
     
@@ -35,7 +31,6 @@ function compareValues(val1, val2, crescator = true) {
     } else if (typeof val1 === 'number' && typeof val2 === 'number') {
         comparison = val1 - val2;
     } else {
-        // Pentru stringuri, folosim localeCompare pentru sortarea corectă în română
         const str1 = String(val1);
         const str2 = String(val2);
         comparison = str1.localeCompare(str2, 'ro', { 
@@ -48,9 +43,7 @@ function compareValues(val1, val2, crescator = true) {
     return crescator ? comparison : -comparison;
 }
 
-/**
- * Sortează produsele cu două chei personalizabile
- */
+// Functie principala pentru sortarea cu doua chei personalizabile
 function sorteazaCuDouaChei() {
     if (!valideazaInputuri()) {
         return;
@@ -61,25 +54,21 @@ function sorteazaCuDouaChei() {
     const cheie2 = document.getElementById('cheie-sortare-2').value;
     const directie2 = document.getElementById('directie-sortare-2').value === 'crescator';
     
-    // Verifică ca cheile să fie diferite
     if (cheie1 === cheie2) {
-        alert('Vă rugăm să selectați chei de sortare diferite pentru a obține rezultate mai precise.');
+        alert('Va rugam sa selectati chei de sortare diferite pentru a obtine rezultate mai precise.');
         return;
     }
     
-    console.log(`Sortare aplicată: ${cheie1} (${directie1 ? 'crescător' : 'descrescător'}), apoi ${cheie2} (${directie2 ? 'crescător' : 'descrescător'})`);
+    console.log(`Sortare aplicata: ${cheie1} (${directie1 ? 'crescator' : 'descrescator'}), apoi ${cheie2} (${directie2 ? 'crescator' : 'descrescator'})`);
     
-    // Creează o copie a produselor pentru sortare
     const produseOrdonata = [...produseAfisate];
     
     produseOrdonata.sort((produsA, produsB) => {
-        // Prima cheie de sortare
         const valoare1A = getValueForSort(produsA, cheie1);
         const valoare1B = getValueForSort(produsB, cheie1);
         
         const comp1 = compareValues(valoare1A, valoare1B, directie1);
         
-        // Dacă prima comparație este egală, folosește a doua cheie
         if (comp1 === 0) {
             const valoare2A = getValueForSort(produsA, cheie2);
             const valoare2B = getValueForSort(produsB, cheie2);
@@ -90,22 +79,13 @@ function sorteazaCuDouaChei() {
         return comp1;
     });
     
-    // Actualizează array-ul global
     produseAfisate = produseOrdonata;
-    
-    // Afișează produsele sortate
     afiseazaProduse(produseAfisate);
-    
-    // Actualizează contorul cu informații despre sortare
     actualizeazaContorCuSortare();
-    
-    // Feedback vizual pentru utilizator
     afisareFeedbackSortare(cheie1, directie1, cheie2, directie2);
 }
 
-/**
- * Resetează sortarea la valorile implicite
- */
+// Functie pentru resetarea sortarii la valorile implicite
 function reseteazaSortarea() {
     document.getElementById('cheie-sortare-1').value = 'pret';
     document.getElementById('directie-sortare-1').value = 'crescator';
@@ -114,17 +94,12 @@ function reseteazaSortarea() {
     
     actualizarePrevizualizareSortare();
     
-    // Resetează la produsele filtrate dar nesortate
-    // (păstrează filtrarea, dar elimină sortarea)
     if (window.produse && window.produse.length > 0) {
-        // Re-aplică doar filtrele fără sortare
         const produseOriginale = [...window.produse];
         produseAfisate = produseOriginale;
         
-        // Re-aplică filtrele active
         const filtreActive = verificaFiltreActive();
         if (filtreActive) {
-            // Re-execută filtrarea pentru a păstra produsele filtrate
             setTimeout(() => {
                 filtreazaProduse();
             }, 100);
@@ -133,12 +108,10 @@ function reseteazaSortarea() {
         }
     }
     
-    console.log('Sortarea a fost resetată la valorile implicite');
+    console.log('Sortarea a fost resetata la valorile implicite');
 }
 
-/**
- * Verifică dacă există filtre active
- */
+// Functie pentru verificarea filtrelor active
 function verificaFiltreActive() {
     const nume = document.getElementById('inp-nume')?.value.trim();
     const tipEchipa = document.querySelector('input[name="gr_tip"]:checked')?.value;
@@ -157,52 +130,44 @@ function verificaFiltreActive() {
            echipe;
 }
 
-/**
- * Actualizează previzualizarea sortării
- */
+// Functie pentru actualizarea previzualizarii sortarii
 function actualizarePrevizualizareSortare() {
     const cheie1 = document.getElementById('cheie-sortare-1').value;
     const directie1 = document.getElementById('directie-sortare-1').value;
     const cheie2 = document.getElementById('cheie-sortare-2').value;
     const directie2 = document.getElementById('directie-sortare-2').value;
     
-    // Maparea cheilor la denumiri prietenoase
     const denumiriChei = {
         'nume': 'nume produs',
-        'pret': 'preț',
+        'pret': 'pret',
         'echipa': 'echipa',
         'categorie': 'categorie',
         'sezon': 'sezon',
         'liga': 'liga',
-        'data_adaugare': 'data adăugării'
+        'data_adaugare': 'data adaugarii'
     };
     
     const denumiriDirectii = {
-        'crescator': 'crescător',
-        'descrescator': 'descrescător'
+        'crescator': 'crescator',
+        'descrescator': 'descrescator'
     };
     
     const previewElement = document.getElementById('preview-sortare');
     if (previewElement) {
-        const textPreview = `Se va sorta după <strong>${denumiriChei[cheie1]} (${denumiriDirectii[directie1]})</strong>, apoi după <strong>${denumiriChei[cheie2]} (${denumiriDirectii[directie2]})</strong>`;
+        const textPreview = `Se va sorta dupa <strong>${denumiriChei[cheie1]} (${denumiriDirectii[directie1]})</strong>, apoi dupa <strong>${denumiriChei[cheie2]} (${denumiriDirectii[directie2]})</strong>`;
         previewElement.innerHTML = textPreview;
         
-        // Adaugă clase CSS pentru efecte speciale
         const containerSortare = document.querySelector('.sortare-personalizabila');
         if (containerSortare) {
-            // Elimină clasele anterioare
             containerSortare.className = containerSortare.className.replace(/sortare-\w+-\w+/g, '');
             
-            // Adaugă clasa pentru combinația curentă
             const clasaCombinatie = `sortare-${cheie1}-${cheie2}`;
             containerSortare.classList.add(clasaCombinatie);
         }
     }
 }
 
-/**
- * Afișează feedback vizual după aplicarea sortării
- */
+// Functie pentru afisarea feedback-ului vizual dupa aplicarea sortarii
 function afisareFeedbackSortare(cheie1, directie1, cheie2, directie2) {
     const containerSortare = document.querySelector('.sortare-personalizabila');
     if (containerSortare) {
@@ -213,15 +178,13 @@ function afisareFeedbackSortare(cheie1, directie1, cheie2, directie2) {
         }, 600);
     }
     
-    // Afișează un toast de confirmare
     const toast = document.createElement('div');
     toast.className = 'toast-sortare';
     toast.innerHTML = `
         <i class="fas fa-check-circle"></i>
-        <span>Sortare aplicată cu succes!</span>
+        <span>Sortare aplicata cu succes!</span>
     `;
     
-    // Stilizează toast-ul
     toast.style.cssText = `
         position: fixed;
         top: 20px;
@@ -240,7 +203,6 @@ function afisareFeedbackSortare(cheie1, directie1, cheie2, directie2) {
         animation: slideInToast 0.4s ease-out;
     `;
     
-    // Adaugă animația CSS inline
     const style = document.createElement('style');
     style.textContent = `
         @keyframes slideInToast {
@@ -256,7 +218,6 @@ function afisareFeedbackSortare(cheie1, directie1, cheie2, directie2) {
     
     document.body.appendChild(toast);
     
-    // Elimină toast-ul după 3 secunde
     setTimeout(() => {
         toast.style.animation = 'slideOutToast 0.4s ease-in forwards';
         setTimeout(() => {
@@ -270,15 +231,12 @@ function afisareFeedbackSortare(cheie1, directie1, cheie2, directie2) {
     }, 3000);
 }
 
-/**
- * Validează combinația de sortare selectată
- */
+// Functie pentru validarea combinatiei de sortare selectate
 function valideazaCombinatieSortare() {
     const cheie1 = document.getElementById('cheie-sortare-1').value;
     const cheie2 = document.getElementById('cheie-sortare-2').value;
     
     if (cheie1 === cheie2) {
-        // Schimbă automat a doua cheie
         const optiuni = ['nume', 'pret', 'echipa', 'categorie', 'sezon', 'liga', 'data_adaugare'];
         const optiuniDisponibile = optiuni.filter(opt => opt !== cheie1);
         
@@ -289,11 +247,8 @@ function valideazaCombinatieSortare() {
     }
 }
 
-/**
- * Inițializează event listeners pentru sortarea personalizabilă
- */
+// Functie pentru initializarea event listeners pentru sortarea personalizabila
 function initializeazaSortarePersonalizabila() {
-    // Event listeners pentru selectele de chei de sortare
     const cheie1Select = document.getElementById('cheie-sortare-1');
     const cheie2Select = document.getElementById('cheie-sortare-2');
     const directie1Select = document.getElementById('directie-sortare-1');
@@ -321,7 +276,6 @@ function initializeazaSortarePersonalizabila() {
         directie2Select.addEventListener('change', actualizarePrevizualizareSortare);
     }
     
-    // Event listeners pentru butoane
     const btnAplicaSortare = document.getElementById('aplicaSortare');
     const btnResetSortare = document.getElementById('resetSortare');
     
@@ -333,21 +287,16 @@ function initializeazaSortarePersonalizabila() {
         btnResetSortare.addEventListener('click', reseteazaSortarea);
     }
     
-    // Inițializează previzualizarea
     actualizarePrevizualizareSortare();
     
-    console.log('Sortarea personalizabilă a fost inițializată');
+    console.log('Sortarea personalizabila a fost initializata');
 }
 
-/**
- * Funcție helper pentru integrarea cu sistemul existent
- */
+// Functie pentru integrarea cu sistemul existent de sortare
 function integreazaSortareaPersonalizabila() {
-    // Înlocuiește funcțiile de sortare existente
     if (typeof window.sorteazaCrescator === 'function') {
         const sorteazaCrescatorOriginal = window.sorteazaCrescator;
         window.sorteazaCrescator = function() {
-            // Setează rapid sortarea pe preț crescător, apoi nume crescător
             document.getElementById('cheie-sortare-1').value = 'pret';
             document.getElementById('directie-sortare-1').value = 'crescator';
             document.getElementById('cheie-sortare-2').value = 'nume';
@@ -360,7 +309,6 @@ function integreazaSortareaPersonalizabila() {
     if (typeof window.sorteazaDescrescator === 'function') {
         const sorteazaDescrescatorOriginal = window.sorteazaDescrescator;
         window.sorteazaDescrescator = function() {
-            // Setează rapid sortarea pe preț descrescător, apoi nume crescător
             document.getElementById('cheie-sortare-1').value = 'pret';
             document.getElementById('directie-sortare-1').value = 'descrescator';
             document.getElementById('cheie-sortare-2').value = 'nume';
@@ -371,7 +319,7 @@ function integreazaSortareaPersonalizabila() {
     }
 }
 
-// Export pentru utilizare în module
+// Export pentru utilizare in module
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = {
         sorteazaCuDouaChei,
@@ -382,9 +330,7 @@ if (typeof module !== 'undefined' && module.exports) {
     };
 }
 
-/**
- * Aplică un exemplu de sortare predefinit
- */
+// Functie pentru aplicarea unui exemplu de sortare predefinit
 function aplicaExempluSortare(cheie1, directie1, cheie2, directie2) {
     document.getElementById('cheie-sortare-1').value = cheie1;
     document.getElementById('directie-sortare-1').value = directie1;
@@ -393,15 +339,12 @@ function aplicaExempluSortare(cheie1, directie1, cheie2, directie2) {
     
     actualizarePrevizualizareSortare();
     
-    // Aplică sortarea automat
     setTimeout(() => {
         sorteazaCuDouaChei();
     }, 300);
 }
 
-/**
- * Actualizează contorul de produse cu informații despre sortare
- */
+// Functie pentru actualizarea contorului de produse cu informatii despre sortare
 function actualizeazaContorCuSortare() {
     const cheie1 = document.getElementById('cheie-sortare-1')?.value;
     const directie1 = document.getElementById('directie-sortare-1')?.value;
@@ -411,24 +354,23 @@ function actualizeazaContorCuSortare() {
     if (cheie1 && cheie2 && typeof actualizeazaContorProduse === 'function') {
         actualizeazaContorProduse();
         
-        // Adaugă informații despre sortarea curentă
         const sumaInfo = document.getElementById('p-suma');
         if (sumaInfo) {
             const denumiriChei = {
                 'nume': 'nume',
-                'pret': 'preț',
+                'pret': 'pret',
                 'echipa': 'echipa',
                 'categorie': 'categorie',
                 'sezon': 'sezon',
                 'liga': 'liga',
-                'data_adaugare': 'data adăugării'
+                'data_adaugare': 'data adaugarii'
             };
             
-            const textSortare = ` Sortate după ${denumiriChei[cheie1]} (${directie1 === 'crescator' ? '↑' : '↓'}), apoi ${denumiriChei[cheie2]} (${directie2 === 'crescator' ? '↑' : '↓'}).`;
+            const textSortare = ` Sortate dupa ${denumiriChei[cheie1]} (${directie1 === 'crescator' ? '↑' : '↓'}), apoi ${denumiriChei[cheie2]} (${directie2 === 'crescator' ? '↑' : '↓'}).`;
             
-            if (!sumaInfo.innerHTML.includes('Sortate după')) {
+            if (!sumaInfo.innerHTML.includes('Sortate dupa')) {
                 const textOriginal = sumaInfo.innerHTML;
-                const pozitiaAlt = textOriginal.indexOf('Apăsați');
+                const pozitiaAlt = textOriginal.indexOf('Apasati');
                 if (pozitiaAlt !== -1) {
                     const parteaInainte = textOriginal.substring(0, pozitiaAlt);
                     const parteaDupa = textOriginal.substring(pozitiaAlt);
@@ -441,9 +383,8 @@ function actualizeazaContorCuSortare() {
     }
 }
 
-// Auto-inițializare când DOM-ul este gata
+// Auto-initializare cand DOM-ul este gata
 document.addEventListener('DOMContentLoaded', function() {
-    // Așteaptă ca produsele să fie încărcate
     setTimeout(() => {
         if (document.getElementById('cheie-sortare-1')) {
             initializeazaSortarePersonalizabila();
@@ -452,7 +393,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }, 500);
 });
 
-// Inițializează sortarea și când se încarcă dinamic conținutul
+// Initializare sortare si cand se incarca dinamic continutul
 if (typeof window.addEventListener === 'function') {
     window.addEventListener('load', function() {
         setTimeout(() => {

@@ -1,8 +1,11 @@
+/* BONUS ETAPA 6 - Bonus 20: Sistemul de comparare produse */
+
+/* Container principal pentru comparare */
 #container-comparare {
     position: fixed;
     bottom: 20px;
     right: 20px;
-    background: linear-gradient(135deg, #076104, #228B22);
+    background: linear-gradient(135deg, var(--culoare-primara), #228B22);
     color: var(--culoare-deschis);
     padding: 15px 20px;
     border-radius: 15px;
@@ -107,7 +110,7 @@
 }
 
 .btn-compara {
-    background: linear-gradient(135deg, #076104, #228B22);
+    background: linear-gradient(135deg, var(--culoare-primara), #228B22);
     color: var(--culoare-deschis);
     border: none;
     padding: 8px 12px;
@@ -142,8 +145,8 @@
 
 .tooltip {
     position: absolute;
-    background: #333;
-    color: white;
+    background: var(--culoare-inchis2);
+    color: var(--culoare-deschis);
     padding: 8px 12px;
     border-radius: 6px;
     font-size: 0.8rem;
@@ -166,9 +169,10 @@
     left: 50%;
     transform: translateX(-50%);
     border: 5px solid transparent;
-    border-top-color: #333;
+    border-top-color: var(--culoare-inchis2);
 }
 
+/* Responsive design */
 @media screen and (max-width: 768px) {
     #container-comparare {
         bottom: 10px;
@@ -226,6 +230,7 @@
     }
 }
 
+/* Stilizare pentru butoane compara in pagini de produse */
 .produs-individual .btn-compara,
 .detalii-produs .btn-compara,
 .produs-container .btn-compara {
@@ -290,9 +295,10 @@
 
 .btn-compara.success {
     background: linear-gradient(135deg, #28a745, #20c997);
-    color: white;
+    color: var(--culoare-deschis);
 }
 
+/* Z-index hierarchy */
 #container-comparare {
     z-index: 9998;
 }
@@ -305,6 +311,7 @@
     z-index: 10001 !important;
 }
 
+/* Dark theme support */
 [data-theme="dark"] #container-comparare {
     background: linear-gradient(135deg, #0a4906, #1a5f1a);
     border-color: rgba(255, 255, 255, 0.1);
@@ -318,6 +325,7 @@
     background: linear-gradient(135deg, #1a5f1a, #2d7a2d);
 }
 
+/* Print styles */
 @media print {
     #container-comparare,
     .btn-compara,

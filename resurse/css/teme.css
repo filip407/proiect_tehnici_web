@@ -1,4 +1,4 @@
-
+/* ETAPA 6: Light/dark theme - Definirea variabilelor pentru tema light */
 :root {
   --culoare-primara: #076104;   
   --culoare-secundara: #80C135;   
@@ -31,6 +31,7 @@
   --title-color: var(--culoare-deschis);
 }
 
+/* ETAPA 6: Light/dark theme - Definirea variabilelor pentru tema dark */
 [data-theme="dark"] {
   --culoare-primara: #4CAF50;   
   --culoare-secundara: #2E7D32;   
@@ -63,6 +64,7 @@
   --title-color: #FFFFFF;
 }
 
+/* ETAPA 6: Light/dark theme - Aplicarea temelor pe elemente */
 h1 {
   color: var(--title-color);
   transition: color 0.3s ease;
@@ -94,6 +96,7 @@ footer {
   transition: background-color 0.3s ease;
 }
 
+/* ETAPA 6: Light/dark theme - Butonul de schimbare tema */
 .theme-toggle {
   position: fixed;
   top: 20px;
@@ -126,6 +129,7 @@ footer {
   transform: scale(0.95);
 }
 
+/* ETAPA 6: Light/dark theme - Iconuri pentru soare si luna */
 .theme-toggle .sun-icon {
   display: block;
 }
@@ -142,6 +146,7 @@ footer {
   display: block;
 }
 
+/* ETAPA 6: Light/dark theme - Stilizarea tabelelor in dark mode */
 [data-theme="dark"] #stilizare-tabel th,
 [data-theme="dark"] #stilizare-tabel td {
   border-color: var(--border-color);
@@ -155,6 +160,7 @@ footer {
   background-color: var(--bg-zone-special);
 }
 
+/* ETAPA 6: Light/dark theme - Linkuri in dark mode */
 [data-theme="dark"] a {
   color: var(--culoare-text-primar);
 }
@@ -163,6 +169,7 @@ footer {
   color: var(--text-body);
 }
 
+/* ETAPA 6: Light/dark theme - Elemente specifice in dark mode */
 [data-theme="dark"] math {
   background-color: var(--bg-zone-special);
   border-left-color: var(--border-color);
@@ -182,10 +189,12 @@ footer {
   border-color: var(--border-color);
 }
 
+/* ETAPA 6: Light/dark theme - Tranzitii pentru toate elementele */
 * {
   transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
 }
 
+/* ETAPA 6: Light/dark theme - Scrollbar in dark mode */
 [data-theme="dark"] ::-webkit-scrollbar {
   background-color: var(--bg-zone);
 }

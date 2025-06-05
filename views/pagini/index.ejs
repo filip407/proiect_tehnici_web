@@ -6,18 +6,21 @@
     <body>
     <%- include("../fragmente/header.ejs") %> 
     <main>
+        <!-- ETAPA 2: Task layout - Implementarea layoutului responsive cu grid -->
         <div id="layout-responsive">
             <section class="zona1">
                 <div class="z-pattern">
                     <div class="z-top-left">
+                        <!-- ETAPA 5: Reflexie - Efect CSS pentru titlu cu reflexie -->
                         <div class="container-reflexie">
-                            <h2 class="titlu-cu-reflexie">Bine ați venit la Elite Kits!</h2>
-                            <h2 class="reflexie">Bine ați venit la Elite Kits!</h2>
+                            <h2 class="titlu-cu-reflexie">Bine ati venit la Elite Kits!</h2>
+                            <h2 class="reflexie">Bine ati venit la Elite Kits!</h2>
                         </div>
-                        <p>Magazinul <strong>numărul 1</strong> de tricouri de fotbal din România.</p>
-                        <p>Oferim o gamă largă de <b>tricouri originale</b> de la cele mai populare echipe de club și naționale din lume.</p>
+                        <p>Magazinul <strong>numarul 1</strong> de tricouri de fotbal din Romania.</p>
+                        <p>Oferim o gama larga de <b>tricouri originale</b> de la cele mai populare echipe de club si nationale din lume.</p>
                     </div>
                     <div class="z-top-right">
+                        <!-- ETAPA 4: Task video - Implementarea video cu surse multiple si subtitles -->
                         <section id="video-instructional">
                             <div class="video-container">
                                 <video 
@@ -29,7 +32,7 @@
                                     <source src="/resurse/video/video-tricou.mp4" type="video/mp4">
                                     <source src="/resurse/video/video-tricou.webm" type="video/webm">
                                     <track 
-                                        label="Română" 
+                                        label="Romana" 
                                         kind="subtitles" 
                                         srclang="ro" 
                                         src="/resurse/video/subtitles-ro.vtt" 
@@ -39,39 +42,33 @@
                                         kind="subtitles" 
                                         srclang="en" 
                                         src="/resurse/video/subtitles-en.vtt">
-                                    Browserul dumneavoastră nu suportă elementul video.
+                                    Browserul dumneavoastra nu suporta elementul video.
                                 </video>
                             </div>
                             <p class="video-description">
-                                Video promoțional pentru unul din tricourile de pe site-ul nostru.
+                                Video promotional pentru unul din tricourile de pe site-ul nostru.
                             </p>
                         </section>
                     </div>
-                        <!-- <figure>
-                    <picture>
-                        <source media="(max-width: 900px)" srcset="/resurse/imagini/imagine_mica.jpg">
-                        <source media="(max-width: 1400px)" srcset="/resurse/imagini/imagine_medie.jpg">
-                        <img src="/resurse/imagini/imagine_mare2.jpg" alt="Tricou de fotbal valabil pe Elite Kits">
-                    </picture>
-                    <figcaption>Tricou valabil pe Elite Kits</figcaption>
-                </figure> -->
                 </div>
             </section>
+            
+            <!-- ETAPA 1: Task 7 - Tabel cu ghidul de marimi -->
             <section class="zona2">
-                <h3>Ghid de mărimi</h3>
+                <h3>Ghid de marimi</h3>
                 <div class="tabel-marimi">
                     <table id="stilizare-tabel">
                         <thead>
                             <tr>
-                                <th rowspan="2">Mărime</th>
-                                <th colspan="2">Dimensiuni adulți</th>
+                                <th rowspan="2">Marime</th>
+                                <th colspan="2">Dimensiuni adulti</th>
                                 <th colspan="2">Dimensiuni copii</th>
                             </tr>
                             <tr>
-                                <th>Înălțime (cm)</th>
-                                <th>Lățime piept (cm)</th>
-                                <th>Vârstă (ani)</th>
-                                <th>Lățime piept (cm)</th>
+                                <th>Inaltime (cm)</th>
+                                <th>Latime piept (cm)</th>
+                                <th>Varsta (ani)</th>
+                                <th>Latime piept (cm)</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -106,7 +103,7 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td colspan="5">Notă: Aceste mărimi sunt orientative și pot varia în funcție de producător</td>
+                                <td colspan="5">Nota: Aceste marimi sunt orientative si pot varia in functie de producator</td>
                             </tr>
                         </tfoot>
                     </table>
@@ -114,55 +111,57 @@
             </section>
             <section class="zona3">
                 <h3>Calendar evenimente</h3>
-                <p>Urmărește cele mai importante evenimente din lumea fotbalului și nu rata lansările de noi tricouri!</p>
+                <p>Urmareste cele mai importante evenimente din lumea fotbalului si nu rata lansarile de noi tricouri!</p>
             </section>
             <section class="zona4">
-                <h3>Anunțuri</h3>
-                <p>Tricourile pentru sezonul 2024-2025 sunt acum disponibile pentru comandă.</p>
+                <h3>Anunturi</h3>
+                <p>Tricourile pentru sezonul 2024-2025 sunt acum disponibile pentru comanda.</p>
             </section>
             <section class="zona5">
                 <h3>Utilizatori online</h3>
-                <p>În acest moment sunt 43 utilizatori activi pe site.</p>
-                <p>Cele mai populare produse căutate astăzi:</p>
+                <p>In acest moment sunt 43 utilizatori activi pe site.</p>
+                <p>Cele mai populare produse cautate astazi:</p>
                 <ul>
                     <li>Tricou FC Barcelona 2025/2026</li>
-                    <li>Tricou România Euro 2024</li>
+                    <li>Tricou Romania Euro 2024</li>
                     <li>Tricou Manchester United 2025/2026</li>
                 </ul>
             </section>
             <section class="zona6">
                 <h3>Statistici utilizator</h3>
-                <p>Bine ai revenit! Ultima ta vizită a fost acum 3 zile.</p>
+                <p>Bine ai revenit! Ultima ta vizita a fost acum 3 zile.</p>
             </section>
             <section class="zona7">
-                <h3>Informații server</h3>
+                <!-- ETAPA 4: Task 16 - Afisarea IP-ului utilizatorului -->
+                <h3>Informatii server</h3>
                 <p>Versiune site: 2.0.0</p>
                 <p>Ultima actualizare: 25 mai 2025</p>
                 <p>Stare server: Online</p>
-                <p class="ip-utilizator">IP-ul tău: <%= locals.ip %></p>
+                <p class="ip-utilizator">IP-ul tau: <%= locals.ip %></p>
             </section>
             <section class="zona8">
-                <h3>Noutăți și recomandări</h3>
-                <p>Descoperă cele mai recente tricouri pentru sezonul 2025-2026!</p>
+                <h3>Noutati si recomandari</h3>
+                <p>Descopera cele mai recente tricouri pentru sezonul 2025-2026!</p>
                 <div class="noutati-container">
                     <div class="noutate-item">
                         <p>Tricou FC Barcelona 2025/2026</p>
-                        <p>Noul design revoluționar cu inserții de carbon pentru o ventilație optimă.</p>
+                        <p>Noul design revolutionar cu insertii de carbon pentru o ventilatie optima.</p>
                     </div>
+                    <!-- ETAPA 5: Stilizare hr - Efect CSS pentru separatori -->
                     <hr class="sageata-hr" id="efect-css-stilizare-hr">
                     <div class="noutate-item">
                         <p>Tricou Real Madrid 2025/2026</p>
-                        <p>Inspirat de istoria glorioasă a clubului, cu accente aurii și tehnologie DryFit.</p>
+                        <p>Inspirat de istoria glorioasa a clubului, cu accente aurii si tehnologie DryFit.</p>
                     </div>
                     <hr class="sageata-hr" id="efect-css-stilizare-hr">
                     <div class="noutate-item">
-                        <p>Tricou România Euro 2024</p>
-                        <p>Ediție specială cu autograful căpitanului și detalii tricolore elegante.</p>
+                        <p>Tricou Romania Euro 2024</p>
+                        <p>Editie speciala cu autograful capitanului si detalii tricolore elegante.</p>
                     </div>
                 </div>
                 <hr class="sageata-hr" id="efect-css-stilizare-hr">
                 <div class="recomandari">
-                    <p>De asemnea, s-ar putea sa iți placă și:</p>
+                    <p>De asemnea, s-ar putea sa iti place si:</p>
                     <ul>
                         <li>Tricou Manchester United 2025/2026</li>
                         <li>Tricou Wolves 2023/2024</li>
@@ -173,7 +172,9 @@
         </div>
         <section class="zona9">
             <section id="catalog">
+            <!-- ETAPA 1: Task 2 - Folosirea iconurilor Font Awesome -->
             <h2><i class="fa-solid fa-soccer-ball fa-spin-custom"></i>Catalog de Tricouri</h2>
+            <!-- BONUS ETAPA 1: Crearea unei harti de imagini -->
             <div id="harta-imagini">
                 <img src="/resurse/imagini/tricouri-harta.jpg" usemap="#image-map">
                 <map name="image-map">
@@ -185,6 +186,7 @@
                     <area target="_top" alt="Tricou PSG" title="Tricou PSG" href="/produs/21" coords="736,113,792,347" shape="rect">
                 </map>
             </div>
+            <!-- ETAPA 5: Galeria statica - Fragment inclus pentru afisarea imaginilor -->
             <%- include("../fragmente/galerie-fragment.ejs") %>
         </section>
     </section>

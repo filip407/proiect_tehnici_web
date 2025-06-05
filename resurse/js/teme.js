@@ -1,3 +1,5 @@
+/* ETAPA 6: Light/dark theme cu variabile CSS si memorare in localStorage */
+
 class ThemeManager {
     constructor() {
         this.storageKey = 'elitekits-theme';
@@ -7,14 +9,17 @@ class ThemeManager {
         this.init();
     }
     
+    // Initializeaza managerul de teme
     init() {
         this.loadSavedTheme();
         this.createThemeToggleButton();
         this.applyTheme(this.currentTheme);
         this.attachEventListeners();
         
-        console.log('Theme Manager inițializat cu tema:', this.currentTheme);
+        console.log('Theme Manager initializat cu tema:', this.currentTheme);
     }
+
+    // Incarca tema salvata din localStorage
     loadSavedTheme() {
         try {
             const savedTheme = localStorage.getItem(this.storageKey);
@@ -25,17 +30,21 @@ class ThemeManager {
                 this.saveTheme();
             }
         } catch (error) {
-            console.log('Nu s-a putut încărca tema din localStorage:', error);
+            console.log('Nu s-a putut incarca tema din localStorage:', error);
             this.currentTheme = 'light';
         }
     }
+
+    // Salveaza tema curenta in localStorage
     saveTheme() {
         try {
             localStorage.setItem(this.storageKey, this.currentTheme);
         } catch (error) {
-            console.log('Nu s-a putut salva tema în localStorage:', error);
+            console.log('Nu s-a putut salva tema in localStorage:', error);
         }
     }
+
+    // Creaza butonul pentru schimbarea temei
     createThemeToggleButton() {
         const existingButton = document.getElementById('theme-toggle-btn');
         if (existingButton) {
@@ -45,14 +54,16 @@ class ThemeManager {
         this.button = document.createElement('button');
         this.button.id = 'theme-toggle-btn';
         this.button.className = 'theme-toggle';
-        this.button.setAttribute('aria-label', 'Schimbă tema');
-        this.button.setAttribute('title', 'Schimbă între tema light și dark');
+        this.button.setAttribute('aria-label', 'Schimba tema');
+        this.button.setAttribute('title', 'Schimba intre tema light si dark');
         this.button.innerHTML = `
             <i class="fas fa-sun sun-icon" aria-hidden="true"></i>
             <i class="fas fa-moon moon-icon" aria-hidden="true"></i>
         `;
         document.body.appendChild(this.button);
     }
+
+    // Ataseaza event listeners pentru buton si sincronizare
     attachEventListeners() {
         if (this.button) {
             this.button.addEventListener('click', () => {
@@ -73,14 +84,17 @@ class ThemeManager {
             }
         });
     }
+
+    // Schimba tema intre light si dark
     toggleTheme() {
         const newTheme = this.currentTheme === 'light' ? 'dark' : 'light';
         this.setTheme(newTheme);
     }
 
+    // Seteaza o tema specifica
     setTheme(theme) {
         if (theme !== 'light' && theme !== 'dark') {
-            console.warn('Temă nevalidă:', theme);
+            console.warn('Tema nevalida:', theme);
             return;
         }
         
@@ -93,8 +107,10 @@ class ThemeManager {
             detail: { theme: theme }
         }));
         
-        console.log('Tema schimbată la:', theme);
+        console.log('Tema schimbata la:', theme);
     }
+
+    // Aplica tema la documentul HTML
     applyTheme(theme) {
         const html = document.documentElement;
         
@@ -106,6 +122,7 @@ class ThemeManager {
         this.updateThemeColorMeta(theme);
     }
     
+    // Actualizeaza meta tag-ul theme-color
     updateThemeColorMeta(theme) {
         let metaThemeColor = document.querySelector('meta[name="theme-color"]');
         
@@ -119,30 +136,35 @@ class ThemeManager {
         metaThemeColor.content = themeColor;
     }
     
+    // Actualizeaza starea butonului de schimbare tema
     updateButtonState() {
         if (!this.button) return;
         
         const title = this.currentTheme === 'light' 
-            ? 'Schimbă la tema întunecată' 
-            : 'Schimbă la tema luminoasă';
+            ? 'Schimba la tema intunecata' 
+            : 'Schimba la tema luminoasa';
             
         this.button.setAttribute('title', title);
         this.button.setAttribute('aria-label', title);
     }
 
+    // Returneaza tema curenta
     getCurrentTheme() {
         return this.currentTheme;
     }
 
+    // Verifica daca este in modul dark
     isDarkMode() {
         return this.currentTheme === 'dark';
     }
 
+    // Reseteaza tema la default (light)
     resetTheme() {
         this.setTheme('light');
     }
 }
 
+// Initializeaza managerul de teme cand DOM-ul este gata
 document.addEventListener('DOMContentLoaded', function() {
     const checkFontAwesome = () => {
         const testElement = document.createElement('i');
@@ -175,6 +197,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setTimeout(waitForFontAwesome, 100);
     }
 });
+
 if (typeof module !== 'undefined' && module.exports) {
     module.exports = ThemeManager;
 }

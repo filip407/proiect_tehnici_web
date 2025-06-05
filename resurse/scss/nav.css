@@ -1,3 +1,6 @@
+/* ETAPA 3: Task meniu - Variabile pentru breakpoints si tranzitii */
+/* ETAPA 3: Mixins pentru reutilizare */
+/* ETAPA 3: Task meniu - Navigare desktop */
 nav {
   background: var(--culoare-primara);
   margin-top: 20px;
@@ -21,6 +24,8 @@ nav > ul > li {
   position: relative;
   flex: 1;
   text-align: center;
+  /* ETAPA 3: Efect pentru linkurile fara submeniu */
+  /* ETAPA 3: Submeniu dropdown */
 }
 nav > ul > li > a {
   display: block;
@@ -105,10 +110,12 @@ nav > ul > li:hover > ul {
   transition: transform 0.5s ease, opacity 0.5s ease, visibility 0s linear 0s;
 }
 
+/* ETAPA 3: Task meniu - Mobile menu implementation */
 @media screen and (max-width: 768px) {
   nav > ul {
     display: none;
   }
+  /* BONUS ETAPA 3: Hamburger menu cu divuri */
   .hamburger-menu {
     display: block;
     position: absolute;
@@ -118,6 +125,7 @@ nav > ul > li:hover > ul {
     height: 30px;
     cursor: pointer;
     z-index: 200;
+    /* BONUS ETAPA 3: Animatie hamburger cu delay-uri diferite */
   }
   .hamburger-menu span {
     display: block;
@@ -248,6 +256,7 @@ nav > ul > li:hover > ul {
     visibility: hidden;
   }
 }
+/* ETAPA 3: Responsivitate pentru ecrane medii */
 @media screen and (max-width: 992px) and (min-width: 769px) {
   nav > ul > li > a {
     font-size: 0.9rem;
@@ -294,6 +303,7 @@ nav > ul > li:hover > ul {
     visibility: visible !important;
   }
 }
+/* BONUS ETAPA 3: Animatii hamburger cu schimbarea proprietatilor */
 @keyframes hamburgerBar1Animation {
   0% {
     background-color: var(--culoare-accent);

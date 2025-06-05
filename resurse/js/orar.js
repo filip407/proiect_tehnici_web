@@ -1,45 +1,46 @@
-// Variabile globale pentru orar
+/* ETAPA 7, Bonus 19: Orarul sa poata fi vizualizat pe orice pagina */
+
 let orarData = null;
 let orarTimeout = null;
 
-// Încarcă datele orarului
+// Incarca datele orarului din fisierul JSON
 async function incarcaOrarData() {
     try {
         const response = await fetch('/resurse/json/orar.json');
         orarData = await response.json();
         return orarData;
     } catch (error) {
-        console.error('Eroare la încărcarea orarului:', error);
+        console.error('Eroare la incarcarea orarului:', error);
         // Orar de fallback
         orarData = {
             orar: [
                 { zi: "Luni", ore_deschidere: "09:00", ore_inchidere: "18:00", deschis: true },
-                { zi: "Marți", ore_deschidere: "09:00", ore_inchidere: "18:00", deschis: true },
+                { zi: "Marti", ore_deschidere: "09:00", ore_inchidere: "18:00", deschis: true },
                 { zi: "Miercuri", ore_deschidere: "09:00", ore_inchidere: "18:00", deschis: true },
                 { zi: "Joi", ore_deschidere: "09:00", ore_inchidere: "18:00", deschis: true },
                 { zi: "Vineri", ore_deschidere: "09:00", ore_inchidere: "20:00", deschis: true },
-                { zi: "Sâmbătă", ore_deschidere: "10:00", ore_inchidere: "16:00", deschis: true },
-                { zi: "Duminică", ore_deschidere: "00:00", ore_inchidere: "00:00", deschis: false }
+                { zi: "Sambata", ore_deschidere: "10:00", ore_inchidere: "16:00", deschis: true },
+                { zi: "Duminica", ore_deschidere: "00:00", ore_inchidere: "00:00", deschis: false }
             ]
         };
         return orarData;
     }
 }
 
-// Obține ziua curentă în format românesc
+// Determina ziua curenta in format romanesc
 function getZiuaCurenta() {
-    const zile = ['Duminică', 'Luni', 'Marți', 'Miercuri', 'Joi', 'Vineri', 'Sâmbătă'];
+    const zile = ['Duminica', 'Luni', 'Marti', 'Miercuri', 'Joi', 'Vineri', 'Sambata'];
     const acum = new Date();
     return zile[acum.getDay()];
 }
 
-// Verifică dacă magazinul este deschis acum
+// Verifica daca magazinul este deschis in momentul curent
 function esteDeschisAcum() {
     if (!orarData) return false;
     
     const acum = new Date();
     const ziuaCurenta = getZiuaCurenta();
-    const oraCurenta = acum.getHours() * 60 + acum.getMinutes(); // în minute de la miezul nopții
+    const oraCurenta = acum.getHours() * 60 + acum.getMinutes();
     
     const programZi = orarData.orar.find(zi => zi.zi === ziuaCurenta);
     
@@ -56,7 +57,7 @@ function esteDeschisAcum() {
     return oraCurenta >= oraDeschidere && oraCurenta < oraInchidere;
 }
 
-// Formatează ora curentă
+// Formateaza ora curenta pentru afisare
 function formateazaOraCurenta() {
     const acum = new Date();
     const optiuni = {
@@ -73,7 +74,7 @@ function formateazaOraCurenta() {
     return acum.toLocaleDateString('ro-RO', optiuni);
 }
 
-// Construiește tabelul cu orarul
+// Construieste tabelul cu orarul magazinului
 function construiesteOrar() {
     if (!orarData) return;
     
@@ -87,26 +88,22 @@ function construiesteOrar() {
     orarData.orar.forEach(zi => {
         const rand = document.createElement('tr');
         
-        // Marchează ziua curentă
         if (zi.zi === ziuaCurenta) {
             rand.classList.add('zi-curenta');
         }
         
-        // Coloana cu ziua
         const celulaZi = document.createElement('td');
         celulaZi.textContent = zi.zi;
         celulaZi.style.fontWeight = zi.zi === ziuaCurenta ? 'bold' : 'normal';
         
-        // Coloana cu programul
         const celulaProgram = document.createElement('td');
         if (zi.deschis) {
             celulaProgram.textContent = `${zi.ore_deschidere} - ${zi.ore_inchidere}`;
         } else {
-            celulaProgram.textContent = 'ÎNCHIS';
+            celulaProgram.textContent = 'INCHIS';
             celulaProgram.style.fontWeight = 'bold';
         }
         
-        // Coloana cu statusul
         const celulaStatus = document.createElement('td');
         const spanStatus = document.createElement('span');
         
@@ -114,7 +111,7 @@ function construiesteOrar() {
             spanStatus.textContent = 'Deschis';
             spanStatus.className = 'status-deschis';
         } else {
-            spanStatus.textContent = 'Închis';
+            spanStatus.textContent = 'Inchis';
             spanStatus.className = 'status-inchis';
         }
         
@@ -128,7 +125,7 @@ function construiesteOrar() {
     });
 }
 
-// Actualizează statusul curent al magazinului
+// Actualizeaza statusul curent al magazinului cu marcarea zilei curente
 function actualizeazaStatusCurent() {
     const statusMagazin = document.getElementById('status-magazin');
     const statusIcon = document.getElementById('status-icon');
@@ -139,10 +136,8 @@ function actualizeazaStatusCurent() {
     
     const deschis = esteDeschisAcum();
     
-    // Actualizează ora curentă
     oraCurentaText.textContent = formateazaOraCurenta();
     
-    // Actualizează statusul
     if (deschis) {
         statusMagazin.className = 'status-indicator deschis';
         statusIcon.className = 'fas fa-check-circle';
@@ -150,13 +145,12 @@ function actualizeazaStatusCurent() {
     } else {
         statusMagazin.className = 'status-indicator inchis';
         statusIcon.className = 'fas fa-times-circle';
-        statusText.textContent = 'MAGAZINUL ESTE ÎNCHIS ACUM';
+        statusText.textContent = 'MAGAZINUL ESTE INCHIS ACUM';
     }
 }
 
-// Afișează orarul
+// Afiseaza orarul cu actualizare automata
 async function afiseazaOrar() {
-    // Încarcă datele dacă nu sunt deja încărcate
     if (!orarData) {
         await incarcaOrarData();
     }
@@ -165,36 +159,25 @@ async function afiseazaOrar() {
     if (overlay) {
         overlay.style.display = 'flex';
         
-        // Construiește tabelul
         construiesteOrar();
-        
-        // Actualizează statusul curent
         actualizeazaStatusCurent();
         
-        // Actualizează statusul la fiecare secundă
         const intervalStatus = setInterval(actualizeazaStatusCurent, 1000);
-        
-        // Înregistrează intervalul pentru a-l putea opri când se închide orarul
         overlay.setAttribute('data-interval', intervalStatus);
         
-        // Închide automat după 15 secunde (opțional)
         orarTimeout = setTimeout(() => {
             inchideOrar();
         }, 15000);
         
-        // Adaugă event listener pentru ESC
         document.addEventListener('keydown', inchideOrarEsc);
-        
-        // Adaugă event listener pentru click pe overlay
         overlay.addEventListener('click', inchideOrarClick);
     }
 }
 
-// Închide orarul
+// Inchide orarul
 function inchideOrar() {
     const overlay = document.getElementById('orar-overlay');
     if (overlay) {
-        // Animație de ieșire
         overlay.style.animation = 'fadeOut 0.3s ease-in-out';
         
         setTimeout(() => {
@@ -202,20 +185,17 @@ function inchideOrar() {
             overlay.style.animation = '';
         }, 300);
         
-        // Oprește intervalul de actualizare
         const intervalId = overlay.getAttribute('data-interval');
         if (intervalId) {
             clearInterval(parseInt(intervalId));
             overlay.removeAttribute('data-interval');
         }
         
-        // Oprește timeout-ul automat
         if (orarTimeout) {
             clearTimeout(orarTimeout);
             orarTimeout = null;
         }
         
-        // Elimină event listeners
         document.removeEventListener('keydown', inchideOrarEsc);
         overlay.removeEventListener('click', inchideOrarClick);
     }
@@ -235,7 +215,7 @@ function inchideOrarClick(event) {
     }
 }
 
-// Adaugă CSS pentru animația fadeOut
+// Adauga animatiile CSS pentru fadeOut
 function adaugaAnimatiiCSS() {
     const style = document.createElement('style');
     style.textContent = `
@@ -247,21 +227,16 @@ function adaugaAnimatiiCSS() {
     document.head.appendChild(style);
 }
 
-// Inițializare când se încarcă pagina
+// Initializeaza orarul la incarcarea paginii
 document.addEventListener('DOMContentLoaded', function() {
-    // Adaugă animațiile CSS
     adaugaAnimatiiCSS();
-    
-    // Preîncarcă datele orarului
     incarcaOrarData();
     
-    // Verifică dacă există butonul de orar și adaugă event listener
     const btnOrar = document.getElementById('btn-orar');
     if (btnOrar) {
         btnOrar.addEventListener('click', afiseazaOrar);
     }
     
-    // Verifică dacă există linkul de orar în footer și adaugă event listener
     const linkOrar = document.getElementById('link-orar');
     if (linkOrar) {
         linkOrar.addEventListener('click', function(e) {
@@ -271,6 +246,5 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Export pentru folosire globală
 window.afiseazaOrar = afiseazaOrar;
 window.inchideOrar = inchideOrar;

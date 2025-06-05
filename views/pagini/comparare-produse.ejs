@@ -9,20 +9,22 @@
     <link rel="stylesheet" href="/resurse/css/comparare.css" type="text/css" />
 </head>
 <body>
+    <!-- BONUS 20 ETAPA 6: Compararea produselor - fereastra separata -->
     <button class="close-button" onclick="window.close()">
-        <i class="fas fa-times"></i> Închide
+        <i class="fas fa-times"></i> Inchide
     </button>
     
     <div class="comparare-header">
         <h1><i class="fas fa-balance-scale"></i> Comparare Produse</h1>
-        <p>Analizează diferențele dintre produsele selectate</p>
+        <p>Analizeaza diferentele dintre produsele selectate</p>
     </div>
 
+    <!-- BONUS 20 ETAPA 6: Tabel pentru comparatie -->
     <div class="comparare-container">
         <table class="comparare-table">
             <thead>
                 <tr>
-                    <th><i class="fas fa-list"></i> Caracteristică</th>
+                    <th><i class="fas fa-list"></i> Caracteristica</th>
                     <th><i class="fas fa-tshirt"></i> <%= produs1.nume %></th>
                     <th><i class="fas fa-tshirt"></i> <%= produs2.nume %></th>
                 </tr>
@@ -34,7 +36,7 @@
                     <td class="produs-value nume"><%= produs2.nume %></td>
                 </tr>
                 <tr>
-                    <td class="caracteristica-label"><strong><i class="fas fa-euro-sign"></i> Preț</strong></td>
+                    <td class="caracteristica-label"><strong><i class="fas fa-euro-sign"></i> Pret</strong></td>
                     <td class="produs-value pret"><%= parseFloat(produs1.pret).toFixed(2) %> RON</td>
                     <td class="produs-value pret"><%= parseFloat(produs2.pret).toFixed(2) %> RON</td>
                 </tr>
@@ -49,7 +51,7 @@
                     <td class="produs-value"><%= produs2.liga || 'N/A' %></td>
                 </tr>
                 <tr>
-                    <td class="caracteristica-label"><strong><i class="fas fa-layer-group"></i> Tip echipă</strong></td>
+                    <td class="caracteristica-label"><strong><i class="fas fa-layer-group"></i> Tip echipa</strong></td>
                     <td class="produs-value">
                         <%= produs1.tip_echipa ? produs1.tip_echipa.charAt(0).toUpperCase() + produs1.tip_echipa.slice(1) : 'N/A' %>
                     </td>
@@ -83,7 +85,7 @@
                 
                 <% if (produs1.tara || produs2.tara) { %>
                 <tr>
-                    <td class="caracteristica-label"><strong><i class="fas fa-flag"></i> Țara</strong></td>
+                    <td class="caracteristica-label"><strong><i class="fas fa-flag"></i> Tara</strong></td>
                     <td class="produs-value"><%= produs1.tara || 'N/A' %></td>
                     <td class="produs-value"><%= produs2.tara || 'N/A' %></td>
                 </tr>
@@ -91,7 +93,7 @@
                 
                 <% if (produs1.jucator || produs2.jucator) { %>
                 <tr>
-                    <td class="caracteristica-label"><strong><i class="fas fa-user"></i> Jucător</strong></td>
+                    <td class="caracteristica-label"><strong><i class="fas fa-user"></i> Jucator</strong></td>
                     <td class="produs-value"><%= produs1.jucator || 'N/A' %></td>
                     <td class="produs-value"><%= produs2.jucator || 'N/A' %></td>
                 </tr>
@@ -99,7 +101,7 @@
                 
                 <% if (produs1.numar_tricou || produs2.numar_tricou) { %>
                 <tr>
-                    <td class="caracteristica-label"><strong><i class="fas fa-hashtag"></i> Număr tricou</strong></td>
+                    <td class="caracteristica-label"><strong><i class="fas fa-hashtag"></i> Numar tricou</strong></td>
                     <td class="produs-value"><%= produs1.numar_tricou || 'N/A' %></td>
                     <td class="produs-value"><%= produs2.numar_tricou || 'N/A' %></td>
                 </tr>
@@ -127,16 +129,17 @@
                 <tr>
                     <td class="caracteristica-label"><strong><i class="fas fa-info-circle"></i> Descriere</strong></td>
                     <td class="produs-value descriere-text">
-                        <%= produs1.descriere || 'Fără descriere' %>
+                        <%= produs1.descriere || 'Fara descriere' %>
                     </td>
                     <td class="produs-value descriere-text">
-                        <%= produs2.descriere || 'Fără descriere' %>
+                        <%= produs2.descriere || 'Fara descriere' %>
                     </td>
                 </tr>
                 <% } %>
 
+                <!-- BONUS 20 ETAPA 6: Calculul diferentei de pret -->
                 <tr class="row-highlight">
-                    <td class="caracteristica-label"><strong><i class="fas fa-calculator"></i> Diferența de preț</strong></td>
+                    <td class="caracteristica-label"><strong><i class="fas fa-calculator"></i> Diferenta de pret</strong></td>
                     <% 
                     const diferenta = Math.abs(parseFloat(produs1.pret) - parseFloat(produs2.pret));
                     const maiIeftin = parseFloat(produs1.pret) < parseFloat(produs2.pret) ? 1 : 2;
@@ -147,7 +150,7 @@
                         <% } else if (diferenta > 0) { %>
                             <span class="dezavantaj"><i class="fas fa-arrow-up"></i> Mai scump cu <%= diferenta.toFixed(2) %> RON</span>
                         <% } else { %>
-                            <span class="egal"><i class="fas fa-equals"></i> Același preț</span>
+                            <span class="egal"><i class="fas fa-equals"></i> Acelasi pret</span>
                         <% } %>
                     </td>
                     <td class="produs-value <%= maiIeftin === 2 ? 'pret-avantaj' : '' %>">
@@ -156,7 +159,7 @@
                         <% } else if (diferenta > 0) { %>
                             <span class="dezavantaj"><i class="fas fa-arrow-up"></i> Mai scump cu <%= diferenta.toFixed(2) %> RON</span>
                         <% } else { %>
-                            <span class="egal"><i class="fas fa-equals"></i> Același preț</span>
+                            <span class="egal"><i class="fas fa-equals"></i> Acelasi pret</span>
                         <% } %>
                     </td>
                 </tr>
@@ -165,13 +168,13 @@
     </div>
 
     <div class="comparare-footer">
-        <p><i class="fas fa-info-circle"></i> Apăsați <kbd>Esc</kbd> pentru a închide fereastra</p>
+        <p><i class="fas fa-info-circle"></i> Apasati <kbd>Esc</kbd> pentru a inchide fereastra</p>
         <div class="footer-buttons">
             <button class="btn-footer" onclick="window.print()">
-                <i class="fas fa-print"></i> Printează
+                <i class="fas fa-print"></i> Printeaza
             </button>
             <button class="btn-footer" onclick="window.close()">
-                <i class="fas fa-times"></i> Închide
+                <i class="fas fa-times"></i> Inchide
             </button>
         </div>
     </div>

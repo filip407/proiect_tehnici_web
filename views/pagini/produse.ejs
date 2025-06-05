@@ -12,37 +12,41 @@
 <body>
     <%- include("../fragmente/header") %>
     <main>
+        <!-- ETAPA 6: Afisarea filtru activ -->
         <% if (locals.tipEchipaFiltru && locals.tipEchipaFiltru !== 'toate') { %>
         <div class="filtru-activ-banner">
             <div class="filtru-activ-content">
                 <i class="fas fa-filter"></i>
                 <span>
-                    Afișez produse pentru: 
+                    Afisez produse pentru: 
                     <strong>
                         <% if (locals.tipEchipaFiltru === 'club') { %>
                             Echipe de Club
                         <% } else if (locals.tipEchipaFiltru === 'nationala') { %>
-                            Echipe Naționale
+                            Echipe Nationale
                         <% } else if (locals.tipEchipaFiltru === 'fotbalist') { %>
-                            Fotbaliști
+                            Fotbalisti
                         <% } else { %>
                             <%= locals.tipEchipaFiltru.charAt(0).toUpperCase() + locals.tipEchipaFiltru.slice(1) %>
                         <% } %>
                     </strong>
                 </span>
                 <a href="/produse" class="btn-clear-filter">
-                    <i class="fas fa-times"></i> Afișează toate
+                    <i class="fas fa-times"></i> Afiseaza toate
                 </a>
             </div>
         </div>
         <% } %>
+        
+        <!-- ETAPA 6: Filtere pentru produse -->
         <div class="filters-container">
-            <h2><i class="fas fa-filter"></i> Filtrează produsele</h2>
+            <h2><i class="fas fa-filter"></i> Filtreaza produsele</h2>
             
             <div class="filters-grid">
+                <!-- ETAPA 6: Filtru pentru cautare text -->
                 <div class="filter-group">
-                    <h3><i class="fas fa-search"></i> Căutare</h3>
-                    <label for="inp-nume">Nume tricou, echipă sau jucător:</label>
+                    <h3><i class="fas fa-search"></i> Cautare</h3>
+                    <label for="inp-nume">Nume tricou, echipa sau jucator:</label>
                     <input type="text" id="inp-nume" list="echipe-populare" placeholder="Ex: Barcelona, Messi, Real Madrid...">
                     <datalist id="echipe-populare">
                         <option value="FC Barcelona">
@@ -55,7 +59,7 @@
                         <option value="Arsenal">
                         <option value="Manchester City">
                         <option value="AC Milan">
-                        <option value="România">
+                        <option value="Romania">
                         <option value="Portugalia">
                         <option value="Brazilia">
                         <option value="Messi">
@@ -63,8 +67,10 @@
                         <option value="Haaland">
                     </datalist>
                 </div>
+                
+                <!-- ETAPA 6: Filtru radio pentru tip echipa -->
                 <div class="filter-group">
-                    <h3><i class="fas fa-users"></i> Tip echipă</h3>
+                    <h3><i class="fas fa-users"></i> Tip echipa</h3>
                     <div class="radio-group">
                         <div class="radio-item">
                             <input id="tip-toate" name="gr_tip" value="toate" type="radio" 
@@ -79,18 +85,20 @@
                         <div class="radio-item">
                             <input id="tip-nationala" name="gr_tip" value="nationala" type="radio"
                                    <%= locals.tipEchipaFiltru === 'nationala' ? 'checked' : '' %>>
-                            <label for="tip-nationala">Echipe naționale</label>
+                            <label for="tip-nationala">Echipe nationale</label>
                         </div>
                         <div class="radio-item">
                             <input id="tip-fotbalist" name="gr_tip" value="fotbalist" type="radio"
                                    <%= locals.tipEchipaFiltru === 'fotbalist' ? 'checked' : '' %>>
-                            <label for="tip-fotbalist">Tricouri cu fotbaliști</label>
+                            <label for="tip-fotbalist">Tricouri cu fotbalisti</label>
                         </div>
                     </div>
                 </div>
+                
+                <!-- ETAPA 6: Select pentru categorii -->
                 <div class="filter-group">
                     <h3><i class="fas fa-tag"></i> Categorie</h3>
-                    <label for="inp-categorie">Selectează categoria:</label>
+                    <label for="inp-categorie">Selecteaza categoria:</label>
                     <select id="inp-categorie">
                         <option id="sel-toate" selected value="toate">Toate categoriile</option>
                         <% if (locals.optiuni && locals.optiuni.length > 0) { %>
@@ -98,18 +106,20 @@
                                 <option value="<%- opt.unnest %>"><%- opt.unnest %></option>
                             <% } %>
                         <% } else { %>
-                            <option value="acasa">Acasă</option>
+                            <option value="acasa">Acasa</option>
                             <option value="deplasare">Deplasare</option>
-                            <option value="editie speciala">Ediție specială</option>
+                            <option value="editie speciala">Editie speciala</option>
                             <option value="antrenament">Antrenament</option>
                             <option value="retro">Retro</option>
                             <option value="comemorativ">Comemorativ</option>
                         <% } %>
                     </select>
                 </div>
+                
+                <!-- ETAPA 6: Select multiple pentru caracteristici -->
                 <div class="filter-group">
                     <h3><i class="fas fa-list"></i> Caracteristici speciale</h3>
-                    <label for="inp-caracteristici">Selectează caracteristicile dorite:</label>
+                    <label for="inp-caracteristici">Selecteaza caracteristicile dorite:</label>
                     <select id="inp-caracteristici" multiple size="4">
                         <option value="DryFit">DryFit Technology</option>
                         <option value="premium">Premium Quality</option>
@@ -120,27 +130,30 @@
                         <option value="antimicrobial">Antimicrobial</option>
                         <option value="moisture">Moisture Wicking</option>
                     </select>
-                    <small>Țineți Ctrl pentru selecție multiplă</small>
+                    <small>Tineti Ctrl pentru selectie multipla</small>
                 </div>
+                
+                <!-- ETAPA 6: Range input pentru pret -->
                 <div class="filter-group">
-                    <h3><i class="fas fa-euro-sign"></i> Preț maxim</h3>
-                    <label for="inp-pret">Preț maxim (RON):</label>
+                    <h3><i class="fas fa-euro-sign"></i> Pret maxim</h3>
+                    <label for="inp-pret">Pret maxim (RON):</label>
                     <div class="range-container">
                         <input type="range" id="inp-pret" value="400" min="0" max="400" step="10">
                         <div class="price-display" id="pret-display">400 RON</div>
                     </div>
                 </div>
 
+                <!-- ETAPA 6: Radio pentru varsta -->
                 <div class="filter-group">
-                    <h3><i class="fas fa-child"></i> Vârstă</h3>
+                    <h3><i class="fas fa-child"></i> Varsta</h3>
                     <div class="radio-group">
                         <div class="radio-item">
                             <input id="varsta-toate" name="gr_varsta" value="toate" type="radio" checked>
-                            <label for="varsta-toate">Toate vârstele</label>
+                            <label for="varsta-toate">Toate varstele</label>
                         </div>
                         <div class="radio-item">
                             <input id="varsta-adulti" name="gr_varsta" value="false" type="radio">
-                            <label for="varsta-adulti">Pentru adulți</label>
+                            <label for="varsta-adulti">Pentru adulti</label>
                         </div>
                         <div class="radio-item">
                             <input id="varsta-copii" name="gr_varsta" value="true" type="radio">
@@ -148,9 +161,11 @@
                         </div>
                     </div>
                 </div>
+                
+                <!-- ETAPA 6: Select pentru sezon -->
                 <div class="filter-group">
                     <h3><i class="fas fa-calendar"></i> Sezon</h3>
-                    <label for="inp-sezon">Selectează sezonul:</label>
+                    <label for="inp-sezon">Selecteaza sezonul:</label>
                     <select id="inp-sezon">
                         <option value="toate" selected>Toate sezoanele</option>
                         <option value="2025/2026">2025/2026</option>
@@ -162,235 +177,249 @@
                         <option value="1970">1970</option>
                     </select>
                 </div>
+                
+                <!-- ETAPA 6: Textarea pentru echipe -->
                 <div class="filter-group">
                     <h3><i class="fas fa-star"></i> Echipe populare</h3>
-                    <label for="inp-echipe">Selectați echipele care vă interesează:</label>
+                    <label for="inp-echipe">Selectati echipele care va intereseaza:</label>
                     <textarea id="inp-echipe" rows="4" 
-                              placeholder="Introduceți numele echipelor separate prin virgulă&#10;Ex: Barcelona, Real Madrid, Manchester United, Liverpool, PSG"></textarea>
-                    <small>Separați echipele prin virgulă. Filtrarea va afișa produsele care conțin oricare din echipele specificate.</small>
+                              placeholder="Introduceti numele echipelor separate prin virgula&#10;Ex: Barcelona, Real Madrid, Manchester United, Liverpool, PSG"></textarea>
+                    <small>Separati echipele prin virgula. Filtrarea va afisa produsele care contin oricare din echipele specificate.</small>
                     <small id="echipe-error" class="error-message" style="display: none; color: red;">
-                        Vă rugăm să introduceți doar nume de echipe valide (litere, spații, puncte și cratime)
+                        Va rugam sa introduceti doar nume de echipe valide (litere, spatii, puncte si cratime)
                     </small>
                 </div>
             </div>
-           <!-- Înlocuiește secțiunea buttons-container din pagina produse.ejs -->
-<div class="buttons-container">
-    <button id="filtrare" class="btn btn-primary">
-        <i class="fas fa-filter"></i> Filtrează
-    </button>
-    <button id="resetare" class="btn btn-secondary">
-        <i class="fas fa-undo"></i> Resetează filtrele
-    </button>
-</div>
+            
+            <!-- ETAPA 6: Butoane pentru filtrare si resetare -->
+            <div class="buttons-container">
+                <button id="filtrare" class="btn btn-primary">
+                    <i class="fas fa-filter"></i> Filtreaza
+                </button>
+                <button id="resetare" class="btn btn-secondary">
+                    <i class="fas fa-undo"></i> Reseteaza filtrele
+                </button>
+            </div>
 
-<!-- Adaugă această secțiune pentru sortarea personalizabilă DUPĂ buttons-container -->
-<div class="sortare-personalizabila">
-    <h3><i class="fas fa-sort"></i> Sortare avansată</h3>
-    
-    <div class="sortare-grid">
-        <div class="sortare-cheie">
-            <label for="cheie-sortare-1">
-                <i class="fas fa-sort-amount-up"></i> 
-                Prima cheie de sortare:
-            </label>
-            <select id="cheie-sortare-1">
-                <option value="nume">Nume produs</option>
-                <option value="pret" selected>Preț</option>
-                <option value="echipa">Echipa</option>
-                <option value="categorie">Categorie</option>
-                <option value="sezon">Sezon</option>
-                <option value="liga">Liga</option>
-                <option value="data_adaugare">Data adăugării</option>
-            </select>
-        </div>
-        
-        <div class="sortare-directie">
-            <label for="directie-sortare-1">Direcția primei sortări:</label>
-            <select id="directie-sortare-1">
-                <option value="crescator" selected>Crescător</option>
-                <option value="descrescator">Descrescător</option>
-            </select>
-        </div>
-        
-        <div class="sortare-cheie">
-            <label for="cheie-sortare-2">
-                <i class="fas fa-sort-amount-down"></i> 
-                A doua cheie de sortare:
-            </label>
-            <select id="cheie-sortare-2">
-                <option value="nume" selected>Nume produs</option>
-                <option value="pret">Preț</option>
-                <option value="echipa">Echipa</option>
-                <option value="categorie">Categorie</option>
-                <option value="sezon">Sezon</option>
-                <option value="liga">Liga</option>
-                <option value="data_adaugare">Data adăugării</option>
-            </select>
-        </div>
-        
-        <div class="sortare-directie">
-            <label for="directie-sortare-2">Direcția celei de-a doua sortări:</label>
-            <select id="directie-sortare-2">
-                <option value="crescator" selected>Crescător</option>
-                <option value="descrescator">Descrescător</option>
-            </select>
-        </div>
-    </div>
-    
-    <div class="sortare-preview">
-        <div class="preview-content">
-            <i class="fas fa-info-circle"></i>
-            <span id="preview-sortare">Se va sorta după <strong>preț (crescător)</strong>, apoi după <strong>nume (crescător)</strong></span>
-        </div>
-    </div>
-</div>
+            <!-- BONUS ETAPA 6, Bonus 8: Sortare personalizabila cu doua chei -->
+            <div class="sortare-personalizabila">
+                <h3><i class="fas fa-sort"></i> Sortare avansata</h3>
+                
+                <div class="sortare-grid">
+                    <div class="sortare-cheie">
+                        <label for="cheie-sortare-1">
+                            <i class="fas fa-sort-amount-up"></i> 
+                            Prima cheie de sortare:
+                        </label>
+                        <select id="cheie-sortare-1">
+                            <option value="nume">Nume produs</option>
+                            <option value="pret" selected>Pret</option>
+                            <option value="echipa">Echipa</option>
+                            <option value="categorie">Categorie</option>
+                            <option value="sezon">Sezon</option>
+                            <option value="liga">Liga</option>
+                            <option value="data_adaugare">Data adaugarii</option>
+                        </select>
+                    </div>
+                    
+                    <div class="sortare-directie">
+                        <label for="directie-sortare-1">Directia primei sortari:</label>
+                        <select id="directie-sortare-1">
+                            <option value="crescator" selected>Crescator</option>
+                            <option value="descrescator">Descrescator</option>
+                        </select>
+                    </div>
+                    
+                    <div class="sortare-cheie">
+                        <label for="cheie-sortare-2">
+                            <i class="fas fa-sort-amount-down"></i> 
+                            A doua cheie de sortare:
+                        </label>
+                        <select id="cheie-sortare-2">
+                            <option value="nume" selected>Nume produs</option>
+                            <option value="pret">Pret</option>
+                            <option value="echipa">Echipa</option>
+                            <option value="categorie">Categorie</option>
+                            <option value="sezon">Sezon</option>
+                            <option value="liga">Liga</option>
+                            <option value="data_adaugare">Data adaugarii</option>
+                        </select>
+                    </div>
+                    
+                    <div class="sortare-directie">
+                        <label for="directie-sortare-2">Directia celei de-a doua sortari:</label>
+                        <select id="directie-sortare-2">
+                            <option value="crescator" selected>Crescator</option>
+                            <option value="descrescator">Descrescator</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="sortare-preview">
+                    <div class="preview-content">
+                        <i class="fas fa-info-circle"></i>
+                        <span id="preview-sortare">Se va sorta dupa <strong>pret (crescator)</strong>, apoi dupa <strong>nume (crescator)</strong></span>
+                    </div>
+                </div>
+            </div>
 
-    <div class="sortare-rapida-btns">
-        <button id="resetSortare" class="btn btn-secondary">
-            <i class="fas fa-undo"></i> Resetează la implicit
-        </button>
-        <button id="sortCrescNume" class="btn btn-success">
-            <i class="fas fa-sort-amount-up"></i> Sortare crescătoare rapidă
-        </button>
-        <button id="sortDescrescNume" class="btn btn-warning">
-            <i class="fas fa-sort-amount-down"></i> Sortare descrescătoare rapidă
-        <button id="aplicaSortare" class="btn btn-primary">
-            <i class="fas fa-sort"></i> Aplică sortarea
-        </button>
-    </div>
-        <div class="suma-info">
-            <p id="p-suma">
-                <% if (locals.produse && locals.produse.length > 0) { %>
-                    Se afișează <%= locals.produse.length %> produse
-                    <% if (locals.tipEchipaFiltru && locals.tipEchipaFiltru !== 'toate') { %>
-                        pentru categoria 
-                        <% if (locals.tipEchipaFiltru === 'club') { %>
-                            "Echipe de Club"
-                        <% } else if (locals.tipEchipaFiltru === 'nationala') { %>
-                            "Echipe Naționale"
-                        <% } else if (locals.tipEchipaFiltru === 'fotbalist') { %>
-                            "Fotbaliști"
-                        <% } else { %>
-                            "<%= locals.tipEchipaFiltru %>"
-                        <% } %>
-                    <% } %>
-                <% } else { %>
-                    Se încarcă produsele...
-                <% } %>
-                Apăsați <kbd>Alt</kbd>+<kbd>C</kbd> pentru suma prețurilor produselor selectate.
-            </p>
-        </div>
-        <section id="produse" class="products-section">
-            <div class="section-header">
-                <h2><i class="fa-solid fa-soccer-ball fa-spin-custom"></i> 
-                    <% if (locals.tipEchipaFiltru && locals.tipEchipaFiltru !== 'toate') { %>
-                        <% if (locals.tipEchipaFiltru === 'club') { %>
-                            Tricouri Echipe de Club
-                        <% } else if (locals.tipEchipaFiltru === 'nationala') { %>
-                            Tricouri Echipe Naționale
-                        <% } else if (locals.tipEchipaFiltru === 'fotbalist') { %>
-                            Tricouri cu Fotbaliști
-                        <% } else { %>
-                            Tricouri <%= locals.tipEchipaFiltru %>
+            <div class="sortare-rapida-btns">
+                <button id="resetSortare" class="btn btn-secondary">
+                    <i class="fas fa-undo"></i> Reseteaza la implicit
+                </button>
+                <button id="aplicaSortare" class="btn btn-primary">
+                    <i class="fas fa-sort"></i> Aplica sortarea
+                </button>
+                <button id="sortCrescNume" class="btn btn-success">
+                    <i class="fas fa-sort-amount-up"></i> Sortare crescatoare rapida
+                </button>
+                <button id="sortDescrescNume" class="btn btn-warning">
+                    <i class="fas fa-sort-amount-down"></i> Sortare descrescatoare rapida
+                </button>
+            </div>
+            
+            <!-- BONUS ETAPA 6, Bonus 15: Numarul total de produse afisate -->
+            <div class="suma-info">
+                <p id="p-suma">
+                    <% if (locals.produse && locals.produse.length > 0) { %>
+                        Se afiseaza <%= locals.produse.length %> produse
+                        <% if (locals.tipEchipaFiltru && locals.tipEchipaFiltru !== 'toate') { %>
+                            pentru categoria 
+                            <% if (locals.tipEchipaFiltru === 'club') { %>
+                                "Echipe de Club"
+                            <% } else if (locals.tipEchipaFiltru === 'nationala') { %>
+                                "Echipe Nationale"
+                            <% } else if (locals.tipEchipaFiltru === 'fotbalist') { %>
+                                "Fotbalisti"
+                            <% } else { %>
+                                "<%= locals.tipEchipaFiltru %>"
+                            <% } %>
                         <% } %>
                     <% } else { %>
-                        Colecția noastră de tricouri
+                        Se incarca produsele...
                     <% } %>
-                </h2>
-                <p>Descoperă cele mai populare tricouri de fotbal din lume</p>
+                    Apasati <kbd>Alt</kbd>+<kbd>C</kbd> pentru suma preturilor produselor selectate.
+                </p>
             </div>
+            
+            <!-- ETAPA 6: Sectiunea cu produsele -->
+            <section id="produse" class="products-section">
+                <div class="section-header">
+                    <h2><i class="fa-solid fa-soccer-ball fa-spin-custom"></i> 
+                        <% if (locals.tipEchipaFiltru && locals.tipEchipaFiltru !== 'toate') { %>
+                            <% if (locals.tipEchipaFiltru === 'club') { %>
+                                Tricouri Echipe de Club
+                            <% } else if (locals.tipEchipaFiltru === 'nationala') { %>
+                                Tricouri Echipe Nationale
+                            <% } else if (locals.tipEchipaFiltru === 'fotbalist') { %>
+                                Tricouri cu Fotbalisti
+                            <% } else { %>
+                                Tricouri <%= locals.tipEchipaFiltru %>
+                            <% } %>
+                        <% } else { %>
+                            Colectia noastra de tricouri
+                        <% } %>
+                    </h2>
+                    <p>Descopera cele mai populare tricouri de fotbal din lume</p>
+                </div>
 
-            <div class="grid-produse">
-                <% if (locals.produse && locals.produse.length > 0) { %>
-                    <% for (let prod of locals.produse) { %>
-                        <article class="produs" id="elem_<%= prod.id %>">
-                            <h3 class="nume">
-                                <a href="/produs/<%-prod.id %>">
-                                    <span class="val-nume"><%- prod.nume %></span>
-                                </a>
-                            </h3>
-                            <div class="info-prod">
-                                <table class="tabel-caracteristici">
-                                    <tr>
-                                        <td><strong>Preț:</strong></td>
-                                        <td class="val-pret"><%- prod.pret %> RON</td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Echipa:</strong></td>
-                                        <td class="val-echipa"><%- prod.echipa %></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Liga:</strong></td>
-                                        <td class="val-liga"><%- prod.liga || 'N/A' %></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Sezon:</strong></td>
-                                        <td class="val-sezon"><%- prod.sezon %></td>
-                                    </tr>
-                                    <tr>
-                                        <td><strong>Pentru copii:</strong></td>
-                                        <td class="val-copii"><%- prod.pentru_copii ? 'Da' : 'Nu' %></td>
-                                    </tr>
-                                </table>
+                <!-- ETAPA 6: Grid cu produsele -->
+                <div class="grid-produse">
+                    <% if (locals.produse && locals.produse.length > 0) { %>
+                        <% for (let prod of locals.produse) { %>
+                            <article class="produs" id="elem_<%= prod.id %>">
+                                <h3 class="nume">
+                                    <a href="/produs/<%-prod.id %>">
+                                        <span class="val-nume"><%- prod.nume %></span>
+                                    </a>
+                                </h3>
+                                <div class="info-prod">
+                                    <table class="tabel-caracteristici">
+                                        <tr>
+                                            <td><strong>Pret:</strong></td>
+                                            <td class="val-pret"><%- prod.pret %> RON</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Echipa:</strong></td>
+                                            <td class="val-echipa"><%- prod.echipa %></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Liga:</strong></td>
+                                            <td class="val-liga"><%- prod.liga || 'N/A' %></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Sezon:</strong></td>
+                                            <td class="val-sezon"><%- prod.sezon %></td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Pentru copii:</strong></td>
+                                            <td class="val-copii"><%- prod.pentru_copii ? 'Da' : 'Nu' %></td>
+                                        </tr>
+                                    </table>
 
-                                <p class="descriere"><%- prod.descriere || 'Tricou de fotbal de calitate premium.' %></p>
-                                
-                                <p class="categorie-prod">Categorie: <span class="val-categorie"><%- prod.categorie %></span></p>
-                                <% if (prod.pentru_copii || prod.este_nou || prod.esteCelMaiIeftin ) { %>
-                                <div class="product-badges">
-                                    <% if (prod.pentru_copii) { %>
-                                    <span class="badge badge-kids">
-                                        <i class="fas fa-child"></i> Copii
-                                    </span>
-                                    <% } %>
+                                    <p class="descriere"><%- prod.descriere || 'Tricou de fotbal de calitate premium.' %></p>
                                     
-                                    <% if (prod.este_nou) { %>
-                                    <span class="badge badge-nou">
-                                        <i class="fas fa-sparkles"></i> NOU
-                                    </span>
-                                    <% } %>
-                                    <% if (prod.esteCelMaiIeftin) { %>
-                                    <span class="badge badge-cheapest">
-                                        <i class="fas fa-crown"></i> CEL MAI IEFTIN DIN CATEGORIE
-                                    </span>
+                                    <p class="categorie-prod">Categorie: <span class="val-categorie"><%- prod.categorie %></span></p>
+                                    
+                                    <!-- BONUS ETAPA 6, Bonus 14: Marcarea celui mai ieftin produs -->
+                                    <!-- BONUS ETAPA 6, Bonus 18: Badge pentru produse noi -->
+                                    <% if (prod.pentru_copii || prod.este_nou || prod.esteCelMaiIeftin ) { %>
+                                    <div class="product-badges">
+                                        <% if (prod.pentru_copii) { %>
+                                        <span class="badge badge-kids">
+                                            <i class="fas fa-child"></i> Copii
+                                        </span>
+                                        <% } %>
+                                        
+                                        <% if (prod.este_nou) { %>
+                                        <span class="badge badge-nou">
+                                            <i class="fas fa-sparkles"></i> NOU
+                                        </span>
+                                        <% } %>
+                                        
+                                        <% if (prod.esteCelMaiIeftin) { %>
+                                        <span class="badge badge-cheapest">
+                                            <i class="fas fa-crown"></i> CEL MAI IEFTIN DIN CATEGORIE
+                                        </span>
+                                        <% } %>
+                                    </div>
                                     <% } %>
                                 </div>
+                                <figure>
+                                    <a href="/produs/<%-prod.id %>">
+                                        <img src="/resurse/imagini/produse/<%- prod.imagine %>" 
+                                             style="width:100%;height:auto;" 
+                                             alt="[imagine <%- prod.nume %>]"
+                                             onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI0NSUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlRyaWNvdTwvdGV4dD4KICA8dGV4dCB4PSI1MCUiIHk9IjYwJSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+RWxpdGUgS2l0czwvdGV4dD4KICA8L3N2Zz4K'" />
+                                    </a>
+                                </figure>
+                                <label class="selecteaza-cos">
+                                    <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
+                                    Selecteaza
+                                </label>
+                            </article>
+                        <% } %>
+                    <% } else { %>
+                        <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                            <h3>
+                                <% if (locals.tipEchipaFiltru && locals.tipEchipaFiltru !== 'toate') { %>
+                                    Nu s-au gasit produse pentru aceasta categorie
+                                <% } else { %>
+                                    Se incarca produsele...
                                 <% } %>
-                            </div>
-                            <figure>
-                                <a href="/produs/<%-prod.id %>">
-                                    <img src="/resurse/imagini/produse/<%- prod.imagine %>" 
-                                         style="width:100%;height:auto;" 
-                                         alt="[imagine <%- prod.nume %>]"
-                                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIwIiBoZWlnaHQ9IjI1MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KICA8cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZGRkIi8+CiAgPHRleHQgeD0iNTAlIiB5PSI0NSUiIGZvbnQtZmFtaWx5PSJBcmlhbCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIyMCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlRyaWNvdTwvdGV4dD4KICA8dGV4dCB4PSI1MCUiIHk9IjYwJSIgZm9udC1mYW1pbHk9IkFyaWFsLCBzYW5zLXNlcmlmIiBmb250LXNpemU9IjE2IiBmaWxsPSIjOTk5IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+RWxpdGUgS2l0czwvdGV4dD4KICA8L3N2Zz4K'" />
-                                </a>
-                            </figure>
-                            <label class="selecteaza-cos">
-                                <input type="checkbox" class="select-cos" value="<%-prod.id %>" autocomplete="off">
-                                Selectează
-                            </label>
-                        </article>
+                            </h3>
+                            <p>
+                                <% if (locals.tipEchipaFiltru && locals.tipEchipaFiltru !== 'toate') { %>
+                                    <a href="/produse" class="btn btn-primary">Vezi toate produsele</a>
+                                <% } else { %>
+                                    Produsele vor fi afisate automat prin JavaScript daca nu sunt disponibile din server.
+                                <% } %>
+                            </p>
+                        </div>
                     <% } %>
-                <% } else { %>
-                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
-                        <h3>
-                            <% if (locals.tipEchipaFiltru && locals.tipEchipaFiltru !== 'toate') { %>
-                                Nu s-au găsit produse pentru această categorie
-                            <% } else { %>
-                                Se încarcă produsele...
-                            <% } %>
-                        </h3>
-                        <p>
-                            <% if (locals.tipEchipaFiltru && locals.tipEchipaFiltru !== 'toate') { %>
-                                <a href="/produse" class="btn btn-primary">Vezi toate produsele</a>
-                            <% } else { %>
-                                Produsele vor fi afișate automat prin JavaScript dacă nu sunt disponibile din server.
-                            <% } %>
-                        </p>
-                    </div>
-                <% } %>
-            </div>
-        </section>
+                </div>
+            </section>
+        </div>
     </main>
     <%- include("../fragmente/footer") %>
 </body>

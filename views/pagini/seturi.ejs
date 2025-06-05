@@ -9,6 +9,7 @@
     <%- include("../fragmente/header") %>
     
     <main>
+        <!-- BONUS 17 ETAPA 6: Seturi de produse - implementare completa -->
         <section id="seturi-section">
             <div class="container-seturi">
                 <header class="header-seturi">
@@ -17,14 +18,16 @@
                         Seturi de Produse Elite Kits
                     </h2>
                     <p class="descriere-seturi">
-                        Descoperă colecțiile noastre speciale de tricouri, create cu grijă pentru pasionații de fotbal. 
-                        Seturile noastre oferă reduceri exclusive și combinații perfecte pentru orice fan.
+                        Descopera colectiile noastre speciale de tricouri, create cu grija pentru pasionatii de fotbal. 
+                        Seturile noastre ofera reduceri exclusive si combinatii perfecte pentru orice fan.
                     </p>
                 </header>
 
                 <% if (locals.seturi && locals.seturi.length > 0) { %>
+                    <!-- BONUS 17 ETAPA 6: Grid pentru afisarea seturilor -->
                     <div class="grid-seturi">
                         <% for (let set of locals.seturi) { %>
+                            <!-- BONUS 17 ETAPA 6: Card pentru fiecare set cu calcul reduceri -->
                             <article class="card-set" data-set-id="<%= set.set_id %>">
                                 <div class="card-set-header">
                                     <h3 class="nume-set">
@@ -48,6 +51,7 @@
                                     <p><%= set.descriere_set %></p>
                                 </div>
 
+                                <!-- BONUS 17 ETAPA 6: Preview produse din set -->
                                 <div class="preview-produse">
                                     <div class="produse-grid">
                                         <% for (let produs of set.produse.slice(0, 4)) { %>
@@ -75,21 +79,22 @@
                                     </div>
                                 </div>
 
+                                <!-- BONUS 17 ETAPA 6: Calculul preturilor cu reduceri -->
                                 <div class="info-preturi">
                                     <div class="preturi-container">
                                         <div class="pret-original">
-                                            <span class="label">Preț individual:</span>
+                                            <span class="label">Pret individual:</span>
                                             <span class="valoare"><%= set.pret_total.toFixed(2) %> RON</span>
                                         </div>
                                         <div class="economie">
-                                            <span class="label">Economisiți:</span>
+                                            <span class="label">Economisiti:</span>
                                             <span class="valoare economie-suma">
                                                 <i class="fas fa-piggy-bank"></i>
                                                 <%= set.economie.toFixed(2) %> RON
                                             </span>
                                         </div>
                                         <div class="pret-final">
-                                            <span class="label">Preț set:</span>
+                                            <span class="label">Pret set:</span>
                                             <span class="valoare pret-redus">
                                                 <%= set.pret_final.toFixed(2) %> RON
                                             </span>
@@ -104,22 +109,23 @@
                                     </a>
                                     <button class="btn-adauga-set" onclick="adaugaSetInCos('<%= set.set_id %>')">
                                         <i class="fas fa-shopping-cart"></i>
-                                        Adaugă setul în coș
+                                        Adauga setul in cos
                                     </button>
                                 </div>
                             </article>
                         <% } %>
                     </div>
                     
+                    <!-- BONUS 17 ETAPA 6: Avantajele seturilor -->
                     <div class="info-avantaje">
                         <div class="avantaj-card">
                             <i class="fas fa-money-bill-wave"></i>
-                            <h4>Economisești mai mult</h4>
-                            <p>Reduceri de până la 25% când cumperi seturi complete</p>
+                            <h4>Economisesti mai mult</h4>
+                            <p>Reduceri de pana la 25% cand cumperi seturi complete</p>
                         </div>
                         <div class="avantaj-card">
                             <i class="fas fa-shipping-fast"></i>
-                            <h4>Livrare gratuită</h4>
+                            <h4>Livrare gratuita</h4>
                             <p>Transport gratuit pentru toate seturile de produse</p>
                         </div>
                         <div class="avantaj-card">
@@ -133,8 +139,7 @@
                     <div class="no-seturi">
                         <i class="fas fa-box-open fa-3x"></i>
                         <h3>Nu sunt seturi disponibile momentan</h3>
-                        <p>Vă rugăm să reveniți mai târziu pentru noi colecții.</p>
-                        </a>
+                        <p>Va rugam sa reveniti mai tarziu pentru noi colectii.</p>
                     </div>
                 <% } %>
             </div>
@@ -145,7 +150,7 @@
     
     <script>
         function adaugaSetInCos(setId) {
-            alert('Setul a fost adăugat în coș!');
+            alert('Setul a fost adaugat in cos!');
         }
         
         document.addEventListener('DOMContentLoaded', function() {

@@ -10,6 +10,7 @@
     
     <main>
         <section>
+            <!-- ETAPA 4: Afisarea unui produs individual cu toate detaliile -->
             <article id="art-produs">
                 <h3><span class="nume"><%- locals.prod.nume %></span></h3>
                 
@@ -76,6 +77,8 @@
                 </div>
             </article>
         </section>
+        
+        <!-- BONUS ETAPA 6, Bonus 17d: Afisarea seturilor din care face parte produsul -->
         <% if (locals.seturiProdus && locals.seturiProdus.length > 0) { %>
         <section class="seturi-produs-section">
             <div class="container-seturi-produs">
@@ -115,7 +118,7 @@
                         <div class="alte-produse-set">
                             <h4>
                                 <i class="fas fa-plus"></i>
-                                Plus alte <%= set.alte_produse_din_set.length %> produse în set:
+                                Plus alte <%= set.alte_produse_din_set.length %> produse in set:
                             </h4>
                             
                             <div class="preview-alte-produse">
@@ -145,7 +148,7 @@
                         <div class="preturi-set-produs">
                             <div class="comparatie-preturi">
                                 <div class="pret-individual-total">
-                                    <span class="label">Preț individual total:</span>
+                                    <span class="label">Pret individual total:</span>
                                     <span class="valoare original-price"><%= set.pret_total.toFixed(2) %> RON</span>
                                 </div>
                                 <div class="economie-set">
@@ -156,7 +159,7 @@
                                     </span>
                                 </div>
                                 <div class="pret-set-final">
-                                    <span class="label">Preț set:</span>
+                                    <span class="label">Pret set:</span>
                                     <span class="valoare set-price"><%= set.pret_final.toFixed(2) %> RON</span>
                                 </div>
                             </div>
@@ -169,7 +172,7 @@
                             </a>
                             <button class="btn-adauga-set-produs" onclick="adaugaSetInCos('<%= set.set_id %>')">
                                 <i class="fas fa-shopping-cart"></i>
-                                Cumpără setul
+                                Cumpara setul
                                 <span class="pret-btn-set"><%= set.pret_final.toFixed(2) %> RON</span>
                             </button>
                         </div>
@@ -180,11 +183,11 @@
                 <div class="info-avantaje-seturi">
                     <div class="avantaj-seturi">
                         <i class="fas fa-money-bill-wave"></i>
-                        <span>Economisești cumpărând setul complet</span>
+                        <span>Economisesti cumparand setul complet</span>
                     </div>
                     <div class="avantaj-seturi">
                         <i class="fas fa-shipping-fast"></i>
-                        <span>Livrare gratuită pentru seturi</span>
+                        <span>Livrare gratuita pentru seturi</span>
                     </div>
                     <div class="avantaj-seturi">
                         <i class="fas fa-gift"></i>
@@ -194,6 +197,8 @@
             </div>
         </section>
         <% } %>
+        
+        <!-- BONUS ETAPA 6, Bonus 16: Produse similare pe pagina produsului -->
         <% if (locals.produseSimilare && locals.produseSimilare.length > 0) { %>
         <section class="produse-similare-section">
             <div class="container-produse-similare">
@@ -216,7 +221,7 @@
                                 <% if (prodSimilar.echipa === locals.prod.echipa) { %>
                                 <span class="badge-similar-echipa">
                                     <i class="fas fa-users"></i>
-                                    Aceeași echipă
+                                    Aceeasi echipa
                                 </span>
                                 <% } %>
                             
@@ -228,7 +233,7 @@
                                 <% if (diferentaProcentuala <= 15) { %>
                                 <span class="badge-pret-similar">
                                     <i class="fas fa-tag"></i>
-                                    Preț similar
+                                    Pret similar
                                 </span>
                                 <% } %>
                             </figure>
@@ -312,6 +317,10 @@
     <script>
         function adaugaInCos(id) {
             alert('Produsul a fost adaugat in cos!');
+        }
+        
+        function adaugaSetInCos(setId) {
+            alert('Setul a fost adaugat in cos!');
         }
     </script>
 </body>

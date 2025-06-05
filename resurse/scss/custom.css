@@ -1,4 +1,13 @@
 @charset "UTF-8";
+/* ETAPA 5: Compilare automata SCSS - Schema cromatica personalizata */
+/* ETAPA 5: Customizare Bootstrap - Definirea culorilor principale */
+/* ETAPA 5: Customizare Bootstrap - Generarea variantelor de culori */
+/* ETAPA 5: Customizare Bootstrap - Familia de font personalizata */
+/* ETAPA 5: Customizare Bootstrap - Dimensiuni de ecran personalizate */
+/* ETAPA 5: Customizare Bootstrap - Raza borderului personalizata */
+/* ETAPA 5: Customizare Bootstrap - Spatieri personalizate */
+/* ETAPA 5: Customizare Bootstrap - Dimensiuni headinguri personalizate */
+/* ETAPA 5: Importul Bootstrap cu variabilele personalizate */
 /*!
  * Bootstrap  v5.3.6 (https://getbootstrap.com/)
  * Copyright 2011-2025 The Bootstrap Authors
@@ -11862,6 +11871,7 @@ textarea.form-control-lg {
     display: none !important;
   }
 }
+/* ETAPA 5: CSS custom properties pentru compatibilitate */
 :root {
   --bs-primary: #076104;
   --bs-primary-rgb: 7, 97, 4;
@@ -11881,12 +11891,14 @@ textarea.form-control-lg {
   --culoare-primara-light: rgb(64.2079207921, 246.8811881188, 58.1188118812);
 }
 
+/* ETAPA 5: Stilizare body cu schema cromatica */
 body {
   font-family: "Montserrat", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   background-color: #E7FCE4;
   color: #0D0D0D;
 }
 
+/* ETAPA 5: Customizare butoane Bootstrap */
 .btn-primary {
   --bs-btn-color: #fff;
   --bs-btn-bg: #076104;
@@ -11917,6 +11929,7 @@ body {
   --bs-btn-disabled-border-color: rgba(128, 193, 53, 0.7);
 }
 
+/* ETAPA 5: Culori de background Bootstrap personalizate */
 .bg-primary {
   background-color: #076104 !important;
 }
@@ -11945,6 +11958,7 @@ body {
   background-color: rgb(64.2079207921, 246.8811881188, 58.1188118812) !important;
 }
 
+/* ETAPA 5: Culori de text Bootstrap personalizate */
 .text-primary {
   color: #076104 !important;
 }
@@ -11953,6 +11967,7 @@ body {
   color: #80C135 !important;
 }
 
+/* ETAPA 5: Culori de border Bootstrap personalizate */
 .border-primary {
   border-color: #076104 !important;
 }
@@ -11961,6 +11976,7 @@ body {
   border-color: #80C135 !important;
 }
 
+/* ETAPA 5: Stilizarea headingurilor cu noile dimensiuni */
 h1, .h1 {
   color: #F2F2F2 !important;
   font-size: 4rem !important;
@@ -11996,6 +12012,7 @@ h6, .h6 {
   font-weight: 500;
 }
 
+/* ETAPA 5: Stilizarea cardurilor Bootstrap */
 .card {
   border-radius: 0.5rem !important;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -12020,6 +12037,7 @@ h6, .h6 {
   background-color: transparent;
 }
 
+/* ETAPA 5: Stilizarea butoanelor generale */
 .btn {
   border-radius: 0.5rem !important;
   padding: 0.6rem 1.2rem;
@@ -12036,6 +12054,7 @@ h6, .h6 {
   transform: translateY(0);
 }
 
+/* ETAPA 5: Stilizarea accordion Bootstrap */
 .accordion {
   --bs-accordion-border-radius: 0.5rem;
   --bs-accordion-inner-border-radius: 0.5rem;
@@ -12079,6 +12098,7 @@ h6, .h6 {
   background-color: #F2F2F2;
 }
 
+/* ETAPA 5: Stilizarea alert Bootstrap */
 .alert {
   border-radius: 0.5rem;
   border: none;
@@ -12093,6 +12113,7 @@ h6, .h6 {
   margin-bottom: 0.75rem;
 }
 
+/* ETAPA 6: Light/dark theme - Dark theme pentru Bootstrap */
 [data-bs-theme=dark] {
   --bs-body-bg: #0D0D0D;
   --bs-body-color: #F2F2F2;
@@ -12121,6 +12142,7 @@ h6, .h6 {
   color: #F2F2F2;
 }
 
+/* ETAPA 5: Media queries responsive */
 @media (min-width: 768px) {
   .container {
     padding-left: 2rem;

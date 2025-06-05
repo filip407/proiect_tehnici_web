@@ -1,15 +1,15 @@
-
+/* ETAPA 3: Task meniu - Variabile pentru breakpoints si tranzitii */
 $breakpoint-tablet: 768px;
 $breakpoint-desktop-small: 992px;
 $transition-standard: 0.5s ease;
 $border-radius-standard: 8px;
 
+/* ETAPA 3: Mixins pentru reutilizare */
 @mixin transition($properties...) {
   transition-property: $properties;
   transition-duration: $transition-standard;
   transition-timing-function: ease;
 }
-
 
 @mixin box-shadow {
   box-shadow: 0 8px 15px var(--culoare-umbra);
@@ -21,6 +21,7 @@ $border-radius-standard: 8px;
   align-items: center;
 }
 
+/* ETAPA 3: Task meniu - Navigare desktop */
 nav {
   background: var(--culoare-primara);
   margin-top: 20px;
@@ -54,7 +55,7 @@ nav {
         font-size: 1.2rem;
         text-transform: uppercase;
         position: relative;
-       transition: color 0.5s ease;
+        transition: color 0.5s ease;
 
         &:visited {
           color: white;
@@ -66,6 +67,7 @@ nav {
         }
       }
 
+      /* ETAPA 3: Efect pentru linkurile fara submeniu */
       &:not(:has(ul)) {
         > a::after {
           content: "";
@@ -85,6 +87,7 @@ nav {
         }
       }
 
+      /* ETAPA 3: Submeniu dropdown */
       > ul {
         position: absolute;
         left: 50%;
@@ -142,6 +145,7 @@ nav {
   }
 }
 
+/* ETAPA 3: Task meniu - Mobile menu implementation */
 @media screen and (max-width: $breakpoint-tablet) {
   nav {
     > ul {
@@ -149,6 +153,7 @@ nav {
     }
   }
 
+  /* BONUS ETAPA 3: Hamburger menu cu divuri */
   .hamburger-menu {
     display: block;
     position: absolute;
@@ -182,19 +187,19 @@ nav {
       }
     }
 
+    /* BONUS ETAPA 3: Animatie hamburger cu delay-uri diferite */
     &.animated {
-
       @for $i from 1 through 3 {
-          span:nth-child(#{$i}) {
-              @if $i == 1 {
-                  animation: hamburgerBar1Animation 0.8s ease-in-out forwards;
-              } @else if $i == 2 {
-                  animation: hamburgerBar2Animation 0.8s ease-in-out forwards;
-              } @else {
-                  animation: hamburgerBar3Animation 0.8s ease-in-out forwards;
-              }
-              animation-delay: #{$i * 300}ms;
+        span:nth-child(#{$i}) {
+          @if $i == 1 {
+            animation: hamburgerBar1Animation 0.8s ease-in-out forwards;
+          } @else if $i == 2 {
+            animation: hamburgerBar2Animation 0.8s ease-in-out forwards;
+          } @else {
+            animation: hamburgerBar3Animation 0.8s ease-in-out forwards;
           }
+          animation-delay: #{$i * 300}ms;
+        }
       }
     }
   }
@@ -310,6 +315,7 @@ nav {
   }
 }
 
+/* ETAPA 3: Responsivitate pentru ecrane medii */
 @media screen and (max-width: $breakpoint-desktop-small) and (min-width: ($breakpoint-tablet + 1)) {
   nav {
     > ul {
@@ -366,6 +372,7 @@ nav {
   }
 }
 
+/* BONUS ETAPA 3: Animatii hamburger cu schimbarea proprietatilor */
 @keyframes hamburgerBar1Animation {
   0% {
     background-color: var(--culoare-accent);

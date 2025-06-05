@@ -1,3 +1,6 @@
+/* BONUS ETAPA 6 - Bonus 17: Seturi de produse */
+
+/* Sectiunea principala pentru seturi */
 #seturi-section {
     padding: 30px 0;
     background: linear-gradient(135deg, var(--culoare-deschis) 0%, var(--culoare-deschis2) 100%);
@@ -63,7 +66,7 @@
 .card-set-header {
     padding: 25px;
     background: linear-gradient(135deg, var(--culoare-primara) 0%, var(--culoare-secundara) 100%);
-    color: white;
+    color: var(--culoare-deschis);
 }
 
 .nume-set {
@@ -169,7 +172,7 @@
     left: 0;
     right: 0;
     background: linear-gradient(transparent, rgba(0,0,0,0.8));
-    color: white;
+    color: var(--culoare-deschis);
     padding: 10px 5px 5px;
     font-size: 0.7rem;
     text-align: center;
@@ -265,18 +268,18 @@
 
 .btn-vezi-set {
     background: var(--culoare-primara);
-    color: white;
+    color: var(--culoare-deschis);
 }
 
 .btn-vezi-set:hover {
     background: var(--culoare-hover);
     transform: translateY(-2px);
-    color: white;
+    color: var(--culoare-deschis);
 }
 
 .btn-adauga-set {
     background: var(--culoare-accent2);
-    color: white;
+    color: var(--culoare-deschis);
 }
 
 .btn-adauga-set:hover {
@@ -345,7 +348,7 @@
 
 .btn-produse {
     background: var(--culoare-primara);
-    color: white;
+    color: var(--culoare-deschis);
     padding: 12px 25px;
     border-radius: 8px;
     text-decoration: none;
@@ -359,9 +362,10 @@
 .btn-produse:hover {
     background: var(--culoare-hover);
     transform: translateY(-2px);
-    color: white;
+    color: var(--culoare-deschis);
 }
 
+/* Pagina individuala pentru set */
 #set-individual {
     padding: 30px 0;
     background: var(--culoare-deschis);
@@ -514,7 +518,7 @@
 
 .btn-adauga-set-mare {
     background: var(--culoare-accent2);
-    color: white;
+    color: var(--culoare-deschis);
     border: none;
     padding: 15px 25px;
     border-radius: 10px;
@@ -685,18 +689,18 @@
 
 .btn-vezi-produs {
     background: var(--culoare-primara);
-    color: white;
+    color: var(--culoare-deschis);
 }
 
 .btn-vezi-produs:hover {
     background: var(--culoare-hover);
     transform: translateY(-1px);
-    color: white;
+    color: var(--culoare-deschis);
 }
 
 .btn-cos-individual {
     background: var(--culoare-accent2);
-    color: white;
+    color: var(--culoare-deschis);
 }
 
 .btn-cos-individual:hover {
@@ -767,6 +771,7 @@
     font-weight: bold;
 }
 
+/* Responsive design */
 @media (max-width: 1024px) {
     .grid-seturi {
         grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -827,7 +832,6 @@
         align-items: flex-start;
         gap: 8px;
     }
-    
     
     .actiuni-set {
         flex-direction: column;
@@ -977,13 +981,14 @@
     }
 }
 
+/* Link styling pentru consistenta */
 .grid-seturi .btn-vezi-set:visited,
 .grid-seturi .btn-adauga-set:visited,
 .btn-vezi-produs:visited,
 .btn-cos-individual:visited,
 .btn-adauga-set-mare:visited,
 .btn-produse:visited {
-    color: white;
+    color: var(--culoare-deschis);
 }
 
 .nume-produs-set a:visited {
@@ -994,6 +999,7 @@
     color: var(--culoare-primara);
 }
 
+/* Animatii pentru incarcarea cardurilor */
 @keyframes fadeInUp {
     from {
         opacity: 0;

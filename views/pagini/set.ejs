@@ -9,12 +9,13 @@
     <%- include("../fragmente/header") %>
     
     <main>
+        <!-- BONUS ETAPA 6, Bonus 17: Pagina dedicata unui set individual -->
         <section id="set-individual">
             <div class="container-set">
                 <div class="breadcrumb">
                     <a href="/seturi">
                         <i class="fas fa-arrow-left"></i>
-                        Înapoi la seturi
+                        Inapoi la seturi
                     </a>
                 </div>
 
@@ -28,6 +29,7 @@
                     </p>
                 </header>
 
+                <!-- BONUS ETAPA 6, Bonus 17c: Statistici set cu calcul pretului -->
                 <div class="info-set-principal">
                     <div class="statistici-set">
                         <div class="statistica">
@@ -38,23 +40,23 @@
                         <div class="statistica">
                             <i class="fas fa-percentage"></i>
                             <span class="numar"><%= locals.set.reducere_procentaj %>%</span>
-                            <span class="label">Reducere aplicată</span>
+                            <span class="label">Reducere aplicata</span>
                         </div>
                         <div class="statistica">
                             <i class="fas fa-piggy-bank"></i>
                             <span class="numar"><%= locals.set.economie.toFixed(2) %></span>
-                            <span class="label">RON economisiți</span>
+                            <span class="label">RON economisiti</span>
                         </div>
                     </div>
 
                     <div class="preturi-set-principal">
                         <div class="pret-comparatie">
                             <span class="pret-original-mare">
-                                <span class="label">Preț individual total:</span>
+                                <span class="label">Pret individual total:</span>
                                 <span class="valoare"><%= locals.set.pret_total.toFixed(2) %> RON</span>
                             </span>
                             <span class="pret-set-mare">
-                                <span class="label">Preț set cu reducere:</span>
+                                <span class="label">Pret set cu reducere:</span>
                                 <span class="valoare"><%= locals.set.pret_final.toFixed(2) %> RON</span>
                             </span>
                         </div>
@@ -62,17 +64,18 @@
                         <div class="actiuni-set-principal">
                             <button class="btn-adauga-set-mare" onclick="adaugaSetInCos('<%= locals.set.set_id %>')">
                                 <i class="fas fa-shopping-cart"></i>
-                                Adaugă întregul set în coș
+                                Adauga intregul set in cos
                                 <span class="pret-btn"><%= locals.set.pret_final.toFixed(2) %> RON</span>
                             </button>
                         </div>
                     </div>
                 </div>
 
+                <!-- BONUS ETAPA 6, Bonus 17d: Lista completa produse din set -->
                 <div class="produse-din-set">
                     <h3>
                         <i class="fas fa-list"></i>
-                        Produsele incluse în set
+                        Produsele incluse in set
                     </h3>
                     
                     <div class="grid-produse-set">
@@ -145,31 +148,32 @@
                     </div>
                 </div>
 
+                <!-- BONUS ETAPA 6, Bonus 17: Beneficiile cumpararii setului -->
                 <div class="beneficii-set">
                     <h3>
                         <i class="fas fa-star"></i>
-                        De ce să alegi acest set?
+                        De ce sa alegi acest set?
                     </h3>
                     <div class="grid-beneficii">
                         <div class="beneficiu">
                             <i class="fas fa-money-bill-wave"></i>
-                            <h4>Economie garantată</h4>
-                            <p>Economisești <strong><%= locals.set.economie.toFixed(2) %> RON</strong> față de cumpărarea individuală</p>
+                            <h4>Economie garantata</h4>
+                            <p>Economisesti <strong><%= locals.set.economie.toFixed(2) %> RON</strong> fata de cumpararea individuala</p>
                         </div>
                         <div class="beneficiu">
                             <i class="fas fa-shipping-fast"></i>
-                            <h4>Livrare optimizată</h4>
-                            <p>Toate produsele din set se livrează împreună, rapid și sigur</p>
+                            <h4>Livrare optimizata</h4>
+                            <p>Toate produsele din set se livreaza impreuna, rapid si sigur</p>
                         </div>
                         <div class="beneficiu">
                             <i class="fas fa-gift"></i>
                             <h4>Ambalaj premium</h4>
-                            <p>Setul vine într-un ambalaj special, perfect pentru cadouri</p>
+                            <p>Setul vine intr-un ambalaj special, perfect pentru cadouri</p>
                         </div>
                         <div class="beneficiu">
                             <i class="fas fa-medal"></i>
-                            <h4>Calitate garantată</h4>
-                            <p>Fiecare produs din set este selectat pentru calitatea sa superioară</p>
+                            <h4>Calitate garantata</h4>
+                            <p>Fiecare produs din set este selectat pentru calitatea sa superioara</p>
                         </div>
                     </div>
                 </div>
@@ -181,13 +185,13 @@
     
     <script>
         function adaugaSetInCos(setId) {
-            alert('Întregul set a fost adăugat în coș!');
-            console.log('Set complet adăugat în coș:', setId);
+            alert('Intregul set a fost adaugat in cos!');
+            console.log('Set complet adaugat in cos:', setId);
         }
         
         function adaugaProdusInCos(produsId) {
-            alert('Produsul a fost adăugat în coș!');
-            console.log('Produs individual adăugat în coș:', produsId);
+            alert('Produsul a fost adaugat in cos!');
+            console.log('Produs individual adaugat in cos:', produsId);
         }
 
         document.querySelector('.breadcrumb a').addEventListener('click', function(e) {

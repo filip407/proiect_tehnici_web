@@ -1,3 +1,6 @@
+/* BONUS ETAPA 6 - Bonus 20: Compararea produselor */
+
+/* Reset si stiluri de baza */
 * {
     margin: 0;
     padding: 0;
@@ -9,14 +12,14 @@ body {
     background: linear-gradient(135deg, #f8f9fa, #e9ecef);
     min-height: 100vh;
     padding: 20px;
-    color: #333;
+    color: var(--culoare-inchis2);
     line-height: 1.6;
 }
 
 .comparare-header {
     text-align: center;
     margin-bottom: 30px;
-    color: #076104;
+    color: var(--culoare-primara);
 }
 
 .comparare-header h1 {
@@ -49,13 +52,13 @@ body {
 }
 
 .comparare-table th {
-    background: linear-gradient(135deg, #076104, #228B22);
-    color: white;
+    background: linear-gradient(135deg, var(--culoare-primara), #228B22);
+    color: var(--culoare-deschis);
     padding: 20px 15px;
     text-align: center;
     font-weight: 600;
     font-size: 1.2rem;
-    border-bottom: 3px solid #fff;
+    border-bottom: 3px solid var(--culoare-deschis);
     position: sticky;
     top: 0;
     z-index: 10;
@@ -86,8 +89,8 @@ body {
 
 .comparare-table tr.row-highlight {
     background: linear-gradient(135deg, rgba(7, 97, 4, 0.1), rgba(34, 139, 34, 0.1));
-    border-top: 2px solid #076104;
-    border-bottom: 2px solid #076104;
+    border-top: 2px solid var(--culoare-primara);
+    border-bottom: 2px solid var(--culoare-primara);
 }
 
 .comparare-table tr.row-highlight:hover {
@@ -96,12 +99,12 @@ body {
 
 .caracteristica-label {
     font-weight: 700;
-    color: #076104;
+    color: var(--culoare-primara);
     background: rgba(7, 97, 4, 0.1);
     text-align: left !important;
     padding-left: 20px !important;
     font-size: 1rem;
-    border-right: 2px solid #076104;
+    border-right: 2px solid var(--culoare-primara);
 }
 
 .caracteristica-label i {
@@ -124,7 +127,7 @@ body {
 
 .produs-value.nume {
     font-weight: 600;
-    color: #076104;
+    color: var(--culoare-primara);
     font-size: 1.1rem;
 }
 
@@ -162,12 +165,12 @@ body {
 
 .badge-da {
     background: linear-gradient(45deg, #28a745, #20c997);
-    color: white;
+    color: var(--culoare-deschis);
 }
 
 .badge-nu {
-    background: linear-gradient(45deg, #dc3545, #fd7e14);
-    color: white;
+    background: linear-gradient(45deg, var(--culoare-accent), #fd7e14);
+    color: var(--culoare-deschis);
 }
 
 .pret-avantaj {
@@ -185,7 +188,7 @@ body {
 }
 
 .dezavantaj {
-    color: #dc3545;
+    color: var(--culoare-accent);
     font-weight: 600;
     display: flex;
     align-items: center;
@@ -206,8 +209,8 @@ body {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: linear-gradient(135deg, #dc3545, #c82333);
-    color: white;
+    background: linear-gradient(135deg, var(--culoare-accent), #c82333);
+    color: var(--culoare-deschis);
     border: none;
     padding: 12px 18px;
     border-radius: 25px;
@@ -261,8 +264,8 @@ body {
 }
 
 .btn-footer {
-    background: linear-gradient(135deg, #076104, #228B22);
-    color: white;
+    background: linear-gradient(135deg, var(--culoare-primara), #228B22);
+    color: var(--culoare-deschis);
     border: none;
     padding: 10px 20px;
     border-radius: 20px;
@@ -282,6 +285,7 @@ body {
     box-shadow: 0 4px 12px rgba(7, 97, 4, 0.4);
 }
 
+/* Responsive design */
 @media screen and (max-width: 1024px) {
     body { 
         padding: 15px; 
@@ -394,6 +398,7 @@ body {
     }
 }
 
+/* Print styles */
 @media print {
     body {
         background: white;
