@@ -14,19 +14,6 @@ async function incarcaProduse() {
     
     if (produseExistente.length > 0) {
         produse = extrageProduseDeInPagina();
-    } else {
-        try {
-            const response = await fetch('/api/produse');
-            if (response.ok) {
-                const data = await response.json();
-                produse = data;
-                afiseazaProduse(produse);
-            } else {
-                throw new Error(`Raspuns API invalid: ${response.status}`);
-            }
-        } catch (error) {
-            console.warn('API indisponibil, folosesc produsele default:', error.message);
-        }
     }
     
     produseAfisate = [...produse];
@@ -291,10 +278,11 @@ function filtreazaProduse() {
     const categorie = document.getElementById('inp-categorie')?.value || 'toate';
     const pretMaxim = parseFloat(document.getElementById('inp-pret')?.value || 400);
     const pentruCopii = document.querySelector('input[name="gr_varsta"]:checked')?.value || 'toate';
-    const sezon = document.getElementById('inp-sezon')?.value || 'toate';
+    const anMinim = parseInt(document.getElementById('inp-an-sezon')?.value || 1970);
     
     const echipeText = document.getElementById('inp-echipe')?.value.toLowerCase().trim() || '';
-    const echipePopulare = echipeText ? echipeText.split(',').map(e => e.trim()).filter(e => e.length > 0) : [];
+    const echipePopulare = echipeText ? 
+        echipeText.split(',').map(e => e.trim()).filter(e => e.length > 0) : [];
     
     const caracteristiciSelect = document.getElementById('inp-caracteristici');
     const caracteristiciSelectate = Array.from(caracteristiciSelect.selectedOptions).map(option => option.value);
@@ -309,7 +297,12 @@ function filtreazaProduse() {
         const categorieMatch = categorie === 'toate' || produs.categorie === categorie;
         const pretMatch = produs.pret <= pretMaxim;
         const copiiMatch = pentruCopii === 'toate' || produs.pentru_copii.toString() === pentruCopii;
-        const sezonMatch = sezon === 'toate' || produs.sezon === sezon;
+
+        let anMatch = true;
+        if (produs.sezon) {
+            const anProdus = parseInt(produs.sezon.split('/')[0]);
+            anMatch = !isNaN(anProdus) && anProdus >= anMinim;
+        }
         
         let echipeMatch = true;
         if (echipePopulare.length > 0) {
@@ -329,7 +322,7 @@ function filtreazaProduse() {
             );
         }
 
-        return numeMatch && tipMatch && categorieMatch && pretMatch && copiiMatch && sezonMatch && echipeMatch && caracteristiciMatch;
+        return numeMatch && tipMatch && categorieMatch && pretMatch && copiiMatch && anMatch && echipeMatch && caracteristiciMatch;
     });
 
     afiseazaProduse(produseAfisate);
@@ -342,33 +335,50 @@ function reseteazaFiltre() {
         return;
     }
     
-    const inpNume = document.getElementById('inp-nume');
-    const tipToate = document.querySelector('#tip-toate');
-    const inpCategorie = document.getElementById('inp-categorie');
-    const inpPret = document.getElementById('inp-pret');
-    const pretDisplay = document.getElementById('pret-display');
-    const varstaToate = document.querySelector('#varsta-toate');
-    const inpSezon = document.getElementById('inp-sezon');
-    const inpEchipe = document.getElementById('inp-echipe');
-    const inpCaracteristici = document.getElementById('inp-caracteristici');
-    const echipeError = document.getElementById('echipe-error');
+    const inputNume = document.getElementById('inp-nume');
+    if (inputNume) inputNume.value = '';
     
-    if (inpNume) inpNume.value = '';
-    if (tipToate) tipToate.checked = true;
-    if (inpCategorie) inpCategorie.value = 'toate';
-    if (inpPret) inpPret.value = '400';
-    if (pretDisplay) pretDisplay.textContent = '400 RON';
-    if (varstaToate) varstaToate.checked = true;
-    if (inpSezon) inpSezon.value = 'toate';
-    if (inpEchipe) inpEchipe.value = '';
-    if (inpCaracteristici) {
-        Array.from(inpCaracteristici.options).forEach(option => option.selected = false);
+    const radioTipToate = document.getElementById('tip-toate');
+    if (radioTipToate) radioTipToate.checked = true;
+    
+    const selectCategorie = document.getElementById('inp-categorie');
+    if (selectCategorie) selectCategorie.value = 'toate';
+    
+    const pretSlider = document.getElementById('inp-pret');
+    if (pretSlider) {
+        pretSlider.value = 400;
+        const pretDisplay = document.getElementById('pret-display');
+        if (pretDisplay) pretDisplay.textContent = '400 RON';
     }
+    
+    const radioVarstaToate = document.getElementById('varsta-toate');
+    if (radioVarstaToate) radioVarstaToate.checked = true;
+
+    const anSlider = document.getElementById('inp-an-sezon');
+    if (anSlider) {
+        anSlider.value = 1970;
+        const anDisplay = document.getElementById('an-display');
+        if (anDisplay) anDisplay.textContent = '1970';
+    }
+    
+    const textareaEchipe = document.getElementById('inp-echipe');
+    if (textareaEchipe) textareaEchipe.value = '';
+    
+    const selectCaracteristici = document.getElementById('inp-caracteristici');
+    if (selectCaracteristici) {
+        Array.from(selectCaracteristici.options).forEach(option => {
+            option.selected = false;
+        });
+    }
+
+    const echipeError = document.getElementById('echipe-error');
     if (echipeError) echipeError.style.display = 'none';
     
     produseAfisate = [...produse];
     afiseazaProduse(produseAfisate);
     actualizeazaContorProduse();
+    
+    console.log('Filtrele au fost resetate');
 }
 
 // Etapa 6 - Sortare crescatoare cu algoritm compus
@@ -378,8 +388,8 @@ function sorteazaCrescator() {
     }
     
     produseAfisate.sort((a, b) => {
-        const raportA = a.pret / (a.sezon.length || 1);
-        const raportB = b.pret / (b.sezon.length || 1);
+        const raportA = a.pret;
+        const raportB = b.pret;
         
         if (Math.abs(raportA - raportB) > 0.01) {
             return raportA - raportB;
@@ -397,8 +407,8 @@ function sorteazaDescrescator() {
     }
     
     produseAfisate.sort((a, b) => {
-        const raportA = a.pret / (a.sezon.length || 1);
-        const raportB = b.pret / (b.sezon.length || 1);
+        const raportA = a.pret;
+        const raportB = b.pret;
         
         if (Math.abs(raportA - raportB) > 0.01) {
             return raportB - raportA;
@@ -489,7 +499,6 @@ function debounce(func, wait) {
     };
 }
 
-// Initializarea event listeners pentru toate controalele
 function initializeazaEventListeners() {
     const pretSlider = document.getElementById('inp-pret');
     const pretDisplay = document.getElementById('pret-display');
@@ -499,6 +508,16 @@ function initializeazaEventListeners() {
             pretDisplay.textContent = this.value + ' RON';
         });
         pretDisplay.textContent = pretSlider.value + ' RON';
+    }
+
+    const anSlider = document.getElementById('inp-an-sezon');
+    const anDisplay = document.getElementById('an-display');
+    
+    if (anSlider && anDisplay) {
+        anSlider.addEventListener('input', function() {
+            anDisplay.textContent = this.value;
+        });
+        anDisplay.textContent = anSlider.value;
     }
 
     const btnFiltrare = document.getElementById('filtrare');
@@ -529,9 +548,8 @@ function initializeazaEventListeners() {
         radio.addEventListener('change', filtreazaProduse);
     });
 
-    const selectSezon = document.getElementById('inp-sezon');
-    if (selectSezon) {
-        selectSezon.addEventListener('change', filtreazaProduse);
+    if (anSlider) {
+        anSlider.addEventListener('input', debounce(filtreazaProduse, 200));
     }
 
     const selectCaracteristici = document.getElementById('inp-caracteristici');
@@ -564,7 +582,6 @@ function initializeazaEventListeners() {
         textareaEchipe.addEventListener('input', debounce(filtreazaProduse, 500));
     }
 
-    // Shortcut pentru calcularea sumei
     document.addEventListener('keydown', function(event) {
         if (event.altKey && event.key.toLowerCase() === 'c') {
             event.preventDefault();

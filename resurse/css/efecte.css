@@ -1,13 +1,13 @@
 /* ETAPA 5: Efecte CSS - Stilizare HR cu pattern sageata */
 hr.sageata-hr {
-  height: 24px;
+  height: 22px;
   border: none;
   margin: 30px 0;
   background-image: 
       linear-gradient(45deg, var(--culoare-primara) 25%, transparent 25%, transparent 50%, var(--culoare-primara) 50%, var(--culoare-primara) 75%, transparent 75%, transparent),
       linear-gradient(-45deg,var(--culoare-primara) 25%, transparent 25%, transparent 50%,var(--culoare-primara) 50%, var(--culoare-primara) 75%, transparent 75%, transparent);
   background-size: 12px;
-  background-position: 0 0, 0 12px;
+  background-position: 0, 0 12px;
   background-repeat: repeat-x;
 }
 

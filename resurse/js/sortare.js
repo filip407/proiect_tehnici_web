@@ -12,7 +12,11 @@ function getValueForSort(produs, cheie) {
         case 'categorie':
             return produs.categorie.toLowerCase().trim();
         case 'sezon':
-            return produs.sezon.toLowerCase().trim();
+            if (produs.sezon) {
+                const anProdus = parseInt(produs.sezon.split('/')[0]);
+                return isNaN(anProdus) ? 0 : anProdus;
+            }
+            return 0;
         case 'liga':
             return (produs.liga || '').toLowerCase().trim();
         case 'data_adaugare':

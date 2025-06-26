@@ -164,18 +164,18 @@
                 
                 <!-- ETAPA 6: Select pentru sezon -->
                 <div class="filter-group">
-                    <h3><i class="fas fa-calendar"></i> Sezon</h3>
-                    <label for="inp-sezon">Selecteaza sezonul:</label>
-                    <select id="inp-sezon">
-                        <option value="toate" selected>Toate sezoanele</option>
-                        <option value="2025/2026">2025/2026</option>
-                        <option value="2024/2025">2024/2025</option>
-                        <option value="2024">2024</option>
-                        <option value="2022/2023">2022/2023</option>
-                        <option value="2021/2022">2021/2022</option>
-                        <option value="2010/2011">2010/2011</option>
-                        <option value="1970">1970</option>
-                    </select>
+                    <h3><i class="fas fa-calendar-alt"></i> Anul sezonului</h3>
+                    <label for="inp-an-sezon">Selectează anul minim al sezonului:</label>
+                        <div class="range-container">
+                            <input type="range" 
+                                 id="inp-an-sezon" 
+                                 value="1970" 
+                                 min="1970" 
+                                 max="2026" 
+                                 step="1">
+                        <div class="price-display" id="an-display">1970</div>
+                </div>
+                <small>Se afișează produse cu ani >= valoarea selectată</small>
                 </div>
                 
                 <!-- ETAPA 6: Textarea pentru echipe -->

@@ -24,8 +24,8 @@ nav > ul > li {
   position: relative;
   flex: 1;
   text-align: center;
-  /* ETAPA 3: Efect pentru linkurile fara submeniu */
   /* ETAPA 3: Submeniu dropdown */
+  /* ETAPA 3: Pentru elementele cu submeniu, ascundem efectul de bara */
 }
 nav > ul > li > a {
   display: block;
@@ -37,6 +37,7 @@ nav > ul > li > a {
   text-transform: uppercase;
   position: relative;
   transition: color 0.5s ease;
+  /* ETAPA 3: Efect pentru toate linkurile principale - se aplica automat */
 }
 nav > ul > li > a:visited {
   color: white;
@@ -45,18 +46,19 @@ nav > ul > li > a:hover {
   background-color: transparent;
   color: var(--culoare-deschis2);
 }
-nav > ul > li:not(:has(ul)) > a::after {
+nav > ul > li > a::after {
   content: "";
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 0;
-  background: var(--culoare-primara);
+  background: var(--culoare-secundara);
   transition: height 0.5s ease, top 0.5s ease;
   z-index: -1;
+  opacity: 0.8;
 }
-nav > ul > li:not(:has(ul)):hover > a::after {
+nav > ul > li > a:hover::after {
   height: 4px;
   top: calc(100% - 4px);
 }
@@ -108,6 +110,14 @@ nav > ul > li:hover > ul {
   opacity: 1;
   visibility: visible;
   transition: transform 0.5s ease, opacity 0.5s ease, visibility 0s linear 0s;
+}
+nav > ul > li:hover > ul ~ a::after, nav > ul > li:has(ul) > a::after {
+  display: none;
+}
+
+/* ETAPA 3: Varianta alternativa pentru browsere care nu suporta :has() */
+nav > ul > li.has-submenu > a::after {
+  display: none !important;
 }
 
 /* ETAPA 3: Task meniu - Mobile menu implementation */

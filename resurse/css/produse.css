@@ -790,7 +790,6 @@ datalist {
 /* BONUS ETAPA 6.18: Badge pentru produse noi */
 .badge-nou {
     background: linear-gradient(45deg, #FF6B6B, #FFE66D) !important;
-    color: white !important;
     animation: glow-nou 2s infinite alternate;
     border: 2px solid rgba(255, 255, 255, 0.3);
     font-weight: bold !important;
@@ -853,7 +852,7 @@ datalist {
 
 .produs:has(.badge-nou) {
     border: 2px solid transparent;
-    background: linear-gradient(white, white) padding-box,
+    background: linear-gradient(--var(--culoare-deschis), --var(culoare-deschis)) padding-box,
                 linear-gradient(45deg, #FF6B6B, #FFE66D) border-box;
     position: relative;
 }

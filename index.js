@@ -97,7 +97,7 @@ const intervalCleanup = setInterval(() => {
     stergeBackupVechi();
 }, 15 * 60 * 1000);
 
-// Etapa 5 - Cerinta 25b,c: Functie pentru compilarea SCSS cu backup
+// Etapa 5 - Cerinta 2b,c: Functie pentru compilarea SCSS cu backup
 async function compileazaScss(caleScss, caleCss) {
     const scssAbs = path.isAbsolute(caleScss)
         ? caleScss
@@ -155,7 +155,7 @@ async function compileazaScss(caleScss, caleCss) {
     }
 }
 
-// Etapa 5 - Cerinta 25d: Compilare initiala SCSS
+// Etapa 5 - Cerinta 2d: Compilare initiala SCSS
 function compileazaToateScss() {
     const fisiere = fs.readdirSync(obiectGlobal.folderScss).filter(f => f.endsWith(".scss"));
     for (let f of fisiere) {
@@ -167,16 +167,14 @@ function compileazaToateScss() {
     }
 }
 
-// Etapa 5 - Cerinta 25e: Compilare automata la modificarea fisierelor SCSS
+// Etapa 5 - Cerinta 2e: Compilare automata la modificarea fisierelor SCSS
 fs.watch(obiectGlobal.folderScss, (event, filename) => {
     if (filename && filename.endsWith(".scss")) {
-        console.log(`[SCSS] Detectat eveniment: ${event} la ${filename}`);
-        
+        console.log(`[SCSS] Detectat eveniment: ${event} la ${filename}`);      
         let caleCss;
         if (filename === "custom.scss") {
             caleCss = path.join(obiectGlobal.folderCss, "custom.css");
-        }
-
+        }       
         compileazaScss(filename, caleCss);
     }
 });
@@ -324,7 +322,7 @@ function incarcaImaginiGalerie(req, res, next) {
     next();
 }
 
-// Bonus 16: Obtinere produse similare cu algoritm de similaritate
+//Etapa 6, Bonus 16: Obtinere produse similare cu algoritm de similaritate
 async function obtineProduseSimilare(produsId, produs) {
     try {
         const query = `
@@ -658,7 +656,7 @@ app.get('/produs/:id', async (req, res) => {
     }
 });
 
-// Bonus 17: Ruta pentru listarea seturilor de produse
+// Etapa 6, Bonus 17: Ruta pentru listarea seturilor de produse
 app.get('/seturi', async (req, res) => {
     try {
         const query = `
@@ -714,7 +712,7 @@ app.get('/seturi', async (req, res) => {
     }
 });
 
-// Bonus 17: Ruta pentru pagina individuala a unui set
+// Etapa 6, Bonus 17: Ruta pentru pagina individuala a unui set
 app.get('/set/:id', async (req, res) => {
     const setId = parseInt(req.params.id);
     
@@ -785,7 +783,7 @@ app.get('/set/:id', async (req, res) => {
     }
 });
 
-// Bonus 17: Functie pentru obtinerea seturilor care contin un produs specific
+// Etapa 6, Bonus 17: Functie pentru obtinerea seturilor care contin un produs specific
 async function obtineSeturiPentruProdus(produsId) {
     try {
         const query = `
@@ -844,7 +842,7 @@ async function obtineSeturiPentruProdus(produsId) {
     }
 }
 
-// Bonus 20: Ruta pentru compararea produselor
+// Etapa 6, Bonus 20: Ruta pentru compararea produselor
 app.get('/comparare-produse', function(req, res) {
     const produs1Param = req.query.produs1;
     const produs2Param = req.query.produs2;

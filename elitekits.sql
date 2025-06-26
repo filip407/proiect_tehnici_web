@@ -147,6 +147,4 @@ INSERT INTO asociere_set (id_set, id_produs) VALUES
 GRANT ALL PRIVILEGES ON tricouri TO filip;
 GRANT ALL PRIVILEGES ON seturi TO filip;
 GRANT ALL PRIVILEGES ON asociere_set TO filip;
-GRANT ALL PRIVILEGES ON SEQUENCE seturi_id_seq TO filip;
-GRANT ALL PRIVILEGES ON SEQUENCE asociere_set_id_seq TO filip;
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO filip;

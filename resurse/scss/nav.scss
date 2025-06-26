@@ -65,23 +65,22 @@ nav {
           background-color: transparent;
           color: var(--culoare-deschis2);
         }
-      }
 
-      /* ETAPA 3: Efect pentru linkurile fara submeniu */
-      &:not(:has(ul)) {
-        > a::after {
+        /* ETAPA 3: Efect pentru toate linkurile principale - se aplica automat */
+        &::after {
           content: "";
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
           height: 0;
-          background: var(--culoare-primara);
+          background: var(--culoare-secundara);
           transition: height $transition-standard, top $transition-standard;
           z-index: -1;
+          opacity: 0.8;
         }
 
-        &:hover > a::after {
+        &:hover::after {
           height: 4px;
           top: calc(100% - 4px);
         }
@@ -141,8 +140,19 @@ nav {
         visibility: visible;
         transition: transform $transition-standard, opacity $transition-standard, visibility 0s linear 0s;
       }
+
+      /* ETAPA 3: Pentru elementele cu submeniu, ascundem efectul de bara */
+      &:hover > ul ~ a::after,
+      &:has(ul) > a::after {
+        display: none;
+      }
     }
   }
+}
+
+/* ETAPA 3: Varianta alternativa pentru browsere care nu suporta :has() */
+nav > ul > li.has-submenu > a::after {
+  display: none !important;
 }
 
 /* ETAPA 3: Task meniu - Mobile menu implementation */
